@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-// import Navbar from "../../containers/Navbar/index";
+import React, { Component } from "react";
+
 import Footer from "../../components/Footer/index"; 
 
 class Chat extends Component {
