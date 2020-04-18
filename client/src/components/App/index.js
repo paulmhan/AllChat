@@ -1,10 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import Navbar from './../Navbar';
+import Navbar from "../../containers/Navbar/index"
 import LandingPage from "../../pages/LandingPage";
 import Chat from "../../pages/Chat";
-import io from "socket.io-client"
+import io from "socket.io-client";
 
 const socket = io();
 
