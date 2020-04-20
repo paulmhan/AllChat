@@ -4,6 +4,7 @@ import Navbar from "../../containers/Navbar/index"
 import LandingPage from "../../pages/LandingPage";
 import Chat from "../../pages/Chat";
 import io from "socket.io-client";
+import SignUp from "../../pages/SignUp";
 
 const socket = io("http://localhost:3001");
 
@@ -15,6 +16,7 @@ const App = props => (
     <div className="container">
       <Navbar/>
       <Route exact path="/" component={LandingPage}/>
+      <Route exact path="/signup" component={SignUp}/>
       <Route exact path="/chat" component={Chat}/>
     </div>
   </Router>
