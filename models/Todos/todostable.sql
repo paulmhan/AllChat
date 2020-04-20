@@ -1,6 +1,18 @@
-CREATE TABLE todos (
-    id INT AUTO_INCREMENT NOT NULL,
-    completed BOOLEAN DEFAULT false,
-    title VARCHAR(255) NOT NULL,
+CREATE TABLE users (
+    id INT NOT NULL AUTO_INCREMENT,
+    user_handle VARCHAR(45) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE rooms (
+    id INT NOT NULL AUTO_INCREMENT,
+    room_name VARCHAR(45) NOT NULL,
     PRIMARY KEY(id)
+);
+
+CREATE TABLE messages (
+    id INT NOT NULL AUTO_INCREMENT,
+    room_id INT NOT NULL,
+    user_id INT NOT NULL,
+    message TEXT NOT NULL
 );
