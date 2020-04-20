@@ -1,5 +1,5 @@
-DROP DATABASE IF EXISTS app_db;
+DROP DATABASE IF EXISTS chat_db;
 
-CREATE DATABASE app_db;
+CREATE DATABASE chat_db;
 
-USE app_db;
+USE chat_db;
