@@ -21,31 +21,16 @@ app.use(routes);
 
 //socket.io
 io.on("connection", socket => {
-    console.log("New client connected");
+    console.log("New client connected.");
     socket.on("connection", data => {
         console.log(data);
     })
     socket.on("disconnect", () => {
-        console.log("Client disconnected");
+        console.log("Client disconnected.");
     })
 })
 
 
 const PORT = process.env.PORT || 3001;
-server.listen(PORT, () => console.log('Port started on port: ' + PORT));
+server.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
-//psuedo code
-
-// users
-//     - multiple messages
-//     - multiple chatrooms
-// messages
-//     - single user
-//     - single chatroom
-// chatrooms
-//     - multiple users
-//     - multiple messages
-
-
-// login with username
-// start with 1 chatroom 
