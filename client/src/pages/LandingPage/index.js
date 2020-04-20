@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import Footer from "../../components/Footer/index";
-import GetStartedBtn from "../../components/GetStartedBtn/index";
+import Footer from "../../components/Footer";
+import GetStartedBtn from "../../components/GetStartedBtn";
+import LandingBodyText from "../../components/LandingBodyText"
 
 class LandingPage extends Component {
     
@@ -11,8 +12,9 @@ class LandingPage extends Component {
         return (
             <div>
                 <h1>Welcome to AllChat!</h1>
-                <GetStartedBtn/>
-                <Footer/>
+                <LandingBodyText />
+                <GetStartedBtn />
+                <Footer />
             </div>
         )
 
