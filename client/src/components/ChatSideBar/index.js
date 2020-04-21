@@ -9,7 +9,9 @@ const ChatSideBar = props => {
         <div>
             <Segment.Group>
                 <RoomName />
-                <UsersList />
+                <Segment.Group>
+                    <UsersList />
+                </Segment.Group>
             </Segment.Group>
         </div>
     )
