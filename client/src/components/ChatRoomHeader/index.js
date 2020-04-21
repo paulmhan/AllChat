@@ -5,6 +5,7 @@ const ChatRoomHeader = props => {
     return(
         <div>
             <h1>AllChat</h1>
+           
         </div>
     )
 }
