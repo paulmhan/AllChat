@@ -4,7 +4,7 @@ import UsersList from "./../UsersList"
 
 
 const ChatSideBar = props => {
-    render(
+    return(
         <div>
             <RoomName />
             <UsersList />
