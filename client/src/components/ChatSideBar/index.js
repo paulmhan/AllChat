@@ -1,13 +1,16 @@
-import React, { Component }from "react";
+import React from "react";
+import { Segment } from "semantic-ui-react";
 
 import RoomName from "./../RoomName"
 import UsersList from "./../UsersList"
 
 const ChatSideBar = props => {
-    return(
+    return (
         <div>
-            <RoomName />
-            <UsersList />
+            <Segment.Group>
+                <RoomName />
+                <UsersList />
+            </Segment.Group>
         </div>
     )
 }
