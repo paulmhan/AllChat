@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Grid } from "semantic-ui-react";
+
 import ChatRoomHeader from "../../components/ChatRoomHeader";
 import ChatSideBar from "../../components/ChatSideBar";
 import ChatContainer from "../../components/ChatContainer";
@@ -10,7 +12,7 @@ import LeaveBtn from "../../components/LeaveBtn";
 class Chat extends Component {
     render() {
         return (
-            <div>
+            <Grid container>
                 <ChatRoomHeader />
                 <ChatSideBar />
                 <ChatContainer />
@@ -18,8 +20,8 @@ class Chat extends Component {
                 <SendBtn />
                 <LeaveBtn />
                 {/* <Footer/> */}
+            </Grid>
             
-            </div>
         )
 
     }

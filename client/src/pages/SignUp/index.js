@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Grid } from "semantic-ui-react";
+
 // import Footer from "../../components/Footer";
 import SignUpHeader from "../../components/SignUpHeader"
 import UsernameInput from "../../components/UsernameInput"
@@ -19,13 +21,13 @@ class LandingPage extends Component {
 
     render() {
         return (
-            <div>
+            <Grid container>
                 <SignUpHeader />
                 <UsernameInput 
                 callback={this.handleInputChange} />
                 <RoomDropdown />
                 <JoinChatBtn />
-            </div>
+            </Grid>
         )
 
     }
