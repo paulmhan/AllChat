@@ -1,6 +1,13 @@
-import React from "react";
+import React, { Component } from "react";
 import { Input } from "semantic-ui-react";
 
-const UsernameInput = () => <Input placeholder="Enter Username Here"/>;
+class UsernameInput extends Component {
 
+    render(){
+        return <Input onChange={this.props.callback} placeholder="Enter You Name Here"/>
+
+        
+    }
+}
+    
 export default UsernameInput;

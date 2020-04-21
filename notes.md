@@ -15,5 +15,6 @@
 // login with username
 // start with 1 chatroom 
 
+Navbar semantic link is causing the domnesting warning
 
 

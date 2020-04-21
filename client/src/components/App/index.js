@@ -8,16 +8,19 @@ import SignUp from "../../pages/SignUp";
 
 const socket = io("http://localhost:3001");
 
-socket.emit("connection", {name:"hello"})
+socket.emit("connection", { name: "hello" })
 
 const App = props => (
 
   <Router>
     <div className="container">
-      <Navbar/>
-      <Route exact path="/" component={LandingPage}/>
-      <Route exact path="/signup" component={SignUp}/>
-      <Route exact path="/chat" component={Chat}/>
+      <Navbar />
+      {/* <Route exact path="/" render={() => <LandingPage />} />
+      <Route exact path="/signup" render={() => <SignUp />} />
+      <Route exact path="/chat" render={() => <Chat />} /> */}
+      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/signup" component={SignUp} />
+      <Route exact path="/chat" component={Chat} />
     </div>
   </Router>
 );

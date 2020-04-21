@@ -2,7 +2,7 @@ import React from "react";
 
 const MessageContainer = props => {
     return (
-        <div class="ui message">
+        <div className="ui message">
         <p>
         User1 <span>9:15am</span>
         </p>
