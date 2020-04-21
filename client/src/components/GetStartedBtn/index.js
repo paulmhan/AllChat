@@ -1,9 +1,11 @@
 import React from "react";
 import { Button } from "semantic-ui-react";
+import { useHistory } from "react-router-dom";
 
 const GetStartedBtn = props => {
+    let history = useHistory();
     return(
-        <Button>Get Started</Button>
+        <Button onClick={() => history.push("/signup")}>Get Started</Button>
     );
 }
 
