@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Footer from "../../components/Footer";
+// import Footer from "../../components/Footer";
 import GetStartedBtn from "../../components/GetStartedBtn";
 import LandingBodyText from "../../components/LandingBodyText"
 
@@ -14,7 +14,7 @@ class LandingPage extends Component {
                 <h1>Welcome to AllChat!</h1>
                 <LandingBodyText />
                 <GetStartedBtn />
-                <Footer />
+                {/* <Footer /> */}
             </div>
         )
 
