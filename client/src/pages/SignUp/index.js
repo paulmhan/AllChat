@@ -12,7 +12,9 @@ class LandingPage extends Component {
 
     handleInputChange = (e) => {
         const { value } = e.target;
+        console.log(value);
         this.setState({ name: value });
+
     };
 
     render() {

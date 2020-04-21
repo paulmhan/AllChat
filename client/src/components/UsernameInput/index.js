@@ -3,12 +3,8 @@ import { Input } from "semantic-ui-react";
 
 class UsernameInput extends Component {
 
-    hello = () => {
-        {this.props.callback()};
-    }
-
     render(){
-        return <Input placeholder="Enter You Name Here"/>
+        return <Input onChange={this.props.callback} placeholder="Enter You Name Here"/>
     }
 }
     
