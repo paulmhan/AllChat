@@ -13,6 +13,7 @@ export default class Navbar extends Component {
         return(
             <div>
                 <Menu pointing secondary>
+                    <Link to="/" > 
                         <Menu.Item
                         as={ Link }
                         to="/"
@@ -20,6 +21,8 @@ export default class Navbar extends Component {
                         active={activeItem === "home"}
                         onClick={this.handleItemClick}
                         />
+                    </Link> 
+                    <Link to="/chat" > 
                         <Menu.Item
                         as={ Link }
                         to="/chat"
@@ -27,6 +30,14 @@ export default class Navbar extends Component {
                         active={activeItem === "messages"}
                         onClick={this.handleItemClick}
                         />
+                    </Link>
+                     {/* <Link to="/signup" >
+                        <Menu.Item
+                        name="sign up"
+                        active={activeItem === "signup"}
+                        onClick={this.handleItemClick}
+                        />
+                    </Link>  */}
                 </Menu>
             </div>
         );

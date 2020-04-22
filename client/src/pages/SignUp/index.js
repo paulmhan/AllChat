@@ -5,7 +5,7 @@ import UsernameInput from "../../components/UsernameInput";
 import RoomDropdown from "../../components/RoomDropdown";
 // import JoinChatBtn from "../../components/JoinChatBtn";
 
-class LandingPage extends Component {
+class SignUp extends Component {
     state = {
         name: "",
         room: "",
@@ -51,4 +51,4 @@ class LandingPage extends Component {
             }
         }
         
-export default LandingPage;
+export default SignUp;
