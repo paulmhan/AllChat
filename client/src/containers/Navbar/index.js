@@ -13,20 +13,24 @@ export default class Navbar extends Component {
         return(
             <div>
                 <Menu pointing secondary>
-                    <Link to="/">
+                    {/* <Link to="/"> */}
                         <Menu.Item
+                        as={ Link }
+                        to="/"
                         name="home"
                         active={activeItem === "home"}
                         onClick={this.handleItemClick}
                         />
-                    </Link>
-                    <Link to="/chat">
+                    {/* </Link> */}
+                    {/* <Link to="/chat"> */}
                         <Menu.Item
+                        as={ Link }
+                        to="/chat"
                         name="messages"
                         active={activeItem === "messages"}
                         onClick={this.handleItemClick}
                         />
-                    </Link>
+                    {/* </Link> */}
                     {/* <Link to="/signup">
                         <Menu.Item
                         name="sign up"
