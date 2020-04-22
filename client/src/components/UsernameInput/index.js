@@ -4,7 +4,7 @@ import { Input } from "semantic-ui-react";
 class UsernameInput extends Component {
 
     render(){
-        return <Input onChange={this.props.callback} placeholder="Enter You Name Here"/>
+        return <Input onChange={this.props.getName} placeholder="Enter You Name Here"/>
 
         
     }
