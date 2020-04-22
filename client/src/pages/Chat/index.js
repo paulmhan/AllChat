@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import io from "socket.io-client"
+// import queryString from "query-string";
 import ChatRoomHeader from "../../components/ChatRoomHeader";
 import ChatSideBar from "../../components/ChatSideBar";
 import MessageContainer from "./../../components/MessageContainer"
@@ -15,6 +16,25 @@ socket.emit("connection", { name: "hello" })
 
 
 class Chat extends Component {
+
+
+    state = {
+        name: "",
+        room: "",
+    }
+
+    componentDidMount() {
+        // const { name, room } = queryString.parse(location.search);
+        // console.log(location.search); 
+        // console.log(name); 
+        // console.log(room); 
+    }
+
+
+
+
+
+
     render() {
         return (
             <div>

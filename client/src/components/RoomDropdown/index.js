@@ -13,7 +13,7 @@
 //             {key: "ch3", value:"ch3", text: "Chatroom 3"},
 //             {key: "ch4", value:"ch4", text: "Chatroom 4"}
 //         ]  
-//         const {value} = this.state;
+        // const {value} = this.state;
 
 //         return(
 //             <Dropdown 
@@ -22,7 +22,7 @@
 //                 search
 //                 selection
 //                 options={chatRoomOptions}
-//                 value={value}
+                // value={value}
 //             />
 //         )
 
