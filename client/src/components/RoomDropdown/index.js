@@ -39,8 +39,6 @@ class RoomDropdown extends Component {
 
     render(){
         return <Input onChange={this.props.getRoom} placeholder="What is the Name of the Room You Would Like to Create or Join?"/>
-
-        
     }
 }
     
