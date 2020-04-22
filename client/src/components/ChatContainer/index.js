@@ -1,10 +1,10 @@
-import React from "react";
-import MessageContainer from "./../MessageContainer"
+// import React from "react";
+// // import MessageContainer from "./../MessageContainer"
 
-const ChatContainer = props => {
-    return(
-        <MessageContainer />
-    );
-}
+// const ChatContainer = props => {
+//     return(
+//         <MessageContainer />
+//     );
+// }
 
-export default ChatContainer;
+// export default ChatContainer;
