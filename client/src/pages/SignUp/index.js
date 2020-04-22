@@ -48,10 +48,10 @@ class SignUp extends Component {
                 <Link onClick={this.checkInputs} to={`/chat?name=${this.state.name}&room=${this.state.room}`}>
                     <button className="button mt-20" type="submit"> Join Chat Room! </button>
                 </Link>
-            </Grid>
-        )
-
-    }
-}
-
+            </div>
+                )
+        
+            }
+        }
+        
 export default SignUp;
