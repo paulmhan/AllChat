@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Grid } from "semantic-ui-react";
+
 import io from "socket.io-client"
 // import queryString from "query-string";
 import ChatRoomHeader from "../../components/ChatRoomHeader";
@@ -37,7 +39,7 @@ class Chat extends Component {
 
     render() {
         return (
-            <div>
+            <Grid container>
                 <ChatRoomHeader />
                 <ChatSideBar />
                 {/* <ChatContainer /> */}
@@ -46,8 +48,8 @@ class Chat extends Component {
                 <SendBtn />
                 <LeaveBtn />
                 {/* <Footer/> */}
+            </Grid>
             
-            </div>
         )
 
     }

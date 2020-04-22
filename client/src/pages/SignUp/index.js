@@ -1,11 +1,14 @@
 import React, { Component } from "react";
+import { Grid } from "semantic-ui-react";
+
+// import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
 import SignUpHeader from "../../components/SignUpHeader";
 import UsernameInput from "../../components/UsernameInput";
 import RoomDropdown from "../../components/RoomDropdown";
 // import JoinChatBtn from "../../components/JoinChatBtn";
 
-class LandingPage extends Component {
+class SignUp extends Component {
     state = {
         name: "",
         room: "",
@@ -34,7 +37,7 @@ class LandingPage extends Component {
 
     render() {
         return (
-            <div>
+            <Grid container>
                 <SignUpHeader />
                 <UsernameInput
                     getName={this.handleNameChange}
@@ -45,10 +48,10 @@ class LandingPage extends Component {
                 <Link onClick={this.checkInputs} to={`/chat?name=${this.state.name}&room=${this.state.room}`}>
                     <button className="button mt-20" type="submit"> Join Chat Room! </button>
                 </Link>
-            </div>
-                )
-        
-            }
-        }
-        
-export default LandingPage;
+            </Grid>
+        )
+
+    }
+}
+
+export default SignUp;
