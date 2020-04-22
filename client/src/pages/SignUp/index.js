@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { Grid } from "semantic-ui-react";
+
+// import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
 import SignUpHeader from "../../components/SignUpHeader";
 import UsernameInput from "../../components/UsernameInput";
@@ -34,7 +37,7 @@ class SignUp extends Component {
 
     render() {
         return (
-            <div>
+            <Grid container>
                 <SignUpHeader />
                 <UsernameInput
                     getName={this.handleNameChange}
@@ -45,10 +48,10 @@ class SignUp extends Component {
                 <Link onClick={this.checkInputs} to={`/chat?name=${this.state.name}&room=${this.state.room}`}>
                     <button className="button mt-20" type="submit"> Join Chat Room! </button>
                 </Link>
-            </div>
-                )
-        
-            }
-        }
-        
+            </Grid>
+        )
+
+    }
+}
+
 export default SignUp;
