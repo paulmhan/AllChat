@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { Dropdown } from "semantic-ui-react";
+
 class RoomDropdown extends Component {
-    
+    state = {
+        value: "",
+    }
 
     render(){
         const chatRoomOptions = [
@@ -10,6 +13,7 @@ class RoomDropdown extends Component {
             {key: "ch3", value:"ch3", text: "Chatroom 3"},
             {key: "ch4", value:"ch4", text: "Chatroom 4"}
         ]  
+        const {value} = this.state;
 
         return(
             <Dropdown 
@@ -18,7 +22,7 @@ class RoomDropdown extends Component {
                 search
                 selection
                 options={chatRoomOptions}
-                // value={value}
+                value={value}
             />
         )
 
