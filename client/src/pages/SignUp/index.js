@@ -8,13 +8,19 @@ import JoinChatBtn from "../../components/JoinChatBtn"
 class LandingPage extends Component {
     state = {
         name: "",
+        room: "",
     };
 
-    handleInputChange = (e) => {
+    handleNameChange = (e) => {
         const { value } = e.target;
         console.log(value);
         this.setState({ name: value });
+    };
 
+    handleRoomChange = (e) => {
+        const { value } = e.target;
+        console.log(value);
+        this.setState({ room: value });
     };
 
     render() {
@@ -22,8 +28,11 @@ class LandingPage extends Component {
             <div>
                 <SignUpHeader />
                 <UsernameInput 
-                callback={this.handleInputChange} />
-                <RoomDropdown />
+                getName={this.handleNameChange} 
+                />
+                <RoomDropdown 
+                getRoom={this.handleRoomChange}
+                />
                 <JoinChatBtn />
             </div>
         )
