@@ -6,7 +6,6 @@ import ChatRoomHeader from "../../components/ChatRoomHeader";
 import ChatSideBar from "../../components/ChatSideBar";
 import MessageContainer from "./../../components/MessageContainer"
 import MessageInputBar from "../../components/MessageInputBar";
-import SendBtn from "../../components/SendBtn";
 import LeaveBtn from "../../components/LeaveBtn";
 
 // socket.emit("connection", { name: "hello" })
@@ -65,15 +64,8 @@ class Chat extends Component {
                                 </Grid.Column>
                             </Grid.Row>
                         </Grid>
-                        
-                        
-                        <SendBtn />
                     </Grid.Column>
                 </Grid.Row>
-
-
-                {/* <Footer/> */}
-                {/* <ChatContainer /> */}
             </Grid>
 
         )

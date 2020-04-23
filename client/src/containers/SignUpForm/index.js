@@ -1,38 +1,53 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "semantic-ui-react";
-import RoomDropdown from "../../components/RoomDropdown";
+import RoomDropdown from "../../components/RoomInput";
 import UsernameInput from "../../components/UsernameInput";
-// import JoinChatBtn from "../../components/JoinChatBtn";
 import SignUpHeader from "../../components/SignUpHeader";
 
 class SignUpForm extends Component {
     state = {
         open: false,
         name: "",
-        room: ""
+        room: "",
+        userNameError: false,
+        roomNameError: false
     };
 
     handleNameChange = e => {
         const { value } = e.target;
-        console.log(value);
         this.setState({ name: value });
     };
 
     handleRoomChange = e => {
         const { value } = e.target;
-        console.log(value);
         this.setState({ room: value });
     };
 
     checkInputs = e => {
         if (!this.state.name || !this.state.room) {
             e.preventDefault();
-            console.log("Need to input both name and room");
-            console.log(this.state.name);
-            console.log(this.state.room);
+            this.setState({ userNameError: true})
+        }
+
+        let roomNameError;
+        let userNameError;
+
+        if(this.state.name.length === 0){
+            userNameError = true;
         } else {
-            console.log("Welcome!");
+            userNameError = false;
+        }
+        if(this.state.room.length === 0){
+            roomNameError = true;
+        } else {
+            roomNameError = false;
+        }
+
+        // Check if one is true
+        // if so, we have an error. set the state
+        if(userNameError || roomNameError) {
+           this.setState({ userNameError, roomNameError });
         }
     }
 
@@ -61,14 +76,19 @@ class SignUpForm extends Component {
                 <Modal.Content>
                     <UsernameInput
                         getName={this.handleNameChange}
+                        name={this.state.name}
+                        error={this.state.userNameError}
                     />
+                    <br />
                     <RoomDropdown
                         getRoom={this.handleRoomChange}
+                        name={this.state.room}
+                        error={this.state.roomNameError}
                     />
                 </Modal.Content>
                 <Modal.Actions>
                     <Link onClick={this.checkInputs} to={`/chat?name=${this.state.name}&room=${this.state.room}`}>
-                        <button className="button mt-20" type="submit"> Join Chat Room! </button>
+                        <button onClick={(e) => this.checkInputs(e)} className="button mt-20" type="submit"> Join Chat Room! </button>
                     </Link>
                 </Modal.Actions>
             </Modal>

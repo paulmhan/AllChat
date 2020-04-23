@@ -12,7 +12,6 @@ const MessageInputBar = props => {
                     icon: "arrow circle up",
                     content: "Send"
                 }}
-                actionPosition="right"
                 placeholder="Send a Message"
             />
         </div>

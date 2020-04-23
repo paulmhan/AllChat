@@ -21,14 +21,6 @@ export default class Navbar extends Component {
                         active={activeItem === "home"}
                         onClick={this.handleItemClick}
                         />
-        
-                        <Menu.Item
-                        as={ Link }
-                        to="/signup"
-                        name="sign up"
-                        active={activeItem === "signup"}
-                        onClick={this.handleItemClick}
-                        />
                 </Menu>
             </div>
         );
