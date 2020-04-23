@@ -8,7 +8,7 @@ const MessageInputBar = props => {
                 fluid
                 action={{
                     color: "blue",
-                    labelPosition: "left",
+                    labelPosition: "right",
                     icon: "arrow circle up",
                     content: "Send"
                 }}

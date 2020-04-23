@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Button, Icon, Modal } from "semantic-ui-react";
+import { Button, Modal } from "semantic-ui-react";
 import RoomDropdown from "../../components/RoomDropdown";
 import UsernameInput from "../../components/UsernameInput";
 // import JoinChatBtn from "../../components/JoinChatBtn";
 import SignUpHeader from "../../components/SignUpHeader";
 
-class SecondModal extends Component {
+class SignUpForm extends Component {
     state = {
         open: false,
         name: "",
         room: ""
     };
-    
+
     handleNameChange = e => {
         const { value } = e.target;
         console.log(value);
@@ -29,6 +29,8 @@ class SecondModal extends Component {
         if (!this.state.name || !this.state.room) {
             e.preventDefault();
             console.log("Need to input both name and room");
+            console.log(this.state.name);
+            console.log(this.state.room);
         } else {
             console.log("Welcome!");
         }
@@ -49,7 +51,7 @@ class SecondModal extends Component {
                 size="small"
                 trigger={
                     <Button primary icon>
-                        Proceed <Icon name="right chevron" />
+                        Get Started
                     </Button>
                 }
             >
@@ -57,46 +59,21 @@ class SecondModal extends Component {
                     <SignUpHeader />
                 </Modal.Header>
                 <Modal.Content>
+                    <UsernameInput
+                        getName={this.handleNameChange}
+                    />
                     <RoomDropdown
                         getRoom={this.handleRoomChange}
                     />
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button 
-                        as={ Link }
-                        type="submit"
-                        onClick={this.checkInputs}
-                        to={`/chat?name=${this.state.name}&room=${this.state.room}`}
-                    >
-                        Join Chat!
-                    </Button>
+                    <Link onClick={this.checkInputs} to={`/chat?name=${this.state.name}&room=${this.state.room}`}>
+                        <button className="button mt-20" type="submit"> Join Chat Room! </button>
+                    </Link>
                 </Modal.Actions>
             </Modal>
         )
     }
 };
-
-
-
-class SignUpForm extends SecondModal {
-    
-    render() {
-        return (
-            <Modal trigger={<Button>Get Started</Button>}>
-        <Modal.Header>
-            <SignUpHeader />
-        </Modal.Header>
-        <Modal.Content>
-            <UsernameInput
-                getName={this.handleNameChange}
-            />
-        </Modal.Content>
-        <Modal.Actions>
-            <SecondModal />
-        </Modal.Actions>
-    </Modal>
-        );
-    }
-}
 
 export default SignUpForm;
