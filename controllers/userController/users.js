@@ -26,8 +26,8 @@ module.exports = {
         });
     },
     deleteUser: (req, res) => {
-        const { todoId } = req.params;
-        connection.query(userQueries.deleteUser, parseInt(todoId), (err, dbRes) => {
+        const { userId } = req.params;
+        connection.query(userQueries.deleteUser, parseInt(userId), (err, dbRes) => {
             if(err) {
                 throw err;
             }
@@ -35,12 +35,12 @@ module.exports = {
         });
     },
     getUserById: (req, res) => {
-        const { todoId } = req.params;
-        connection.query(userQueries.getUserById, parseInt(todoId), (err, todos) => {
+        const { userId } = req.params;
+        connection.query(userQueries.getUserById, parseInt(userId), (err, users) => {
             if(err) {
                 return res.json(err);
             }
-            return res.json(todos[0]);
+            return res.json(users[0]);
         });
     },
 }

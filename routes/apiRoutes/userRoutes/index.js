@@ -1,7 +1,7 @@
 const router = require('express').Router();
+const userController = require("./../../../controllers/userController");
 
-// const todosController = require('./../../../controllers/todosController');
-// /api/todos prepended to every route
+// /api/users prepended to every route
 
 
 
