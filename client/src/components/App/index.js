@@ -8,13 +8,12 @@ import SignUp from "../../pages/SignUp";
 
 
 const App = props => (
-
   <Router>
     <div className="container">
       <Navbar />
       <Route exact path="/" render={() => <LandingPage />} />
-      <Route exact path="/signup" render={() => <SignUp />} />
-      <Route exact path="/chat" render={() => <Chat />} />
+      <Route exact path="/signup" component={ SignUp } />
+      <Route path="/chat" render={() => <Chat />} />
     </div>
   </Router>
 );
