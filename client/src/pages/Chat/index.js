@@ -1,53 +1,48 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
-
 import io from "socket.io-client"
-// import queryString from "query-string";
+import queryString from "query-string";
 import ChatRoomHeader from "../../components/ChatRoomHeader";
 import ChatSideBar from "../../components/ChatSideBar";
 import MessageContainer from "./../../components/MessageContainer"
-// import ChatContainer from "../../components/ChatContainer";
 import MessageInputBar from "../../components/MessageInputBar";
 import SendBtn from "../../components/SendBtn";
 import LeaveBtn from "../../components/LeaveBtn";
-// import Footer from "../../components/Footer"; 
 
-const socket = io("http://localhost:3001");
-
-socket.emit("connection", { name: "hello" })
+// socket.emit("connection", { name: "hello" })
 
 
 class Chat extends Component {
-
-
+    
     state = {
         name: "",
         room: "",
     }
-
+    
     componentDidMount() {
-        // const { name, room } = queryString.parse(location.search);
-        // console.log(location.search); 
-        // console.log(name); 
-        // console.log(room); 
+        const { name, room } = queryString.parse(window.location.search);
+        this.setState({ name });
+        this.setState({ room });
+        let socket = io("http://localhost:3001");
+        console.log(socket);
+        socket.emit("joinChat", { name,room }) 
     }
 
-
-
-
-
+    // componentWillUnmount() {
+    //     let socket = io("http://localhost:3001");
+    //     socket.emit("disconnect");
+    //     socket.off();
+    // }
 
     render() {
         return (
             <Grid container>
                 <ChatRoomHeader />
                 <ChatSideBar />
-                {/* <ChatContainer /> */}
                 <MessageContainer />
                 <MessageInputBar />
                 <SendBtn />
                 <LeaveBtn />
-                {/* <Footer/> */}
             </Grid>
             
         )
