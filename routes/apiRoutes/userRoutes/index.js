@@ -1,19 +1,19 @@
 const router = require('express').Router();
+const userController = require("./../../../controllers/userController");
 
-const todosController = require('./../../../controllers/todosController');
-// /api/todos prepended to every route
-
-
-
-router.route('/')
-    .get(todosController.getTodos)
-    .post(todosController.insertTodo);
+// /api/users prepended to every route
 
 
-router.route('/:todoId')
-    .delete(todosController.deleteTodoById)
-    .get(todosController.getTodoById)
-    .patch(todosController.updateTodoTitleById);
+
+// router.route('/')
+//     .get(todosController.getTodos)
+//     .post(todosController.insertTodo);
+
+
+// router.route('/:todoId')
+//     .delete(todosController.deleteTodoById)
+//     .get(todosController.getTodoById)
+//     .patch(todosController.updateTodoTitleById);
 
 
 

@@ -1,13 +1,11 @@
 const router = require('express').Router();
 
 
-const todoRoutes = require('./todoRoutes');
+const userRoutes = require('./userRoutes');
+
 // /api  prepended to every route declared in here
-// todos
-
-
 // declares a route for /api/todos
-router.use("/todos", todoRoutes);
+router.use("/chat", userRoutes);
 
 
 module.exports = router;
