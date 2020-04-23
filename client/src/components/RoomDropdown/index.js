@@ -33,12 +33,27 @@
 // export default RoomDropdown;
 
 import React, { Component } from "react";
-import { Input } from "semantic-ui-react";
+import { Input, Form } from "semantic-ui-react";
 
 class RoomDropdown extends Component {
-
+  componentDidUpdate(prevProps) {
+    return prevProps.room !== this.props.room;
+  }
     render(){
-        return <Input onChange={this.props.getRoom} placeholder="What is the Name of the Room You Would Like to Create or Join?"/>
+      console.log(this.props);
+        // return <Input onChange={this.props.getName} placeholder="Enter You Name Here"/>
+        return (<Form >
+        <Form.Field 
+          error={ this.props.error } 
+          required
+          label='Room Name'
+          placeholder='Enter your Room name'
+          control='input'
+          onChange={this.props.getRoom}
+          />
+      </Form>
+      )
+        
     }
 }
     
