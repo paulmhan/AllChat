@@ -5,13 +5,13 @@ const MessageInputBar = props => {
     return (
         <div>
             <Input
+                fluid
                 action={{
                     color: "blue",
-                    labelPosition: "left",
+                    labelPosition: "right",
                     icon: "arrow circle up",
                     content: "Send"
                 }}
-                actionPosition="left"
                 placeholder="Send a Message"
             />
         </div>

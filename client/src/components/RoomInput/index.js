@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { Form } from "semantic-ui-react";
 
-class UsernameInput extends Component {
-  
+class RoomDropdown extends Component {
   componentDidUpdate(prevProps) {
-    return prevProps.name !== this.props.name;
+    return prevProps.room !== this.props.room;
   }
     render(){
         return (
@@ -12,16 +11,15 @@ class UsernameInput extends Component {
         <Form.Field 
           error={ this.props.error } 
           required
-          label='User Name'
-          placeholder='Enter your username'
+          label='Room Name'
+          placeholder='Enter your Room name'
           control='input'
-          onChange={this.props.getName}
+          onChange={this.props.getRoom}
           />
       </Form>
-      )  
+      )
+        
     }
 }
     
-export default UsernameInput;
-
-
+export default RoomDropdown;
