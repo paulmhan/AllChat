@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
 
 // import Footer from "../../components/Footer";
-import GetStartedBtn from "../../components/GetStartedBtn";
+// import GetStartedBtn from "../../components/GetStartedBtn";
 import LandingBodyText from "../../components/LandingBodyText"
+import SignUpForm from "../../containers/SignUpForm";
 
 class LandingPage extends Component {
 
@@ -26,7 +27,7 @@ class LandingPage extends Component {
                 <Grid.Row
                     centered
                     columns={1}>
-                    <GetStartedBtn />
+                    <SignUpForm />
                 </Grid.Row>
                 {/* <Footer /> */}
             </Grid>
