@@ -3,11 +3,12 @@ import { Segment } from "semantic-ui-react";
 
 import RoomName from "./../RoomName"
 import UsersList from "./../UsersList"
+import "./style.css";
 
 const ChatSideBar = props => {
     return (
         <div>
-            <Segment.Group>
+            <Segment.Group id="chatroom-container">
                 <RoomName />
                 <Segment.Group>
                     <UsersList />

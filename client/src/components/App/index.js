@@ -4,7 +4,7 @@ import Navbar from "../../containers/Navbar/index"
 import LandingPage from "../../pages/LandingPage";
 import Chat from "../../pages/Chat";
 // import io from "socket.io-client";
-import SignUp from "../../pages/SignUp";
+
 
 
 const App = props => (
@@ -12,7 +12,6 @@ const App = props => (
     <div className="container">
       <Navbar />
       <Route exact path="/" render={() => <LandingPage />} />
-      <Route exact path="/signup" component={ SignUp } />
       <Route path="/chat" render={() => <Chat />} />
     </div>
   </Router>
