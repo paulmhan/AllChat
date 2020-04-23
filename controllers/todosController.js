@@ -1,5 +1,5 @@
 const connection = require('./../config/connection');
-const todoQueries = require('../models/Todos/chatQueries');
+const todoQueries = require('../models/Chat/chatQueries');
 
 
 module.exports = {
