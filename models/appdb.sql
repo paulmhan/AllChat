@@ -1,5 +1,0 @@
-DROP DATABASE IF EXISTS chat_db;
-
-CREATE DATABASE chat_db;
-
-USE chat_db;
