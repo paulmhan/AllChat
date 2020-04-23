@@ -1,23 +1,23 @@
 const connection = require('../../config/connection');
-const todoQueries = require('../../models/users/userQueries');
+const userQueries = require('../../models/users/userQueries');
 
 
 module.exports = {
-    getTodos: (req, res) => {
-        connection.query(todoQueries.getTodos, (err, todos) => {
+    getUser: (req, res) => {
+        connection.query(userQueries.getUsers, (err, users) => {
             if(err) {
                 throw err;
             }
-            return res.json(todos);
+            return res.json(users);
         });
     },
-    insertTodo: (req, res) => {
+    addUser: (req, res) => {
         const { title } = req.body;
-        connection.query(todoQueries.insertTodo, title, (err, dbRes) => {
+        connection.query(userQueries.addUser, title, (err, dbRes) => {
             if(err) {
                 throw err;
             }
-            connection.query(todoQueries.getTodos, (err, todos) => {
+            connection.query(userQueries.getUsers, (err, todos) => {
                 if(err) {
                     throw err;
                 }
@@ -25,33 +25,22 @@ module.exports = {
             });
         });
     },
-    deleteTodoById: (req, res) => {
+    deleteUser: (req, res) => {
         const { todoId } = req.params;
-        connection.query(todoQueries.deleteTodoById, parseInt(todoId), (err, dbRes) => {
+        connection.query(userQueries.deleteUser, parseInt(todoId), (err, dbRes) => {
             if(err) {
                 throw err;
             }
             return res.json({ success: true });
         });
     },
-    getTodoById: (req, res) => {
+    getUserById: (req, res) => {
         const { todoId } = req.params;
-        connection.query(todoQueries.getTodoById, parseInt(todoId), (err, todos) => {
+        connection.query(userQueries.getUserById, parseInt(todoId), (err, todos) => {
             if(err) {
                 return res.json(err);
             }
             return res.json(todos[0]);
         });
     },
-    updateTodoTitleById: (req, res) => {
-        const { todoId } = req.params;
-        const { title } = req.body;
-
-        connection.query(todoQueries.updateTodoTitleById, [title, todoId], (err, dbJson) => {``
-            if(err) {
-                throw new Error(err);
-            }
-            res.json({ success: true });
-        });
-    }
 }
