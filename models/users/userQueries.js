@@ -1,11 +1,11 @@
-const addUser = "INSERT INTO users (username) VALUES (?);";
+const createUser = "INSERT INTO users (name) VALUES (?);";
 const getUsers = "SELECT * FROM users;";
-const deleteUser = "DELETE FROM users (username) WHERE id = ?;";
+const deleteUser = "DELETE FROM users (name) WHERE id = ?;";
 const getUserById = "SELECT * FROM users WHERE id = ?;";
 
 
 module.exports = {
-    addUser,
+    createUser,
     getUsers,
     deleteUser,
     getUserById,

@@ -25,9 +25,8 @@ class LandingPage extends Component {
                 <Grid.Row
                     centered
                     columns={1}>
-                    <SignUpForm />
+                    <SignUpForm socket={this.props.socket}/>
                 </Grid.Row>
-                {/* <Footer /> */}
             </Grid>
         )
 

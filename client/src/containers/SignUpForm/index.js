@@ -4,6 +4,7 @@ import { Button, Modal } from "semantic-ui-react";
 import RoomDropdown from "../../components/RoomInput";
 import UsernameInput from "../../components/UsernameInput";
 import SignUpHeader from "../../components/SignUpHeader";
+import axios from "axios";
 
 class SignUpForm extends Component {
     state = {
@@ -37,6 +38,7 @@ class SignUpForm extends Component {
             userNameError = true;
         } else {
             userNameError = false;
+
         }
         if(this.state.room.length === 0){
             roomNameError = true;
@@ -48,8 +50,21 @@ class SignUpForm extends Component {
         // if so, we have an error. set the state
         if(userNameError || roomNameError) {
            this.setState({ userNameError, roomNameError });
+        } else {
+            this.createUser();
+            // this.createRoom();
         }
     }
+
+    createUser = async () => {
+        const { data } = await axios.post("/api/user/createuser", {name: this.state.name});
+        console.log(data);
+    }
+
+    createRoom = async () => {
+        const { data } = await axios.post("/api/user/createroom", {room: this.state.room})
+        console.log(data);
+    };
 
     open = () => this.setState({ open: true });
 
@@ -87,7 +102,7 @@ class SignUpForm extends Component {
                     />
                 </Modal.Content>
                 <Modal.Actions>
-                    <Link onClick={this.checkInputs} to={`/chat?name=${this.state.name}&room=${this.state.room}`}>
+                    <Link to={"/chat"}>
                         <button onClick={(e) => this.checkInputs(e)} className="button mt-20" type="submit"> Join Chat Room! </button>
                     </Link>
                 </Modal.Actions>
