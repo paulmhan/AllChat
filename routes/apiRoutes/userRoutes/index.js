@@ -1,13 +1,17 @@
 const router = require('express').Router();
 const userController = require("./../../../controllers/userController");
 
-// /api/users prepended to every route
+// /sapi/uers prepended to every route
 
 
 
-// router.route('/')
-//     .get(todosController.getTodos)
-//     .post(todosController.insertTodo);
+router.route('/createuser')
+    .post(userController.createUser);
+
+
+router.route("/getusers")
+    .get(userController.getUsers)
+
 
 
 // router.route('/:todoId')

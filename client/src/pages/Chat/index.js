@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
-import io from "socket.io-client"
-import queryString from "query-string";
+// import io from "socket.io-client";
+import axios from "axios";
+// import queryString from "query-string";
 import ChatRoomHeader from "../../components/ChatRoomHeader";
 import ChatSideBar from "../../components/ChatSideBar";
-import MessageContainer from "./../../components/MessageContainer"
+import MessageContainer from "./../../components/MessageContainer";
 import MessageInputBar from "../../components/MessageInputBar";
 import LeaveBtn from "../../components/LeaveBtn";
 
-// socket.emit("connection", { name: "hello" })
 
 
 class Chat extends Component {
@@ -16,16 +16,27 @@ class Chat extends Component {
     state = {
         name: "",
         room: "",
+        users: [],
     }
     
     componentDidMount() {
-        const { name, room } = queryString.parse(window.location.search);
-        this.setState({ name });
-        this.setState({ room });
-        let socket = io("http://localhost:3001");
-        console.log(socket);
-        socket.emit("joinChat", { name,room }) 
+        this.getUsers();
+        
+        // const { name, room } = queryString.parse(window.location.search);
+        // let socket = io("http://localhost:3001");
+        // socket.emit("joinChat", { name,room });
+        // this.setState({ name,room });
     }
+
+    getUsers = () => {
+        // const { data } = await axios.get("/api/user/getusers");
+        this.props.socket.emit("getUsers", users => {
+            console.log(users);
+            this.setState({ users });
+        })
+        
+    }
+
 
     // componentWillUnmount() {
     //     let socket = io("http://localhost:3001");
@@ -39,7 +50,7 @@ class Chat extends Component {
                 <Grid.Row
                     stretched>
                     <Grid.Column width={4}>
-                        <ChatSideBar />
+                        <ChatSideBar users={this.state.users}/>
                     </Grid.Column>
                     <Grid.Column width={12}>
                         <Grid container>

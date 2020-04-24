@@ -3,34 +3,24 @@ const userQueries = require('../../models/users/userQueries');
 
 
 module.exports = {
-    getUser: (req, res) => {
+    getUsers: cb => {
         connection.query(userQueries.getUsers, (err, users) => {
-            if(err) {
-                throw err;
-            }
-            return res.json(users);
+            if(err) throw err;
+            cb(users);
         });
     },
-    addUser: (req, res) => {
-        const { title } = req.body;
-        connection.query(userQueries.addUser, title, (err, dbRes) => {
-            if(err) {
-                throw err;
-            }
-            connection.query(userQueries.getUsers, (err, todos) => {
-                if(err) {
-                    throw err;
-                }
-                return res.json(todos);
-            });
+    createUser: (req, res) => {
+        const { name } = req.body;
+        connection.query(userQueries.createUser, name, (err, user) => {
+            if (err) throw err;
+            res.json(user);
         });
     },
     deleteUser: (req, res) => {
         const { userId } = req.params;
         connection.query(userQueries.deleteUser, parseInt(userId), (err, dbRes) => {
-            if(err) {
-                throw err;
-            }
+            if(err) throw err;
+        
             return res.json({ success: true });
         });
     },
