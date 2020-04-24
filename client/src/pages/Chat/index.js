@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
 // import io from "socket.io-client";
-import axios from "axios";
+// import axios from "axios";
 // import queryString from "query-string";
 import ChatRoomHeader from "../../components/ChatRoomHeader";
 import ChatSideBar from "../../components/ChatSideBar";
