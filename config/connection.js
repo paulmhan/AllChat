@@ -10,7 +10,7 @@ if(process.env.JAWSDB_URL) {
         port: 3306,
         user: 'root',
         password: process.env.SQL_PASSWORD,
-        database: 'app_db'
+        database: 'chat_db'
     });
 }
 
