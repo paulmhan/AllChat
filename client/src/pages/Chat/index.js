@@ -135,8 +135,6 @@ class Chat extends Component {
                                     <LeaveBtn />
                                 </Grid.Column>
                             </Grid.Row>
-                        </Grid>
-                        <Grid container>
                             <Grid.Row>
                                 <Grid.Column width={16}>
                                     <MessageContainer

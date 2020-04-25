@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form } from "semantic-ui-react";
 
-class UsernameInput extends Component {
+class NameInput extends Component {
   
   componentDidUpdate(prevProps) {
     return prevProps.name !== this.props.name;
@@ -12,8 +12,8 @@ class UsernameInput extends Component {
         <Form.Field 
           error={ this.props.error } 
           required
-          label='User Name'
-          placeholder='Enter your username'
+          label='Name'
+          placeholder='Enter your name'
           control='input'
           onChange={this.props.getName}
           />
@@ -22,6 +22,6 @@ class UsernameInput extends Component {
     }
 }
     
-export default UsernameInput;
+export default NameInput;
 
 

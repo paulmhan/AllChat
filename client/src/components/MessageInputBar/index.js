@@ -1,11 +1,11 @@
 import React from "react";
-import { Form, Button } from "semantic-ui-react";
+import { Input } from "semantic-ui-react";
 
 
 const MessageInputBar = props => {
     return (
         <div>
-            <Form >
+           <Form >
                 <Form.Field
                     error={props.error}
                     value={props.message}
@@ -23,3 +23,20 @@ const MessageInputBar = props => {
 };
 
 export default MessageInputBar;
+
+
+
+
+// {/* <Input
+//                 fluid
+//                 error={props.error}
+//                 value={props.message}
+//                 onChange={props.getMessage}
+//                 action={{
+//                     color: "blue",
+//                     labelPosition: "right",
+//                     icon: "arrow circle up",
+//                     content: "Send",
+//                 }}
+//                 placeholder={props.placeholder}
+//             /> */}
