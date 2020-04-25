@@ -9,13 +9,6 @@ module.exports = {
             cb(users);
         });
     },
-    // createUser: (req, res) => {
-    //     const { name } = req.body;
-    //     connection.query(userQueries.createUser, name, (err, user) => {
-    //         if (err) throw err;
-    //         res.json(user);
-    //     });
-    // },
     deleteUser: (req, res) => {
         const { userId } = req.params;
         connection.query(userQueries.deleteUser, parseInt(userId), (err, dbRes) => {
@@ -32,7 +25,7 @@ module.exports = {
             return res.json(users[0]);
         });
     },
-    createRoom: (data, cb) => {
+    createUser: (data, cb) => {
         const { name } = data;
         connection.query(userQueries.createUser, name, err => {
             if (err) throw err;
