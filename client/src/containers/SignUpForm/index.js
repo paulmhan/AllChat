@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "semantic-ui-react";
-import RoomDropdown from "../../components/RoomInput";
+
+import RoomInput from "../../components/RoomInput";
 import UsernameInput from "../../components/UsernameInput";
 import SignUpHeader from "../../components/SignUpHeader";
 import axios from "axios";
@@ -81,7 +82,7 @@ class SignUpForm extends Component {
                 size="small"
                 trigger={
                     <Button primary icon>
-                        Get Started
+                        Sign Up
                     </Button>
                 }
             >
@@ -95,7 +96,7 @@ class SignUpForm extends Component {
                         error={this.state.userNameError}
                     />
                     <br />
-                    <RoomDropdown
+                    <RoomInput
                         getRoom={this.handleRoomChange}
                         name={this.state.room}
                         error={this.state.roomNameError}

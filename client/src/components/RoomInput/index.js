@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form } from "semantic-ui-react";
 
-class RoomDropdown extends Component {
+class RoomInput extends Component {
   componentDidUpdate(prevProps) {
     return prevProps.room !== this.props.room;
   }
@@ -22,4 +22,4 @@ class RoomDropdown extends Component {
     }
 }
     
-export default RoomDropdown;
+export default RoomInput;
