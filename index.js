@@ -24,9 +24,6 @@ io.on("connection", socket => {
 
     console.log("New client connected.");
 
-    socket.on("joinChat", ({ name, room }) => {
-        console.log(name,room);
-    })
 
     // socket.on("getMessages", (cb) => {
     //     messageController.getMessages(messages => {
@@ -37,6 +34,12 @@ io.on("connection", socket => {
     socket.on("getUsers", (cb) => {
         userController.getUsers(users => {
             cb(users);
+        })
+    })
+
+    socket.on("getRoom", (cb) => {
+        userController.getRoom(room => {
+            cb(room);
         })
     })
 
