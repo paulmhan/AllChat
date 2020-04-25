@@ -21,5 +21,5 @@ CREATE TABLE messages (
     room_id INT NOT NULL,
     user_id INT NOT NULL,
     message TEXT NOT NULL,
-    PRIMARY KEY(id)
+    PRIMARY KEY (id)
 );
