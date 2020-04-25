@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
 
-import SignUpHeader from "../../components/SignUpHeader";
-import UsernameInput from "../../components/UsernameInput";
-import RoomInput from "../../components/RoomInput";
+import NameInput from "../../components/NameInput";
 
 class SignInForm extends Component {
     state = {
@@ -40,16 +38,11 @@ class SignInForm extends Component {
                     </Button>
                 }
             >
-                <Modal.Header><SignUpHeader /></Modal.Header>
+                <Modal.Header>Sign In</Modal.Header>
                 <Modal.Content>
-                    <UsernameInput
+                    <NameInput
                         getName={this.handleNameChange}
                         name={this.state.name}
-                    />
-                    <br />
-                    <RoomInput
-                        getRoom={this.handleRoomChange}
-                        name={this.state.room}
                     />
                 </Modal.Content>
                 <Modal.Actions>

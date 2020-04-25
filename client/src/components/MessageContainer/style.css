@@ -1,3 +1,8 @@
 .message {
     height: 500px;
 }
+
+.message-outline {
+    /* background-color: red; */
+    padding: 5px;
+}

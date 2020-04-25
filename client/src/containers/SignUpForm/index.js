@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "semantic-ui-react";
+
 import RoomInput from "../../components/RoomInput";
-import UsernameInput from "../../components/UsernameInput";
-import SignUpHeader from "../../components/SignUpHeader";
+import NameInput from "../../components/NameInput";
 import axios from "axios";
+
 
 class SignUpForm extends Component {
     state = {
@@ -89,10 +90,10 @@ class SignUpForm extends Component {
                 }
             >
                 <Modal.Header>
-                    <SignUpHeader />
+                    Sign Up
                 </Modal.Header>
                 <Modal.Content>
-                    <UsernameInput
+                    <NameInput
                         getName={this.handleNameChange}
                         name={this.state.name}
                         error={this.state.userNameError}
