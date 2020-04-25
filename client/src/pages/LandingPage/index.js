@@ -2,13 +2,10 @@ import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
 
 import LandingBodyText from "../../components/LandingBodyText"
-import SignUpForm from "../../containers/SignUpForm";
+import LandingPageModal from "../../containers/LandingPageModal";
 
 class LandingPage extends Component {
-
-
-
-
+    
     render() {
         return (
             <Grid container >
@@ -25,7 +22,7 @@ class LandingPage extends Component {
                 <Grid.Row
                     centered
                     columns={1}>
-                    <SignUpForm socket={this.props.socket}/>
+                    <LandingPageModal />
                 </Grid.Row>
             </Grid>
         )

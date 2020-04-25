@@ -9,6 +9,7 @@ import ChatSideBar from "../../components/ChatSideBar";
 import MessageContainer from "./../../components/MessageContainer";
 import MessageInputBar from "../../components/MessageInputBar";
 import LeaveBtn from "../../components/LeaveBtn";
+import "./style.css";
 
 
 
