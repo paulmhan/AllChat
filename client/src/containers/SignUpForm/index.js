@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "semantic-ui-react";
+
 import RoomInput from "../../components/RoomInput";
 import NameInput from "../../components/NameInput";
-import AllChatTitle from "../../components/AllChatTitle";
 import axios from "axios";
 
 
@@ -90,7 +90,7 @@ class SignUpForm extends Component {
                 }
             >
                 <Modal.Header>
-                    <AllChatTitle />
+                    Sign Up
                 </Modal.Header>
                 <Modal.Content>
                     <NameInput

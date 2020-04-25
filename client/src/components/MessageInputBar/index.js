@@ -27,14 +27,14 @@ export default MessageInputBar;
 
 // {/* <Form >
 //                 <Form.Field
-//                     
-//                     
+//                     error={props.error}
+//                     value={props.message}
 //                     required
-//                     
+//                     placeholder={props.placeholder}
 //                     control='input'
-//                     
+//                     onChange={props.getMessage}
 //                 />
 //             </Form>
-//             <Button  primary type="submit">
+//             <Button onClick={props.handleSend} primary type="submit">
 //                 Send
 //             </Button> */}
