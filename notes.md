@@ -19,7 +19,7 @@ Navbar semantic link is causing the domnesting warning
 
 //Messages
 // Format of the messages
-//function for formatMessage taks in username and text as input and returns username, text and time in moment.format('h:mm a')
+//function for formatMessage takes in username and text as input and returns username, text and time in moment.format('h:mm a')
 
 //Initial state: users is an empty array
 //userJoin: function which takes in username, id and room and returns user as an object {username, id, room}
