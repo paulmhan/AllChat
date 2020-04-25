@@ -24,8 +24,10 @@ class Chat extends Component {
     }
 
     componentDidMount() {
-        
+        const roomId = localStorage.getItem("roomId");
+        console.log(roomId);
         this.getUsers();
+        this.getRoom();
         this.getMessages();
 
     }
@@ -49,6 +51,7 @@ class Chat extends Component {
     }
 
     getMessages = () => {
+        //join room_id and messages
         // const { data } = await axios.get("/api/user/getusers");
         this.props.socket.emit("getMessages", messages => {
             console.log(messages);
@@ -128,7 +131,7 @@ class Chat extends Component {
                         <Grid container>
                             <Grid.Row>
                                 <Grid.Column width={14}>
-                                    <ChatRoomHeader />
+                                    <ChatRoomHeader room={this.state.room}/>
                                 </Grid.Column>
                                 <Grid.Column width={1}>
                                     <LeaveBtn />

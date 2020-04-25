@@ -20,8 +20,7 @@ module.exports = {
         const { userId } = req.params;
         connection.query(userQueries.deleteUser, parseInt(userId), (err, dbRes) => {
             if(err) throw err;
-        
-            return res.json({ success: true });
+            res.json({ success: true });
         });
     },
     getUserById: (req, res) => {

@@ -5,6 +5,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const routes = require('./routes');
 const userController = require("./controllers/userController")
+const roomController = require("./controllers/roomController")
 
 //for production only
 if(process.env.NODE_ENV === 'production') {
@@ -40,6 +41,12 @@ io.on("connection", socket => {
     socket.on("getRoom", (cb) => {
         userController.getRoom(room => {
             cb(room);
+        })
+    })
+
+    socket.on("createRoom", (room, cb) => {
+        roomController.createRoom(room, newRoom => {
+            cb(newRoom);
         })
     })
 

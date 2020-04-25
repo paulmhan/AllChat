@@ -30,7 +30,7 @@ class LandingPageModal extends Component {
                 </Modal.Header>
                 <Modal.Content>
                     <SignUpForm socket={this.props.socket}/>
-                    <SignInForm />
+                    <SignInForm socket={this.props.socket}/>
                 </Modal.Content>
             </Modal>
         )

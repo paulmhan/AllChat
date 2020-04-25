@@ -1,13 +1,14 @@
 const createRoom = "INSERT INTO rooms (room_name) VALUES (?);";
-const getRoom = "SELECT * FROM rooms;";
 const deleteRoom = "DELETE FROM rooms (room_name) WHERE id = ?;";
 const getRoomById = "SELECT * FROM rooms WHERE id = ?;";
+const getRoomByName = "SELECT * FROM rooms WHERE room_name = ?;";
+
 
 
 module.exports = {
     createRoom,
-    getRoom,
     deleteRoom,
     getRoomById,
+    getRoomByName,
 };
 
