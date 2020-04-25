@@ -50,6 +50,12 @@ io.on("connection", socket => {
         })
     })
 
+    socket.on("createUser", (user, cb) => {
+        userController.createUser(user, newUser => {
+            cb(newUser);
+        })
+    })
+
     socket.on("disconnect", () => {
         console.log("Client disconnected.");
     })

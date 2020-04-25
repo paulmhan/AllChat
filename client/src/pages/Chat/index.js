@@ -33,13 +33,11 @@ class Chat extends Component {
     }
 
     getUsers = () => {
-        
         const name = localStorage.getItem("name");
         this.props.socket.emit("getUsers", users => {
             console.log(users);
             this.setState({ users, name });
         })
-
     }
 
     getRoom = () => {
