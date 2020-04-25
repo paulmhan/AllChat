@@ -20,5 +20,6 @@ CREATE TABLE messages (
     id INT NOT NULL AUTO_INCREMENT,
     room_id INT NOT NULL,
     user_id INT NOT NULL,
-    message TEXT NOT NULL
+    message TEXT NOT NULL,
+    PRIMARY KEY (id)
 );
