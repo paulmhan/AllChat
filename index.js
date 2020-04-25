@@ -28,6 +28,12 @@ io.on("connection", socket => {
         console.log(name,room);
     })
 
+    // socket.on("getMessages", (cb) => {
+    //     messageController.getMessages(messages => {
+    //         cb(messages);
+    //     })
+    // })
+
     socket.on("getUsers", (cb) => {
         userController.getUsers(users => {
             cb(users);

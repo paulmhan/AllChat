@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "semantic-ui-react";
-import RoomDropdown from "../../components/RoomInput";
+import RoomInput from "../../components/RoomInput";
 import UsernameInput from "../../components/UsernameInput";
 import SignUpHeader from "../../components/SignUpHeader";
 import axios from "axios";
@@ -51,6 +51,7 @@ class SignUpForm extends Component {
         if(userNameError || roomNameError) {
            this.setState({ userNameError, roomNameError });
         } else {
+            localStorage.setItem("name", this.state.name)
             this.createUser();
             // this.createRoom();
         }
@@ -59,7 +60,9 @@ class SignUpForm extends Component {
     createUser = async () => {
         const { data } = await axios.post("/api/user/createuser", {name: this.state.name});
         console.log(data);
-    }
+        //has to be userid from the database and can be stored to local storage for current user and grab it
+        
+    };
 
     createRoom = async () => {
         const { data } = await axios.post("/api/user/createroom", {room: this.state.room})
@@ -95,7 +98,7 @@ class SignUpForm extends Component {
                         error={this.state.userNameError}
                     />
                     <br />
-                    <RoomDropdown
+                    <RoomInput
                         getRoom={this.handleRoomChange}
                         name={this.state.room}
                         error={this.state.roomNameError}
