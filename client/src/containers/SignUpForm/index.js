@@ -84,7 +84,7 @@ class SignUpForm extends Component {
                 size="small"
                 trigger={
                     <Button primary icon>
-                        Get Started
+                        Sign Up
                     </Button>
                 }
             >

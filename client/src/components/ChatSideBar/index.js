@@ -13,11 +13,11 @@ class ChatSideBar extends Component {
 
         return (
             <div>
-                <Segment.Group id="chatroom-container">
+                <Segment.Group id="chatroom-interface">
                     <RoomName />
                         {this.props.users.map((user,index) => 
                         <Segment.Group key={index}>
-                            <p>{user.name}</p>
+                            <Segment>{user.name}</Segment>
                         </Segment.Group>)}
                 </Segment.Group>
             </div>
