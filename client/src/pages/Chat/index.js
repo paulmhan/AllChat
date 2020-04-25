@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
 import moment from 'moment';
-import io from "socket.io-client";
-import axios from "axios";
+// import io from "socket.io-client";
+// import axios from "axios";
 // import queryString from "query-string";
 import ChatRoomHeader from "../../components/ChatRoomHeader";
 import ChatSideBar from "../../components/ChatSideBar";
@@ -133,8 +133,6 @@ class Chat extends Component {
                                     <LeaveBtn />
                                 </Grid.Column>
                             </Grid.Row>
-                        </Grid>
-                        <Grid container>
                             <Grid.Row>
                                 <Grid.Column width={16}>
                                     <MessageContainer
