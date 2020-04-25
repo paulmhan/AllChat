@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Modal, Button } from "semantic-ui-react";
-import SignUpHeader from "../../components/SignUpHeader";
+import AllChatTitle from "../../components/AllChatTitle";
 import SignUpForm from "../SignUpForm";
 import SignInForm from "../SignInForm";
 
@@ -26,7 +26,7 @@ class LandingPageModal extends Component {
                 }
             >
                 <Modal.Header>
-                    <SignUpHeader />
+                    <AllChatTitle />
                 </Modal.Header>
                 <Modal.Content>
                     <SignUpForm socket={this.props.socket}/>
