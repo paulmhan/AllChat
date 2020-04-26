@@ -1,19 +1,26 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { Button, Modal } from "semantic-ui-react";
 
 import RoomInput from "../../components/RoomInput";
 import NameInput from "../../components/NameInput";
 import axios from "axios";
+import { withRouter } from "react-router-dom";
+
 
 
 class SignUpForm extends Component {
+
+    // history = useHistory();
+
     state = {
         open: false,
         name: "",
         room: "",
         userNameError: false,
-        roomNameError: false
+        roomNameError: false,
+        userNameData: false,
+        roomNameData: false
     };
 
     handleNameChange = e => {
@@ -26,22 +33,22 @@ class SignUpForm extends Component {
         this.setState({ room: value });
     };
 
-    checkInputs = e => {
+    checkInputs = async (e) => {
         if (!this.state.name || !this.state.room) {
             e.preventDefault();
-            this.setState({ userNameError: true})
+            this.setState({ userNameError: true })
         }
 
         let roomNameError;
         let userNameError;
 
-        if(this.state.name.length === 0){
+        if (this.state.name.length === 0) {
             userNameError = true;
         } else {
             userNameError = false;
 
         }
-        if(this.state.room.length === 0){
+        if (this.state.room.length === 0) {
             roomNameError = true;
         } else {
             roomNameError = false;
@@ -49,25 +56,42 @@ class SignUpForm extends Component {
 
         // Check if one is true
         // if so, we have an error. set the state
-        if(userNameError || roomNameError) {
-           this.setState({ userNameError, roomNameError });
+        if (userNameError || roomNameError) {
+            this.setState({ userNameError, roomNameError });
         } else {
             localStorage.setItem("name", this.state.name)
-            this.createUser();
-            // this.createRoom();
+
+            let createdUser = this.createUser()
+            let createdRoom = this.createRoom();
+
+            if (createdUser && createdRoom) {
+                console.log("condition checked");
+                this.props.history.push("/chat");
+            }
+
         }
     }
 
-    createUser = async () => {
-        const { data } = await axios.post("/api/user/createuser", {name: this.state.name});
-        console.log(data);
-        //has to be userid from the database and can be stored to local storage for current user and grab it
-        
+    createUser = () => {
+
+        this.props.socket.emit("createUser", { name: this.state.name }, newUser => {
+
+            localStorage.setItem("userId", newUser[0].id);
+
+               
+
+        })
+        return this.state.name
     };
 
-    createRoom = async () => {
-        const { data } = await axios.post("/api/user/createroom", {room: this.state.room})
-        console.log(data);
+    createRoom = () => {
+        this.props.socket.emit("createRoom", { room: this.state.room }, newRoom => {
+           
+            localStorage.setItem("roomId", newRoom[0].id);
+
+                 
+        })
+        return this.state.room
     };
 
     open = () => this.setState({ open: true });
@@ -106,13 +130,13 @@ class SignUpForm extends Component {
                     />
                 </Modal.Content>
                 <Modal.Actions>
-                    <Link to={"/chat"}>
-                        <button onClick={(e) => this.checkInputs(e)} className="button mt-20" type="submit"> Join Chat Room! </button>
-                    </Link>
+                    {/* <Link to={"/chat"}> */}
+                    <button onClick={(e) => this.checkInputs(e)} className="button mt-20" type="submit"> Join Chat Room! </button>
+                    {/* </Link> */}
                 </Modal.Actions>
             </Modal>
         )
     }
 };
 
-export default SignUpForm;
+export default withRouter(SignUpForm);
