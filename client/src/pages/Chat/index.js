@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
 import moment from 'moment';
-// import io from "socket.io-client";
-// import axios from "axios";
 // import queryString from "query-string";
 import ChatRoomHeader from "../../components/ChatRoomHeader";
 import ChatSideBar from "../../components/ChatSideBar";
@@ -60,7 +58,6 @@ class Chat extends Component {
         const { value } = e.target;
         this.setState({ message: value });
     };
-
 
 
     handleSend = (e) => {
