@@ -18,7 +18,6 @@ class ChatSideBar extends Component {
                         <Segment.Group key={index}>
                             <Segment>{user.name}</Segment>
                         </Segment.Group>)}
-                    <Segment>Dummy Segment</Segment>
                 </Segment.Group>
             </div>
         )
