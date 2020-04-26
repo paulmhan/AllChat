@@ -39,7 +39,7 @@ io.on("connection", socket => {
     })
 
     socket.on("getRoom", (cb) => {
-        userController.getRoom(room => {
+        userController.getRoomById(room => {
             cb(room);
         })
     })
