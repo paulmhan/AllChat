@@ -1,19 +1,26 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { Button, Modal } from "semantic-ui-react";
 
 import RoomInput from "../../components/RoomInput";
 import NameInput from "../../components/NameInput";
 import axios from "axios";
+import { withRouter } from "react-router-dom";
+
 
 
 class SignUpForm extends Component {
+
+    // history = useHistory();
+
     state = {
         open: false,
         name: "",
         room: "",
         userNameError: false,
-        roomNameError: false
+        roomNameError: false,
+        userNameData: false,
+        roomNameData: false
     };
 
     handleNameChange = e => {
@@ -54,20 +61,28 @@ class SignUpForm extends Component {
         } else {
             localStorage.setItem("name", this.state.name)
             this.createUser();
-            // this.createRoom();
+            this.createRoom();
+            if(this.state.userNameData && this.state.roomNameData){
+                this.props.history.push("/chat");
+            }
+
         }
     }
 
-    createUser = async () => {
-        const { data } = await axios.post("/api/user/createuser", {name: this.state.name});
-        console.log(data);
-        //has to be userid from the database and can be stored to local storage for current user and grab it
-        
+    createUser(){
+        this.props.socket.emit("createUser", {name:this.state.name}, newUser => {
+            console.log(newUser);
+            localStorage.setItem("userId",newUser[0].id);
+            this.setState({userNameData: true});
+        })
     };
 
-    createRoom = async () => {
-        const { data } = await axios.post("/api/user/createroom", {room: this.state.room})
-        console.log(data);
+    createRoom(){
+        this.props.socket.emit("createRoom", {room:this.state.room}, newRoom => {
+            console.log(newRoom);
+            localStorage.setItem("roomId",newRoom[0].id);
+            this.setState({roomNameData: true});
+        })
     };
 
     open = () => this.setState({ open: true });
@@ -106,13 +121,13 @@ class SignUpForm extends Component {
                     />
                 </Modal.Content>
                 <Modal.Actions>
-                    <Link to={"/chat"}>
+                    {/* <Link to={"/chat"}> */}
                         <button onClick={(e) => this.checkInputs(e)} className="button mt-20" type="submit"> Join Chat Room! </button>
-                    </Link>
+                    {/* </Link> */}
                 </Modal.Actions>
             </Modal>
         )
     }
 };
 
-export default SignUpForm;
+export default withRouter(SignUpForm);

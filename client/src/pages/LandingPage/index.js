@@ -22,7 +22,7 @@ class LandingPage extends Component {
                 <Grid.Row
                     centered
                     columns={1}>
-                    <LandingPageModal />
+                    <LandingPageModal socket={this.props.socket}/>
                 </Grid.Row>
             </Grid>
         )
