@@ -56,3 +56,8 @@ Todo:
     a) create a room_id state 
     b) pass room_id into messageinput bar and create the function in there
     c) Create room queries and controllers and routes;
+
+
+
+Todo:
+dont allow into chat room without going through sign up or sign in

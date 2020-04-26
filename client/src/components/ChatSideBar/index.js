@@ -16,6 +16,7 @@ class ChatSideBar extends Component {
                 <Segment.Group id="chatroom-interface">
                     <RoomName />
                         {this.props.users.map((user,index) => 
+                        // console.log(user.name);
                         <Segment.Group key={index}>
                             <Segment>{user.name}</Segment>
                         </Segment.Group>)}

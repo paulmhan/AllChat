@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
 import { Button, Modal } from "semantic-ui-react";
-
 import RoomInput from "../../components/RoomInput";
 import NameInput from "../../components/NameInput";
-import axios from "axios";
 import { withRouter } from "react-router-dom";
 
 
@@ -62,7 +59,9 @@ class SignUpForm extends Component {
             localStorage.setItem("name", this.state.name)
             this.createUser();
             this.createRoom();
+            console.log("hello");
             if(this.state.userNameData && this.state.roomNameData){
+                console.log("hello");
                 this.props.history.push("/chat");
             }
 
@@ -74,6 +73,7 @@ class SignUpForm extends Component {
             console.log(newUser);
             localStorage.setItem("userId",newUser[0].id);
             this.setState({userNameData: true});
+            console.log(this.state.userNameData);
         })
     };
 
@@ -82,6 +82,7 @@ class SignUpForm extends Component {
             console.log(newRoom);
             localStorage.setItem("roomId",newRoom[0].id);
             this.setState({roomNameData: true});
+            console.log(this.state.roomNameData);
         })
     };
 

@@ -25,17 +25,17 @@ class Chat extends Component {
 
     componentDidMount() {
         const roomId = localStorage.getItem("roomId");
-        console.log(roomId);
+        // console.log(roomId);
         this.getUsers();
         this.getRoom();
-        this.getMessages();
+        // this.getMessages();
 
     }
 
     getUsers = () => {
         const name = localStorage.getItem("name");
         this.props.socket.emit("getUsers", users => {
-            console.log(users);
+            // console.log(users);
             this.setState({ users, name });
         })
     }
@@ -45,17 +45,13 @@ class Chat extends Component {
             console.log(room);
             this.setState({ room });
         })
-
     }
 
     getMessages = () => {
-        //join room_id and messages
-        // const { data } = await axios.get("/api/user/getusers");
         this.props.socket.emit("getMessages", messages => {
             console.log(messages);
             this.setState({ messages });
         })
-
     }
 
     handleMessageChange = e => {
