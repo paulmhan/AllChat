@@ -5,6 +5,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const routes = require('./routes');
 const userController = require("./controllers/userController")
+const roomController = require("./controllers/roomController")
 
 //for production only
 if(process.env.NODE_ENV === 'production') {
@@ -24,9 +25,6 @@ io.on("connection", socket => {
 
     console.log("New client connected.");
 
-    socket.on("joinChat", ({ name, room }) => {
-        console.log(name,room);
-    })
 
     // socket.on("getMessages", (cb) => {
     //     messageController.getMessages(messages => {
@@ -37,6 +35,24 @@ io.on("connection", socket => {
     socket.on("getUsers", (cb) => {
         userController.getUsers(users => {
             cb(users);
+        })
+    })
+
+    socket.on("getRoom", (cb) => {
+        userController.getRoom(room => {
+            cb(room);
+        })
+    })
+
+    socket.on("createRoom", (room, cb) => {
+        roomController.createRoom(room, newRoom => {
+            cb(newRoom);
+        })
+    })
+
+    socket.on("createUser", (user, cb) => {
+        userController.createUser(user, newUser => {
+            cb(newUser);
         })
     })
 
