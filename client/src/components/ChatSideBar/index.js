@@ -2,25 +2,26 @@ import React, { Component } from "react";
 import { Segment } from "semantic-ui-react";
 import RoomName from "./../RoomName"
 // import UsersList from "./../UsersList"
+import Scrollbar from "semantic-ui-react-scrollbar";
 import "./style.css";
 
 
 class ChatSideBar extends Component {
 
-    
 
-    render(){
+    render() {
 
         return (
             <div>
-                <Segment.Group id="chatroom-interface">
+                    <Segment.Group id="chatroom-interface">
+                    
                     <RoomName />
-                        {this.props.users.map((user,index) => 
+                    {this.props.users.map((user, index) =>
                         <Segment.Group key={index}>
                             <Segment>{user.name}</Segment>
                         </Segment.Group>)}
-                    <Segment>Dummy Segment</Segment>
                 </Segment.Group>
+                
             </div>
         )
     }
