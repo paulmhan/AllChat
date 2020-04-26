@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
 import moment from 'moment';
-// import io from "socket.io-client";
-// import axios from "axios";
-// import queryString from "query-string";
 import ChatRoomHeader from "../../components/ChatRoomHeader";
 import ChatSideBar from "../../components/ChatSideBar";
 import MessageContainer from "./../../components/MessageContainer";
@@ -27,27 +24,32 @@ class Chat extends Component {
     }
 
     componentDidMount() {
-        
+        const roomId = localStorage.getItem("roomId");
+        console.log(roomId);
         this.getUsers();
+        this.getRoom();
         this.getMessages();
 
-        // const { name, room } = queryString.parse(window.location.search);
-        // let socket = io("http://localhost:3001");
-        // socket.emit("joinChat", { name,room });
-        // this.setState({ name,room });
     }
 
     getUsers = () => {
-        
-        const name = localStorage.getItem("name")
+        const name = localStorage.getItem("name");
         this.props.socket.emit("getUsers", users => {
             console.log(users);
             this.setState({ users, name });
+        })
+    }
+
+    getRoom = () => {
+        this.props.socket.emit("getRoom", room => {
+            console.log(room);
+            this.setState({ room });
         })
 
     }
 
     getMessages = () => {
+        //join room_id and messages
         // const { data } = await axios.get("/api/user/getusers");
         this.props.socket.emit("getMessages", messages => {
             console.log(messages);
@@ -127,7 +129,7 @@ class Chat extends Component {
                         <Grid container>
                             <Grid.Row>
                                 <Grid.Column width={14}>
-                                    <ChatRoomHeader />
+                                    <ChatRoomHeader room={this.state.room}/>
                                 </Grid.Column>
                                 <Grid.Column width={1}>
                                     <LeaveBtn />
