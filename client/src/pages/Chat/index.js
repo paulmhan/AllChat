@@ -25,19 +25,34 @@ class Chat extends Component {
 
     componentDidMount() {
         const roomId = localStorage.getItem("roomId");
+<<<<<<< HEAD
         // console.log(roomId);
         this.getUsers();
         this.getRoom();
+=======
+        console.log(roomId);
+        const userId = localStorage.getItem("userId");
+        console.log(userId);
+        this.getUsers();
+        // this.getRoom();
+>>>>>>> 910a0c0f147e0bf6349d679fb883c67580740b7f
         // this.getMessages();
 
     }
 
     getUsers = () => {
         const name = localStorage.getItem("name");
+        
         this.props.socket.emit("getUsers", users => {
+<<<<<<< HEAD
             // console.log(users);
             this.setState({ users, name });
+=======
+            console.log(users);
+             this.setState({ users, name });
+>>>>>>> 910a0c0f147e0bf6349d679fb883c67580740b7f
         })
+        
     }
 
     getRoom = () => {
@@ -58,7 +73,6 @@ class Chat extends Component {
         const { value } = e.target;
         this.setState({ message: value });
     };
-
 
 
     handleSend = (e) => {

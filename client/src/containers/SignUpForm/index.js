@@ -30,22 +30,22 @@ class SignUpForm extends Component {
         this.setState({ room: value });
     };
 
-    checkInputs = e => {
+    checkInputs = async (e) => {
         if (!this.state.name || !this.state.room) {
             e.preventDefault();
-            this.setState({ userNameError: true})
+            this.setState({ userNameError: true })
         }
 
         let roomNameError;
         let userNameError;
 
-        if(this.state.name.length === 0){
+        if (this.state.name.length === 0) {
             userNameError = true;
         } else {
             userNameError = false;
 
         }
-        if(this.state.room.length === 0){
+        if (this.state.room.length === 0) {
             roomNameError = true;
         } else {
             roomNameError = false;
@@ -53,37 +53,42 @@ class SignUpForm extends Component {
 
         // Check if one is true
         // if so, we have an error. set the state
-        if(userNameError || roomNameError) {
-           this.setState({ userNameError, roomNameError });
+        if (userNameError || roomNameError) {
+            this.setState({ userNameError, roomNameError });
         } else {
             localStorage.setItem("name", this.state.name)
-            this.createUser();
-            this.createRoom();
-            console.log("hello");
-            if(this.state.userNameData && this.state.roomNameData){
-                console.log("hello");
+
+            let createdUser = this.createUser()
+            let createdRoom = this.createRoom();
+
+            if (createdUser && createdRoom) {
+                console.log("condition checked");
                 this.props.history.push("/chat");
             }
 
         }
     }
 
-    createUser(){
-        this.props.socket.emit("createUser", {name:this.state.name}, newUser => {
-            console.log(newUser);
-            localStorage.setItem("userId",newUser[0].id);
-            this.setState({userNameData: true});
-            console.log(this.state.userNameData);
+    createUser = () => {
+
+        this.props.socket.emit("createUser", { name: this.state.name }, newUser => {
+
+            localStorage.setItem("userId", newUser[0].id);
+
+               
+
         })
+        return this.state.name
     };
 
-    createRoom(){
-        this.props.socket.emit("createRoom", {room:this.state.room}, newRoom => {
-            console.log(newRoom);
-            localStorage.setItem("roomId",newRoom[0].id);
-            this.setState({roomNameData: true});
-            console.log(this.state.roomNameData);
+    createRoom = () => {
+        this.props.socket.emit("createRoom", { room: this.state.room }, newRoom => {
+           
+            localStorage.setItem("roomId", newRoom[0].id);
+
+                 
         })
+        return this.state.room
     };
 
     open = () => this.setState({ open: true });
@@ -123,7 +128,7 @@ class SignUpForm extends Component {
                 </Modal.Content>
                 <Modal.Actions>
                     {/* <Link to={"/chat"}> */}
-                        <button onClick={(e) => this.checkInputs(e)} className="button mt-20" type="submit"> Join Chat Room! </button>
+                    <button onClick={(e) => this.checkInputs(e)} className="button mt-20" type="submit"> Join Chat Room! </button>
                     {/* </Link> */}
                 </Modal.Actions>
             </Modal>
