@@ -14,34 +14,35 @@ class Chat extends Component {
 
     state = {
         name: "",
-        // room: "",
         message:"",
         placeholder:"Send a Message",
         messageError: false,
-        messages: [],
+        messages: [{
+            name:"AllChat", 
+            title:"Welcome to AllChat!", 
+            timeStamp: moment().format('l, h:mm a') 
+        }],
         users: [],
-        messageId:"",
-        // roomId:"",
-        // userId:""
+        userId:0,
+        //set the state of the room Id and user Id from the local storage
+        messageId:""
     }
 
-    componentDidMount = () => {
-        // const roomId = localStorage.getItem("roomId");
-        // this.setState({ roomId });
-        // console.log(roomId);
+    componentDidMount() {
         const userId = localStorage.getItem("userId");
         // this.setState({ userId });
         console.log(userId);
         this.getUsers();
+        this.setState({
+            userId
+        })
         // this.getRoom();
-        // this.getMessages();
 
     }
 
     getUsers = () => {
         const name = localStorage.getItem("name");
         this.props.socket.emit("getUsers", users => {
-            // console.log(users);
             this.setState({ users, name });
         })
     }
@@ -51,18 +52,35 @@ class Chat extends Component {
     //         console.log(room);
     //         this.setState({ room });
     //     })
+
     // }
+
+    createMessage = () => {
+
+        this.props.socket.emit("createMessage", { title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId:1, roomId:2  }, newMessage => {
+            
+            console.log(newMessage);
+
+        })
+        return this.state.messages
+    };
+
 
     getMessages = () => {
         this.props.socket.emit("getMessages", messages => {
             console.log(messages);
-            this.setState({ messages });
+            this.setState({ 
+            messages,
+            placeholder:"Send a Message", 
+            message:"",
+            messageError:false });
         })
     }
 
     handleMessageChange = e => {
         const { value } = e.target;
         this.setState({ message: value });
+        
     };
 
 
@@ -70,22 +88,24 @@ class Chat extends Component {
         e.preventDefault();
         this.checkInputs(e);
         if(this.state.message.length===0) {
-           this.setState({placeholder:"Cannot be blank! "})
+           this.setState({placeholder:"Cannot be blank!"})
         } else {
             const newMessage = {  
-                name:this.state.name, 
                 title: this.state.message, 
                 timeStamp: moment().format('l, h:mm a') 
             };
+            console.log(newMessage)
             //API/socket call here and then set state
             const messages = [...this.state.messages, newMessage];
+            this.createMessage();
+            this.getMessages();
             //pass this back to the backend and in there socket.on send message and use that query createmessage and get it 
-            this.setState({ 
-                messages, 
-                placeholder:"Send a Message", 
-                message:"",
-                messageError:false
-            });
+            // this.setState({ 
+            //     messages, 
+            //     placeholder:"Send a Message", 
+            //     message:"",
+            //     messageError:false
+            // });
             
             // socket.emit("sendMessage", {messages})
             // this.setState({ message: "" });

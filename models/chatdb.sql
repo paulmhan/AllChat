@@ -18,8 +18,8 @@ CREATE TABLE rooms (
 
 CREATE TABLE messages (
     id INT NOT NULL AUTO_INCREMENT,
-    room_id INT NOT NULL,
-    user_id INT NOT NULL,
+    room_id INT,
+    user_id INT,
     message TEXT NOT NULL,
     PRIMARY KEY (id)
 );

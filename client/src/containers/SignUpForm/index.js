@@ -10,9 +10,9 @@ class SignUpForm extends Component {
     state = {
         open: false,
         name: "",
-        // room: "",
         userNameError: false,
-        // roomNameError: false
+        userNameData: false,
+
     };
 
     handleNameChange = e => {
@@ -64,13 +64,18 @@ class SignUpForm extends Component {
 
     createUser = () => {
         this.props.socket.emit("createUser", { name: this.state.name }, newUser => {
+
+            console.log(newUser, "newUser created by createuser function in signup form");
+            
             localStorage.setItem("userId", newUser[0].id);
+            console.log(newUser[0].id, "newuser Id");
         })
         return this.state.name;
     };
 
     // createRoom = () => {
     //     this.props.socket.emit("createRoom", { room: this.state.room }, newRoom => {
+
     //         localStorage.setItem("roomId", newRoom[0].id);git add
     //     })
     //     return this.state.room;
