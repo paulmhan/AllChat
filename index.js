@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
-const routes = require('./routes');
 const userController = require("./controllers/userController")
 // const roomController = require("./controllers/roomController")
 
@@ -18,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // Prepend / to any route declared inside of routes
-app.use(routes);
+// app.use(routes);
 
 //socket.io
 io.on("connection", socket => {
