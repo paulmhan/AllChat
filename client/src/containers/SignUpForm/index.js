@@ -1,18 +1,14 @@
 import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
-// import RoomInput from "../../components/RoomInput";
 import NameInput from "../../components/NameInput";
 import { withRouter } from "react-router-dom";
 
-
-
 class SignUpForm extends Component {
+
     state = {
         open: false,
         name: "",
-        userNameError: false,
-        userNameData: false,
-
+        userNameError: false
     };
 
     handleNameChange = e => {
@@ -20,34 +16,17 @@ class SignUpForm extends Component {
         this.setState({ name: value });
     };
 
-    // handleRoomChange = e => {
-    //     const { value } = e.target;
-    //     this.setState({ room: value });
-    // };
-
     checkInputs = async (e) => {
         if (!this.state.name) {
             e.preventDefault();
-            this.setState({ userNameError: true })
+            this.setState({ userNameError: true });
         }
-
-        // let roomNameError;
         let userNameError;
-
         if (this.state.name.length === 0) {
             userNameError = true;
         } else {
             userNameError = false;
-
         }
-        // if (this.state.room.length === 0) {
-        //     roomNameError = true;
-        // } else {
-        //     roomNameError = false;
-        // }
-
-        // Check if one is true
-        // if so, we have an error. set the state
         if (userNameError) {
             this.setState({ userNameError });
         } else {
@@ -55,39 +34,24 @@ class SignUpForm extends Component {
             let createdUser = this.createUser()
             // let createdRoom = this.createRoom();
             if (createdUser) {
-                console.log("Condition Checked");
                 this.props.history.push("/chat");
             }
-
         }
     }
-
+    
     createUser = () => {
         this.props.socket.emit("createUser", { name: this.state.name }, newUser => {
-
-            console.log(newUser, "newUser created by createuser function in signup form");
-            
+            // console.log(newUser, "newUser created by createuser function in signup form");
             localStorage.setItem("userId", newUser[0].id);
-            console.log(newUser[0].id, "newuser Id");
+            // console.log(newUser[0].id, "newuser Id");
         })
-        return this.state.name;
+        return this.state.name
     };
 
-    // createRoom = () => {
-    //     this.props.socket.emit("createRoom", { room: this.state.room }, newRoom => {
-
-    //         localStorage.setItem("roomId", newRoom[0].id);git add
-    //     })
-    //     return this.state.room;
-    // };
-
     open = () => this.setState({ open: true });
-
     close = () => this.setState({ open: false });
-
     render() {
         const { open } = this.state;
-
         return (
             <Modal
                 open={open}
@@ -125,5 +89,4 @@ class SignUpForm extends Component {
         )
     }
 };
-
 export default withRouter(SignUpForm);
