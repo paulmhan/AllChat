@@ -14,10 +14,11 @@ const MessageInputBar = props => {
                 control='input'
                 onChange={props.getMessage}
             />
-        </Form>
         <Button onClick={props.handleSend} primary type="submit">
             Send
         </Button>
+        </Form>
+        
         </div>
     )
 };

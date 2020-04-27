@@ -65,7 +65,7 @@ class SignUpForm extends Component {
             let createdRoom = this.createRoom();
 
             if (createdUser && createdRoom) {
-                console.log("condition checked");
+                
                 this.props.history.push("/chat");
             }
 
@@ -75,10 +75,10 @@ class SignUpForm extends Component {
     createUser = () => {
 
         this.props.socket.emit("createUser", { name: this.state.name }, newUser => {
-
+            console.log(newUser, "newUser created by createuser function in signup form");
+            
             localStorage.setItem("userId", newUser[0].id);
-
-               
+            console.log(newUser[0].id, "newuser Id");
 
         })
         return this.state.name
@@ -86,10 +86,9 @@ class SignUpForm extends Component {
 
     createRoom = () => {
         this.props.socket.emit("createRoom", { room: this.state.room }, newRoom => {
-           
+            
             localStorage.setItem("roomId", newRoom[0].id);
 
-                 
         })
         return this.state.room
     };
