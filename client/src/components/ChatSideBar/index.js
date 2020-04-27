@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Segment } from "semantic-ui-react";
-import RoomName from "./../RoomName"
-// import UsersList from "./../UsersList"
+import UsersTitle from "../UsersTitle";
 import "./style.css";
 
 
@@ -14,12 +13,11 @@ class ChatSideBar extends Component {
         return (
             <div>
                 <Segment.Group id="chatroom-interface">
-                    <RoomName />
+                    <UsersTitle />
                         {this.props.users.map((user,index) => 
                         <Segment.Group key={index}>
                             <Segment>{user.name}</Segment>
                         </Segment.Group>)}
-                    <Segment>Dummy Segment</Segment>
                 </Segment.Group>
             </div>
         )
