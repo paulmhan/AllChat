@@ -14,6 +14,7 @@ const App = props => (
     <div className="container">
       <AllChatTitle />
     </div>
+    <br />
     <Route exact path="/" render={() => <LandingPage socket={socket}/>} />
     <Route path="/chat" render={() => <Chat socket={socket}/>} />
   </Router>

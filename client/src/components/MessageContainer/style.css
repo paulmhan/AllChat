@@ -1,8 +1,10 @@
 .message {
-    height: 500px;
+    height: 700px;
 }
 
 .message-outline {
-    background-color: red;
-    padding: 5px;
+    padding: 20px;
+    background-image: url(./../../assets/images/metallic-silver-alt.jpg);
+    border-radius: 25px;
 }
+

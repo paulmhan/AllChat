@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Segment } from "semantic-ui-react";
 import RoomName from "./../RoomName"
 // import UsersList from "./../UsersList"
-import Scrollbar from "semantic-ui-react-scrollbar";
+// import Scrollbar from "semantic-ui-react-scrollbar";
 import "./style.css";
 
 

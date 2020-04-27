@@ -1,5 +1,5 @@
 import React from "react";
-import { Input,Form,Button } from "semantic-ui-react";
+import { Form, Button } from "semantic-ui-react";
 
 
 const MessageInputBar = props => {
