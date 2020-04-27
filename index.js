@@ -5,7 +5,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const routes = require('./routes');
 const userController = require("./controllers/userController")
-const roomController = require("./controllers/roomController")
+// const roomController = require("./controllers/roomController")
 
 //for production only
 if(process.env.NODE_ENV === 'production') {
