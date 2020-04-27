@@ -29,4 +29,15 @@ module.exports = {
             return res.json(rooms[0]);
         });
     },
+    // getRoomById: (data, cb) => {
+    //     const { room } = data;
+    //     connection.query(roomQueries.getRoomById, room, err => {
+    //         if (err) throw err;
+    //         connection.query(userQueries.getUserByName, name, (err, newUser) => {
+    //             if (err) throw err;
+    //             cb(newUser);
+    //         });
+    //     });
+    // },
 }
+

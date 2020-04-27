@@ -14,19 +14,23 @@ class Chat extends Component {
 
     state = {
         name: "",
-        room: "",
+        // room: "",
         message:"",
         placeholder:"Send a Message",
         messageError: false,
         messages: [],
         users: [],
-        messageId:""
+        messageId:"",
+        // roomId:"",
+        // userId:""
     }
 
-    componentDidMount() {
-        const roomId = localStorage.getItem("roomId");
-        console.log(roomId);
+    componentDidMount = () => {
+        // const roomId = localStorage.getItem("roomId");
+        // this.setState({ roomId });
+        // console.log(roomId);
         const userId = localStorage.getItem("userId");
+        // this.setState({ userId });
         console.log(userId);
         this.getUsers();
         // this.getRoom();
@@ -37,17 +41,17 @@ class Chat extends Component {
     getUsers = () => {
         const name = localStorage.getItem("name");
         this.props.socket.emit("getUsers", users => {
-            console.log(users);
+            // console.log(users);
             this.setState({ users, name });
         })
     }
 
-    getRoom = () => {
-        this.props.socket.emit("getRoom", room => {
-            console.log(room);
-            this.setState({ room });
-        })
-    }
+    // getRoom = () => {
+    //     this.props.socket.emit("getRoom", room => {
+    //         console.log(room);
+    //         this.setState({ room });
+    //     })
+    // }
 
     getMessages = () => {
         this.props.socket.emit("getMessages", messages => {
@@ -126,7 +130,7 @@ class Chat extends Component {
                         <Grid container>
                             <Grid.Row>
                                 <Grid.Column width={14}>
-                                    <ChatRoomHeader room={this.state.room}/>
+                                    <ChatRoomHeader />
                                 </Grid.Column>
                                 <Grid.Column width={1}>
                                     <LeaveBtn />
