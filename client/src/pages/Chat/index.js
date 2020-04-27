@@ -14,7 +14,7 @@ class Chat extends Component {
 
     state = {
         name: "",
-        room: "",
+       
         message:"",
         placeholder:"Send a Message",
         messageError: false,
@@ -24,20 +24,19 @@ class Chat extends Component {
             timeStamp: moment().format('l, h:mm a') 
         }],
         users: [],
-        roomId:0,
+       
         userId:0,
         //set the state of the room Id and user Id from the local storage
         messageId:""
     }
 
     componentDidMount() {
-        const roomId = localStorage.getItem("roomId");
-        console.log(roomId);
+        // const roomId = localStorage.getItem("roomId");
+        // console.log(roomId);
         const userId = localStorage.getItem("userId");
         console.log(userId);
         this.getUsers();
         this.setState({
-            roomId,
             userId
         })
         // this.getRoom();
@@ -53,13 +52,13 @@ class Chat extends Component {
         
     }
 
-    getRoom = () => {
-        this.props.socket.emit("getRoom", room => {
-            console.log(room);
-            this.setState({ room });
-        })
+    // getRoom = () => {
+    //     this.props.socket.emit("getRoom", room => {
+    //         console.log(room);
+    //         this.setState({ room });
+    //     })
 
-    }
+    // }
 
     createMessage = () => {
 
