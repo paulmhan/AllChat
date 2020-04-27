@@ -9,134 +9,90 @@ import LeaveBtn from "../../components/LeaveBtn";
 import "./style.css";
 
 
-
 class Chat extends Component {
-
     state = {
         name: "",
-        message:"",
-        placeholder:"Send a Message",
+        message: "",
+        placeholder: "Send a Message",
         messageError: false,
         messages: [{
-            name:"AllChat", 
-            title:"Welcome to AllChat!", 
-            timeStamp: moment().format('l, h:mm a') 
+            name: "AllChat",
+            title: "Welcome to AllChat!",
+            timeStamp: moment().format('l, h:mm a')
         }],
         users: [],
-        userId:0,
-        //set the state of the room Id and user Id from the local storage
-        messageId:""
+        userId: 0,
+        messageId: ""
     }
 
     componentDidMount() {
         const userId = localStorage.getItem("userId");
-        // this.setState({ userId });
         console.log(userId);
         this.getUsers();
-        this.setState({
-            userId
-        })
-        // this.getRoom();
-
+        this.setState({ userId });
     }
 
     getUsers = () => {
         const name = localStorage.getItem("name");
         this.props.socket.emit("getUsers", users => {
+            console.log(users);
             this.setState({ users, name });
         })
     }
 
-    // getRoom = () => {
-    //     this.props.socket.emit("getRoom", room => {
-    //         console.log(room);
-    //         this.setState({ room });
-    //     })
-
-    // }
-
     createMessage = () => {
-
-        this.props.socket.emit("createMessage", { title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId:1, roomId:2  }, newMessage => {
-            
+        this.props.socket.emit("createMessage", { title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: 1, roomId: 2 }, newMessage => {
             console.log(newMessage);
-
         })
         return this.state.messages
     };
 
-
     getMessages = () => {
         this.props.socket.emit("getMessages", messages => {
             console.log(messages);
-            this.setState({ 
-            messages,
-            placeholder:"Send a Message", 
-            message:"",
-            messageError:false });
+            this.setState({
+                messages,
+                placeholder: "Send a Message",
+                message: "",
+                messageError: false
+            });
         })
     }
 
     handleMessageChange = e => {
         const { value } = e.target;
         this.setState({ message: value });
-        
     };
-
 
     handleSend = (e) => {
         e.preventDefault();
         this.checkInputs(e);
-        if(this.state.message.length===0) {
-           this.setState({placeholder:"Cannot be blank!"})
+        if (this.state.message.length === 0) {
+            this.setState({ placeholder: "Cannot be blank!" })
         } else {
-            const newMessage = {  
-                title: this.state.message, 
-                timeStamp: moment().format('l, h:mm a') 
+            const newMessage = {
+                title: this.state.message,
+                timeStamp: moment().format('l, h:mm a')
             };
             console.log(newMessage)
-            //API/socket call here and then set state
-            const messages = [...this.state.messages, newMessage];
             this.createMessage();
             this.getMessages();
-            //pass this back to the backend and in there socket.on send message and use that query createmessage and get it 
-            // this.setState({ 
-            //     messages, 
-            //     placeholder:"Send a Message", 
-            //     message:"",
-            //     messageError:false
-            // });
-            
-            // socket.emit("sendMessage", {messages})
-            // this.setState({ message: "" });
-            
         };
-        };
-        
+    };
 
     checkInputs = e => {
         if (!this.state.message) {
             e.preventDefault();
-            this.setState({ messageError: true})
+            this.setState({ messageError: true })
         }
-
         let messageError;
-
-        if(this.state.message.length === 0){
+        if (this.state.message.length === 0) {
             messageError = true;
-            this.setState({messageError})
+            this.setState({ messageError })
         } else {
             messageError = false;
         }
-
-
     }
-
-    // componentWillUnmount() {
-    //     let socket = io("http://localhost:3001");
-    //     socket.emit("disconnect");
-    //     socket.off();
-    // }
 
     render() {
         return (
@@ -173,7 +129,6 @@ class Chat extends Component {
                                         // checkInputs = {this.checkInputs()}
                                         handleSend={this.handleSend}
                                     // error={this.state.messageError}
-
                                     />
                                 </Grid.Column>
                             </Grid.Row>
@@ -181,10 +136,7 @@ class Chat extends Component {
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
-
         )
-
     }
 }
-
 export default Chat;
