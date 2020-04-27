@@ -4,9 +4,9 @@ const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const routes = require('./routes');
-const userController = require("./controllers/userController")
-const roomController = require("./controllers/roomController")
-const messageController = require("./controllers/messageController")
+const userController = require("./controllers/userController");
+const roomController = require("./controllers/roomController");
+const messageController = require("./controllers/messageController");
 const botName = 'AllChat Bot';
 
 //for production only
