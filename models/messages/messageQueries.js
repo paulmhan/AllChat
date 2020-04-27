@@ -1,4 +1,4 @@
-const createMessage = "INSERT INTO messages (message) VALUES (?);";
+const createMessage = "INSERT INTO messages (title,timeStamp,roomId, userId) VALUES (?,?,?,?);";
 const getMessages = "SELECT * FROM messages;";
 const deleteMessage = "DELETE FROM messages (message) WHERE id = ?;";
 

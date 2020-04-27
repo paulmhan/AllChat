@@ -9,11 +9,17 @@ module.exports = {
             cb(text);
         });
     },
-    createMessage: (req, res) => {
-        const { message } = req.body;
-        connection.query(messageQueries.createMessage, message, (err, text) => {
+    createMessage: (data, cb) => {
+        const { title } = data;
+        const { timeStamp } = data;
+        const {roomId} = data;
+        const {userId} = data;
+        connection.query(messageQueries.createMessage, [title,timeStamp,roomId,userId], err => {
             if (err) throw err;
-            res.json(text);
+            connection.query(messageQueries.getMessages, (err, newMessage) => {
+                if (err) throw err;
+                cb(newMessage);
+            });
         });
     },
     // deleteUser: (req, res) => {
