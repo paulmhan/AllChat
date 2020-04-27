@@ -1,10 +1,10 @@
 import React from "react";
 import { Segment } from "semantic-ui-react";
 
-const RoomName = props => {
+const UsersTitle = props => {
     return(
         <Segment>Users:</Segment>
     );
 };
 
-export default RoomName;
+export default UsersTitle;
