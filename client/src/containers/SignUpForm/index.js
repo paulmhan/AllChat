@@ -1,26 +1,18 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
 import { Button, Modal } from "semantic-ui-react";
-
 // import RoomInput from "../../components/RoomInput";
 import NameInput from "../../components/NameInput";
-import axios from "axios";
 import { withRouter } from "react-router-dom";
 
 
 
 class SignUpForm extends Component {
-
-    // history = useHistory();
-
     state = {
         open: false,
         name: "",
-        // room: "",
         userNameError: false,
-        // roomNameError: false,
         userNameData: false,
-        // roomNameData: false
+
     };
 
     handleNameChange = e => {
@@ -60,12 +52,10 @@ class SignUpForm extends Component {
             this.setState({ userNameError });
         } else {
             localStorage.setItem("name", this.state.name)
-
             let createdUser = this.createUser()
             // let createdRoom = this.createRoom();
-
             if (createdUser) {
-                
+                console.log("Condition Checked");
                 this.props.history.push("/chat");
             }
 
@@ -73,24 +63,22 @@ class SignUpForm extends Component {
     }
 
     createUser = () => {
-
         this.props.socket.emit("createUser", { name: this.state.name }, newUser => {
+
             console.log(newUser, "newUser created by createuser function in signup form");
             
             localStorage.setItem("userId", newUser[0].id);
             console.log(newUser[0].id, "newuser Id");
-
         })
-        return this.state.name
+        return this.state.name;
     };
 
     // createRoom = () => {
     //     this.props.socket.emit("createRoom", { room: this.state.room }, newRoom => {
-            
-    //         localStorage.setItem("roomId", newRoom[0].id);
 
+    //         localStorage.setItem("roomId", newRoom[0].id);git add
     //     })
-    //     return this.state.room
+    //     return this.state.room;
     // };
 
     open = () => this.setState({ open: true });

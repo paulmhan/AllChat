@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // Prepend / to any route declared inside of routes
-app.use(routes);
+// app.use(routes);
 
 //socket.io
 io.on("connection", socket => {
@@ -42,17 +42,17 @@ io.on("connection", socket => {
         })
     })
 
-    socket.on("getRoom", (cb) => {
-        userController.getRoomById(room => {
-            cb(room);
-        })
-    })
+    // socket.on("getRoom", (cb) => {
+    //     userController.getRoomById(room => {
+    //         cb(room);
+    //     })
+    // })
 
-    socket.on("createRoom", (room, cb) => {
-        roomController.createRoom(room, newRoom => {
-            cb(newRoom);
-        })
-    })
+    // socket.on("createRoom", (room, cb) => {
+    //     roomController.createRoom(room, newRoom => {
+    //         cb(newRoom);
+    //     })
+    // })
 
     socket.on("createUser", (user, cb) => {
         userController.createUser(user, newUser => {

@@ -14,7 +14,6 @@ class Chat extends Component {
 
     state = {
         name: "",
-       
         message:"",
         placeholder:"Send a Message",
         messageError: false,
@@ -24,16 +23,14 @@ class Chat extends Component {
             timeStamp: moment().format('l, h:mm a') 
         }],
         users: [],
-       
         userId:0,
         //set the state of the room Id and user Id from the local storage
         messageId:""
     }
 
     componentDidMount() {
-        // const roomId = localStorage.getItem("roomId");
-        // console.log(roomId);
         const userId = localStorage.getItem("userId");
+        // this.setState({ userId });
         console.log(userId);
         this.getUsers();
         this.setState({
@@ -46,10 +43,8 @@ class Chat extends Component {
     getUsers = () => {
         const name = localStorage.getItem("name");
         this.props.socket.emit("getUsers", users => {
-            console.log(users);
             this.setState({ users, name });
         })
-        
     }
 
     // getRoom = () => {
@@ -70,9 +65,8 @@ class Chat extends Component {
         return this.state.messages
     };
 
+
     getMessages = () => {
-        //join room_id and messages
-        // const { data } = await axios.get("/api/user/getusers");
         this.props.socket.emit("getMessages", messages => {
             console.log(messages);
             this.setState({ 
@@ -81,7 +75,6 @@ class Chat extends Component {
             message:"",
             messageError:false });
         })
-
     }
 
     handleMessageChange = e => {
@@ -157,7 +150,7 @@ class Chat extends Component {
                         <Grid container>
                             <Grid.Row>
                                 <Grid.Column width={14}>
-                                    <ChatRoomHeader room={this.state.room}/>
+                                    <ChatRoomHeader />
                                 </Grid.Column>
                                 <Grid.Column width={1}>
                                     <LeaveBtn />
