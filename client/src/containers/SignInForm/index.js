@@ -15,10 +15,10 @@ class SignInForm extends Component {
         this.setState({ name: value });
     };
 
-    handleRoomChange = e => {
-        const { value } = e.target;
-        this.setState({ room: value });
-    };
+    // handleRoomChange = e => {
+    //     const { value } = e.target;
+    //     this.setState({ room: value });
+    // };
 
     open = () => this.setState({ open: true });
 
