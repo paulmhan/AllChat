@@ -18,7 +18,7 @@ CREATE TABLE rooms (
 
 CREATE TABLE messages (
     id INT NOT NULL AUTO_INCREMENT,
-    roomId INT,
+    name VARCHAR(30) NOT NULL,
     userId INT,
     title TEXT NOT NULL,
     timeStamp VARCHAR(30) NOT NULL,
