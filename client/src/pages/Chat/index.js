@@ -29,8 +29,8 @@ class Chat extends Component {
         const userId = localStorage.getItem("userId");
         const name = localStorage.getItem("name");
         this.getUsers();
-        this.setState({ userId });
-        this.setState({ name });
+        this.setState({ userId, name });
+        
     }
 
     getUsers = () => {
@@ -41,8 +41,8 @@ class Chat extends Component {
     }
 
     createMessage = () => {
-        this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, newMessage => {
-            this.setState({ messages: [...this.state.messages, ...newMessage ], message: '' });
+        this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, messages => {
+            this.setState({ messages, message: '' });
         })
       
     };
