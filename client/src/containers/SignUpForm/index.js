@@ -43,6 +43,7 @@ class SignUpForm extends Component {
         this.props.socket.emit("createUser", { name: this.state.name }, newUser => {
             // console.log(newUser, "newUser created by createuser function in signup form");
             localStorage.setItem("userId", newUser[0].id);
+            localStorage.setItem("name", newUser[0].name);
             // console.log(newUser[0].id, "newuser Id");
         })
         return this.state.name
