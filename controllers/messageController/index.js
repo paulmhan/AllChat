@@ -10,13 +10,13 @@ module.exports = {
         });
     },
     createMessage: (data, cb) => {
+        const { name } = data;
         const { title } = data;
         const { timeStamp } = data;
-        const {roomId} = data;
-        const {userId} = data;
-        connection.query(messageQueries.createMessage, [title,timeStamp,roomId,userId], err => {
+        const {userId } = data;
+        connection.query(messageQueries.createMessage, [name, title,timeStamp,userId], (err, result) => {
             if (err) throw err;
-            connection.query(messageQueries.getMessages, (err, newMessage) => {
+            connection.query(messageQueries.getMessageById, result.insertId, (err, newMessage) => {
                 if (err) throw err;
                 cb(newMessage);
             });
