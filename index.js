@@ -28,7 +28,7 @@ io.on("connection", socket => {
     })
     // socket.broadcast.emit('user connected');
     socket.on("getUsers", (cb) => {
-        roomController.getUsers(users => {
+        roomController.getRoomUsers(users => {
             cb(users);
         })
     })

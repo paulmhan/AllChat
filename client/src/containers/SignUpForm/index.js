@@ -36,7 +36,6 @@ class SignUpForm extends Component {
             let createdUser = this.createUser()
             // let createdRoom = this.createRoom();
             if (createdUser) {
-                console.log("Yay")
                 this.props.history.push("/chat");
             }
         }

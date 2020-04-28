@@ -40,7 +40,7 @@ class Chat extends Component {
     getUsers = () => {
         const name = localStorage.getItem("name");
         this.props.socket.emit("getUsers", users => {
-            console.log(users);
+            // console.log(users);
             this.setState({ users, name });
         })
     }
@@ -79,11 +79,17 @@ class Chat extends Component {
                 title: this.state.message,
                 timeStamp: moment().format('l, h:mm a')
             };
-            console.log(newMessage)
+            console.log(newMessage);
             this.createMessage();
             this.getMessages();
         };
     };
+
+
+    handleLeave = () => {
+        //pass in userId that is trying to leave as object
+        this.props.socket.emit("leave",)
+    }
 
     checkInputs = e => {
         if (!this.state.message) {
