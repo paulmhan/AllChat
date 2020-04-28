@@ -6,9 +6,8 @@ import "./style.css";
 
 class ChatSideBar extends Component {
 
-    
 
-    render(){
+    render() {
 
         return (
             <div>
@@ -19,6 +18,7 @@ class ChatSideBar extends Component {
                             <Segment>{user.name}</Segment>
                         </Segment.Group>)}
                 </Segment.Group>
+                
             </div>
         )
     }
