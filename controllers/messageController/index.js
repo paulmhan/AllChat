@@ -10,33 +10,17 @@ module.exports = {
         });
     },
     createMessage: (data, cb) => {
+        const { name } = data;
         const { title } = data;
         const { timeStamp } = data;
-        const {roomId} = data;
-        const {userId} = data;
-        connection.query(messageQueries.createMessage, [title,timeStamp,roomId,userId], err => {
+        const {userId } = data;
+        connection.query(messageQueries.createMessage, [name, title,timeStamp,userId], (err, result) => {
             if (err) throw err;
-            connection.query(messageQueries.getMessages, (err, newMessage) => {
+            connection.query(messageQueries.getAllMessages, (err, messages) => {
                 if (err) throw err;
-                cb(newMessage);
+                cb(messages);
             });
         });
     },
-    // deleteUser: (req, res) => {
-    //     const { userId } = req.params;
-    //     connection.query(userQueries.deleteUser, parseInt(userId), (err, dbRes) => {
-    //         if(err) throw err;
-        
-    //         return res.json({ success: true });
-    //     });
-    // },
-    // getUserById: (req, res) => {
-    //     const { userId } = req.params;
-    //     connection.query(userQueries.getUserById, parseInt(userId), (err, users) => {
-    //         if(err) {
-    //             return res.json(err);
-    //         }
-    //         return res.json(users[0]);
-    //     });
-    // },
+    
 }

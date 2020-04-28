@@ -26,10 +26,11 @@ class Chat extends Component {
     }
 
     componentDidMount() {
-        // const userId = localStorage.getItem("userId");
-        // console.log(this.state.userId)
+        const userId = localStorage.getItem("userId");
+        const name = localStorage.getItem("name");
         this.getUsers();
-        // this.setState({ userId });
+        this.setState({ userId, name });
+        
     }
 
     // componentWillUnmount() {
@@ -40,29 +41,17 @@ class Chat extends Component {
     getUsers = () => {
         const name = localStorage.getItem("name");
         this.props.socket.emit("getUsers", users => {
-            // console.log(users);
             this.setState({ users, name });
         })
     }
 
     createMessage = () => {
-        this.props.socket.emit("createMessage", { title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: 1, roomId: 2 }, newMessage => {
-            console.log(newMessage);
+        this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, messages => {
+            this.setState({ messages, message: '' });
         })
-        return this.state.messages
+      
     };
 
-    getMessages = () => {
-        this.props.socket.emit("getMessages", messages => {
-            console.log(messages);
-            this.setState({
-                messages,
-                placeholder: "Send a Message",
-                message: "",
-                messageError: false
-            });
-        })
-    }
 
     handleMessageChange = e => {
         const { value } = e.target;
@@ -75,13 +64,8 @@ class Chat extends Component {
         if (this.state.message.length === 0) {
             this.setState({ placeholder: "Cannot be blank!" })
         } else {
-            const newMessage = {
-                title: this.state.message,
-                timeStamp: moment().format('l, h:mm a')
-            };
-            console.log(newMessage);
             this.createMessage();
-            this.getMessages();
+            // this.getNewMessage();
         };
     };
 

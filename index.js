@@ -21,11 +21,12 @@ app.use(express.urlencoded({ extended: true }));
 io.on("connection", socket => {
 
     console.log("New client connected.");
-    socket.on("getMessages", (cb) => {
-        messageController.getMessages(messages => {
-            cb(messages);
-        })
-    })
+
+    // socket.on("getMessages", (cb) => {
+    //     messageController.getMessages(messages => {
+    //         cb(messages);
+    //     })
+    // })
     // socket.broadcast.emit('user connected');
     socket.on("getUsers", (cb) => {
         roomController.getRoomUsers(users => {
