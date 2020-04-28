@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Modal, Button } from "semantic-ui-react";
+import { Modal } from "semantic-ui-react";
 
 import SignUpForm from "../SignUpForm";
 import SignInForm from "../SignInForm";
+import "./style.css";
 
 class LandingPageModal extends Component {
     state = { open: false };
@@ -13,24 +14,35 @@ class LandingPageModal extends Component {
     render() {
         const { open } = this.state;
 
-        return(
+        return (
             <Modal
                 open={open}
                 onOpen={this.open}
                 onClose={this.close}
                 size="small"
                 trigger={
-                    <Button primary>
-                        Get Started
-                    </Button>
+                    <button id="GetStartedBtn">
+                            Get Started
+                    </button>
+                        
+            
                 }
             >
                 <Modal.Header>
-                    Sign Up/Sign In
+                    Don't have an account? Sign up and start chatting!
                 </Modal.Header>
                 <Modal.Content>
-                    <SignUpForm socket={this.props.socket}/>
-                    <SignInForm socket={this.props.socket}/>
+                    <div id="signup-btn">
+                        <SignUpForm socket={this.props.socket} />
+                    </div>
+                </Modal.Content>
+                <Modal.Header>
+                    Already have an account? Enter your name and sign in!
+                </Modal.Header>
+                <Modal.Content>
+                    <div id="signin-btn">
+                        <SignInForm socket={this.props.socket} />
+                    </div>
                 </Modal.Content>
             </Modal>
         )

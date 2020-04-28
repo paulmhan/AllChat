@@ -33,7 +33,7 @@ class SignInForm extends Component {
                 onClose={this.close}
                 size="small"
                 trigger={
-                    <Button primary>
+                    <Button color="red" size="massive">
                         Sign In
                     </Button>
                 }
@@ -48,7 +48,7 @@ class SignInForm extends Component {
                 <Modal.Actions>
                     <Button>
                         Sign In
-                </Button>
+                    </Button>
                 </Modal.Actions>
             </Modal>
         );

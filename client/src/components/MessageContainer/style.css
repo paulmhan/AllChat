@@ -1,5 +1,7 @@
 .message {
     height: 700px;
+    max-height: 700px;
+    overflow-y: auto;
 }
 
 .message-outline {
@@ -7,4 +9,3 @@
     background-image: url(./../../assets/images/metallic-silver-alt.jpg);
     border-radius: 25px;
 }
-

@@ -59,7 +59,7 @@ class SignUpForm extends Component {
                 onClose={this.close}
                 size="small"
                 trigger={
-                    <Button primary icon>
+                    <Button color="green" size="massive">
                         Sign Up
                     </Button>
                 }
