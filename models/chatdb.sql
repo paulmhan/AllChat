@@ -12,7 +12,7 @@ CREATE TABLE users (
 
 CREATE TABLE rooms (
     id INT NOT NULL AUTO_INCREMENT,
-    room_name VARCHAR(45) NOT NULL,
+    userId INT,
     PRIMARY KEY(id)
 );
 

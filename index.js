@@ -5,6 +5,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const userController = require("./controllers/userController");
 const messageController = require("./controllers/messageController");
+const roomController = require("./controllers/roomController");
 const botName = 'AllChat Bot';
 
 //for production only
@@ -27,7 +28,7 @@ io.on("connection", socket => {
     })
     // socket.broadcast.emit('user connected');
     socket.on("getUsers", (cb) => {
-        userController.getUsers(users => {
+        roomController.getUsers(users => {
             cb(users);
         })
     })
@@ -45,15 +46,16 @@ io.on("connection", socket => {
         userController.createUser(user, newUser => {
             cb(newUser);
         })
-        socket.emit("message", { user: "admin", text: `${user} has joined the chat room.`})
+        // socket.emit("message", { user: "admin", text: `${user} has joined the chat room.`})
     })
+    
     socket.on("createMessage", (message, cb) => {
         messageController.createMessage(message, newMessage => {
             cb(newMessage);
         })
     })
 
-    socket.
+    
 
     socket.on("disconnect", () => {
         console.log("Client disconnected.");

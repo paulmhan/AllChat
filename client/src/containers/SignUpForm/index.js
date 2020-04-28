@@ -8,7 +8,7 @@ class SignUpForm extends Component {
     state = {
         open: false,
         name: "",
-        // room: "Chat Room",
+        room: "Chat Room",
         userNameError: false
 
     };
