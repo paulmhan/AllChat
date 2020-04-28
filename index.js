@@ -45,12 +45,16 @@ io.on("connection", socket => {
         userController.createUser(user, newUser => {
             cb(newUser);
         })
+        socket.emit("message", { user: "admin", text: `${user} has joined the chat room.`})
     })
     socket.on("createMessage", (message, cb) => {
         messageController.createMessage(message, newMessage => {
             cb(newMessage);
         })
     })
+
+    socket.
+
     socket.on("disconnect", () => {
         console.log("Client disconnected.");
     })

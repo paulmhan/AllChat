@@ -21,16 +21,21 @@ class Chat extends Component {
             timeStamp: moment().format('l, h:mm a')
         }],
         users: [],
-        userId: 0,
+        // userId: localStorage.getItem('userId'),
         messageId: ""
     }
 
     componentDidMount() {
-        const userId = localStorage.getItem("userId");
-        console.log(userId);
+        // const userId = localStorage.getItem("userId");
+        // console.log(this.state.userId)
         this.getUsers();
-        this.setState({ userId });
+        // this.setState({ userId });
     }
+
+    // componentWillUnmount() {
+    //     localStorage.clear()
+    // }
+
 
     getUsers = () => {
         const name = localStorage.getItem("name");

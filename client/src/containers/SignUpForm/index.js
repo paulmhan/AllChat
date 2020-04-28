@@ -8,7 +8,9 @@ class SignUpForm extends Component {
     state = {
         open: false,
         name: "",
+        // room: "Chat Room",
         userNameError: false
+
     };
 
     handleNameChange = e => {
@@ -34,16 +36,15 @@ class SignUpForm extends Component {
             let createdUser = this.createUser()
             // let createdRoom = this.createRoom();
             if (createdUser) {
+                console.log("Yay")
                 this.props.history.push("/chat");
             }
         }
     }
     
     createUser = () => {
-        this.props.socket.emit("createUser", { name: this.state.name }, newUser => {
-            // console.log(newUser, "newUser created by createuser function in signup form");
+        this.props.socket.emit("createUser", { name: this.state.name}, newUser => {
             localStorage.setItem("userId", newUser[0].id);
-            // console.log(newUser[0].id, "newuser Id");
         })
         return this.state.name
     };
@@ -73,17 +74,9 @@ class SignUpForm extends Component {
                         name={this.state.name}
                         error={this.state.userNameError}
                     />
-                    <br />
-                    {/* <RoomInput
-                        getRoom={this.handleRoomChange}
-                        name={this.state.room}
-                        error={this.state.roomNameError}
-                    /> */}
                 </Modal.Content>
                 <Modal.Actions>
-                    {/* <Link to={"/chat"}> */}
                     <button onClick={(e) => this.checkInputs(e)} className="button mt-20" type="submit"> Join Chat Room! </button>
-                    {/* </Link> */}
                 </Modal.Actions>
             </Modal>
         )
