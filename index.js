@@ -22,11 +22,11 @@ io.on("connection", socket => {
 
     console.log("New client connected.");
 
-    // socket.on("getMessages", (cb) => {
-    //     messageController.getMessages(messages => {
-    //         cb(messages);
-    //     })
-    // })
+    socket.on("getMessage", (cb) => {
+        messageController.getMessages(messages => {
+            cb(messages);
+        })
+    })
     // socket.broadcast.emit('user connected');
 
     socket.on("getUsers", (cb) => {
@@ -43,13 +43,20 @@ io.on("connection", socket => {
     
     socket.on("createMessage", (message, cb) => {
         messageController.createMessage(message, newMessage => {
+            // console.log(newMessage)
+            socket.broadcast.emit("messageReceive", newMessage);
+            
             cb(newMessage);
         })
+        // socket.broadcast.emit(newMessage);
     })
 
-    socket.on("leaveRoom", (userId, cb) => {
-        roomController.deleteUserId(userId, cb => {
-            cb(userId);
+    socket.on("leaveRoom", (data, cb) => {
+        roomController.deleteUserId(data, status => {
+            if(status.affectedRows !== 0){
+                io.broadcast.emit("userLeft");
+            }
+            cb({status: true});
         })
     })
     

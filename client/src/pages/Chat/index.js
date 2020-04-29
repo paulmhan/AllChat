@@ -27,8 +27,17 @@ class Chat extends Component {
 
     componentDidMount() {
         const userId = localStorage.getItem("userId");
+        console.log("chat cdm",userId);
         const name = localStorage.getItem("name");
         this.getUsers();
+<<<<<<< Updated upstream
+        this.props.socket.on("messageReceive", newMessage => {
+            this.setState({messages:[...this.state.messages, ...newMessage]});
+=======
+        this.props.socket.on("userLeft", () => {
+            this.getUsers();
+>>>>>>> Stashed changes
+        })
         this.setState({ userId, name });
     }
 
@@ -45,12 +54,12 @@ class Chat extends Component {
     }
 
     createMessage = () => {
-        this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, messages => {
-            this.setState({ messages, message: '' });
+        this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, newMessage => {
+            
+            this.setState({messages:[...this.state.messages, ...newMessage], message:''});
         })
       
     };
-
 
     handleMessageChange = e => {
         const { value } = e.target;
@@ -64,15 +73,13 @@ class Chat extends Component {
             this.setState({ placeholder: "Cannot be blank!" })
         } else {
             this.createMessage();
-            // this.getNewMessage();
         };
     };
 
 
     handleLeave = () => {
-        this.props.socket.emit("leaveRoom", {userId: this.state.userId}, users => {
-            this.setState(users);
-            console.log(users);
+        this.props.socket.emit("leaveRoom", {userId: this.state.userId}, status => {
+            console.log(status);
         })
     }
 
@@ -102,7 +109,7 @@ class Chat extends Component {
                         <Grid container>
                             <Grid.Row>
                                 <Grid.Column width={14}>
-                                    <ChatRoomHeader />
+                                    <ChatRoomHeader name = {this.state.name} />
                                 </Grid.Column>
                                 <Grid.Column width={1}>
                                     <LeaveBtn />

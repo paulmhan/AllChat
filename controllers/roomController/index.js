@@ -11,9 +11,10 @@ module.exports = {
     },
     deleteUserId: (data, cb) => {
         const { userId } = data;
-        connection.query(roomQueries.deleteUserId, parseInt(userId), err => {
+        console.log(userId);
+        connection.query(roomQueries.deleteUserId, parseInt(userId), (err, status) => {
             if(err) throw err;
-            cb(userId);
+            cb(status);
         });
     },
 }
