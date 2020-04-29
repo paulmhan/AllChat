@@ -3,6 +3,8 @@ import { Button, Modal } from "semantic-ui-react";
 import NameInput from "../../components/NameInput";
 import { withRouter } from "react-router-dom";
 
+import "./style.css";
+
 class SignUpForm extends Component {
 
     state = {
@@ -60,7 +62,7 @@ class SignUpForm extends Component {
                 onClose={this.close}
                 size="small"
                 trigger={
-                    <Button color="green" size="massive">
+                    <Button id="SignUpBtn" color="green" size="massive">
                         Sign Up
                     </Button>
                 }
