@@ -21,20 +21,31 @@ class Chat extends Component {
             timeStamp: moment().format('l, h:mm a')
         }],
         users: [],
-        userId: 0,
+        // userId: localStorage.getItem('userId'),
         messageId: ""
     }
+
+
 
     componentDidMount() {
         const userId = localStorage.getItem("userId");
         const name = localStorage.getItem("name");
+        console.log("chat cdm", userId);
         this.getUsers();
+        // this.props.socket.on("userLeft", () => {
+        //     this.getUsers();
+        // })
         this.props.socket.on("messageReceive", newMessage => {
-            this.setState({messages:[...this.state.messages, ...newMessage]});
+            this.setState({ messages: [...this.state.messages, ...newMessage] });
         })
         this.setState({ userId, name });
-        
     }
+
+
+    // componentWillUnmount() {
+    //     this.handleLeave();
+    // }
+
 
     getUsers = () => {
         const name = localStorage.getItem("name");
@@ -45,10 +56,10 @@ class Chat extends Component {
 
     createMessage = () => {
         this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, newMessage => {
-            
-            this.setState({messages:[...this.state.messages, ...newMessage], message:''});
+
+            this.setState({ messages: [...this.state.messages, ...newMessage], message: '' });
         })
-      
+
     };
 
     handleMessageChange = e => {
@@ -65,6 +76,13 @@ class Chat extends Component {
             this.createMessage();
         };
     };
+
+
+    // handleLeave = () => {
+    //     this.props.socket.emit("leaveRoom", { userId: this.state.userId }, status => {
+    //         console.log(status);
+    //     })
+    // }
 
     checkInputs = e => {
         if (!this.state.message) {
@@ -92,7 +110,7 @@ class Chat extends Component {
                         <Grid container>
                             <Grid.Row>
                                 <Grid.Column width={14}>
-                                    <ChatRoomHeader name = {this.state.name} />
+                                    <ChatRoomHeader name={this.state.name} />
                                 </Grid.Column>
                                 <Grid.Column width={1}>
                                     <LeaveBtn />
@@ -112,9 +130,7 @@ class Chat extends Component {
                                         message={this.state.message}
                                         error={this.state.messageError}
                                         placeholder={this.state.placeholder}
-                                        // checkInputs = {this.checkInputs()}
                                         handleSend={this.handleSend}
-                                    // error={this.state.messageError}
                                     />
                                 </Grid.Column>
                             </Grid.Row>

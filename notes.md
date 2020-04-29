@@ -9,3 +9,9 @@ Hard Code One Room:
     
     
 
+On leave Button:
+ - we want to delete that userId the rooms_db and then rerun get users to update the chat sidebar. 
+ - want to broadcast that the user lefr
+
+ want to broadcast when user joins
+ 
