@@ -21,11 +21,11 @@ io.on("connection", socket => {
 
     console.log("New client connected.");
 
-    // socket.on("getMessages", (cb) => {
-    //     messageController.getMessages(messages => {
-    //         cb(messages);
-    //     })
-    // })
+    socket.on("getMessage", (cb) => {
+        messageController.getMessages(messages => {
+            cb(messages);
+        })
+    })
     // socket.broadcast.emit('user connected');
     socket.on("getUsers", (cb) => {
         userController.getUsers(users => {
@@ -49,8 +49,12 @@ io.on("connection", socket => {
     })
     socket.on("createMessage", (message, cb) => {
         messageController.createMessage(message, newMessage => {
+            // console.log(newMessage)
+            socket.broadcast.emit("messageReceive", newMessage);
+            
             cb(newMessage);
         })
+        // socket.broadcast.emit(newMessage);
     })
     socket.on("disconnect", () => {
         console.log("Client disconnected.");
