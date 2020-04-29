@@ -30,12 +30,11 @@ class Chat extends Component {
         const name = localStorage.getItem("name");
         this.getUsers();
         this.setState({ userId, name });
-        
     }
 
-    // componentWillUnmount() {
-    //     localStorage.clear()
-    // }
+    componentWillUnmount() {
+        this.handleLeave();
+    }
 
 
     getUsers = () => {
@@ -72,7 +71,10 @@ class Chat extends Component {
 
     handleLeave = () => {
         //pass in userId that is trying to leave as object
-        this.props.socket.emit("leave",)
+        this.props.socket.emit("leaveRoom", {userId: this.state.userId}, users => {
+            this.setState(users);
+            console.log(users);
+        })
     }
 
     checkInputs = e => {

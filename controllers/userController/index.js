@@ -21,7 +21,6 @@ module.exports = {
             connection.query(userQueries.getUserByName, name, (err, newUser) => {
                 if (err) throw err;
                 //create insert userid into room table
-                console.log(newUser[0].id);
                 connection.query(roomQueries.insertIdtoRoom, newUser[0].id, err => {
                     if (err) throw err;
                     cb(newUser);

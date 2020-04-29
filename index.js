@@ -28,26 +28,17 @@ io.on("connection", socket => {
     //     })
     // })
     // socket.broadcast.emit('user connected');
+
     socket.on("getUsers", (cb) => {
         roomController.getRoomUsers(users => {
             cb(users);
         })
     })
-    // socket.on("getRoom", (cb) => {
-    //     userController.getRoomById(room => {
-    //         cb(room);
-    //     })
-    // })
-    // socket.on("createRoom", (room, cb) => {
-    //     roomController.createRoom(room, newRoom => {
-    //         cb(newRoom);
-    //     })
-    // })
+    
     socket.on("createUser", (user, cb) => {
         userController.createUser(user, newUser => {
             cb(newUser);
         })
-        // socket.emit("message", { user: "admin", text: `${user} has joined the chat room.`})
     })
     
     socket.on("createMessage", (message, cb) => {
@@ -56,6 +47,7 @@ io.on("connection", socket => {
         })
     })
 
+    // socket.on("leaveRoom")
     
 
     socket.on("disconnect", () => {

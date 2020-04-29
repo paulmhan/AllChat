@@ -32,9 +32,8 @@ class SignUpForm extends Component {
         if (userNameError) {
             this.setState({ userNameError });
         } else {
-            localStorage.setItem("name", this.state.name)
-            let createdUser = this.createUser()
-            // let createdRoom = this.createRoom();
+            localStorage.setItem("name", this.state.name);
+            let createdUser = this.createUser();
             if (createdUser) {
                 this.props.history.push("/chat");
             }
@@ -45,13 +44,13 @@ class SignUpForm extends Component {
         this.props.socket.emit("createUser", { name: this.state.name}, newUser => {
             localStorage.setItem("userId", newUser[0].id);
             localStorage.setItem("name", newUser[0].name);
-            // console.log(newUser[0].id, "newuser Id");
         })
-        return this.state.name
+        return this.state.name;
     };
 
     open = () => this.setState({ open: true });
     close = () => this.setState({ open: false });
+
     render() {
         const { open } = this.state;
         return (
