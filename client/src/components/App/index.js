@@ -7,7 +7,6 @@ import AllChatTitle from "../AllChatTitle";
 
 const socket = io();
 
-
 const App = props => (
   <Router>
     <div className="container">
