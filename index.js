@@ -47,7 +47,11 @@ io.on("connection", socket => {
         })
     })
 
-    // socket.on("leaveRoom")
+    socket.on("leaveRoom", (userId, cb) => {
+        roomController.deleteUserId(userId, cb => {
+            cb(userId);
+        })
+    })
     
 
     socket.on("disconnect", () => {

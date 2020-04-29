@@ -9,11 +9,11 @@ module.exports = {
             cb(users);
         });
     },
-    deleteUser: (req, res) => {
-        const { userId } = req.params;
-        connection.query(userQueries.deleteUser, parseInt(userId), (err, dbRes) => {
+    deleteUserId: (data, cb) => {
+        const { userId } = data;
+        connection.query(roomQueries.deleteUserId, parseInt(userId), err => {
             if(err) throw err;
-            res.json({ success: true });
+            cb(userId);
         });
     },
 }

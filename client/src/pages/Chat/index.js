@@ -70,7 +70,6 @@ class Chat extends Component {
 
 
     handleLeave = () => {
-        //pass in userId that is trying to leave as object
         this.props.socket.emit("leaveRoom", {userId: this.state.userId}, users => {
             this.setState(users);
             console.log(users);
@@ -123,9 +122,7 @@ class Chat extends Component {
                                         message={this.state.message}
                                         error={this.state.messageError}
                                         placeholder={this.state.placeholder}
-                                        // checkInputs = {this.checkInputs()}
                                         handleSend={this.handleSend}
-                                    // error={this.state.messageError}
                                     />
                                 </Grid.Column>
                             </Grid.Row>
