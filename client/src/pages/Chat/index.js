@@ -25,119 +25,120 @@ class Chat extends Component {
         messageId: ""
     }
 
+
+
     componentDidMount() {
         const userId = localStorage.getItem("userId");
-        console.log("chat cdm",userId);
         const name = localStorage.getItem("name");
+        console.log("chat cdm", userId);
         this.getUsers();
-<<<<<<< Updated upstream
-        this.props.socket.on("messageReceive", newMessage => {
-            this.setState({messages:[...this.state.messages, ...newMessage]});
-=======
         this.props.socket.on("userLeft", () => {
             this.getUsers();
->>>>>>> Stashed changes
         })
-        this.setState({ userId, name });
-    }
-
+        this.props.socket.on("messageReceive", newMessage => {
+            this.setState({ messages: [...this.state.messages, ...newMessage] });
+            })
+            this.setState({ userId, name });
+        }
+        
+       
     componentWillUnmount() {
-        this.handleLeave();
-    }
+            this.handleLeave();
+        }
 
 
     getUsers = () => {
-        const name = localStorage.getItem("name");
-        this.props.socket.emit("getUsers", users => {
-            this.setState({ users, name });
-        })
-    }
+                const name = localStorage.getItem("name");
+                this.props.socket.emit("getUsers", users => {
+                    this.setState({ users, name });
+                })
+            }
 
     createMessage = () => {
-        this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, newMessage => {
-            
-            this.setState({messages:[...this.state.messages, ...newMessage], message:''});
-        })
-      
-    };
+                this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, newMessage => {
 
-    handleMessageChange = e => {
-        const { value } = e.target;
-        this.setState({ message: value });
-    };
+                    this.setState({ messages: [...this.state.messages, ...newMessage], message: '' });
+                })
 
-    handleSend = (e) => {
-        e.preventDefault();
-        this.checkInputs(e);
-        if (this.state.message.length === 0) {
-            this.setState({ placeholder: "Cannot be blank!" })
-        } else {
-            this.createMessage();
+            };
+
+        handleMessageChange = e => {
+            const { value } = e.target;
+            this.setState({ message: value });
         };
-    };
 
-
-    handleLeave = () => {
-        this.props.socket.emit("leaveRoom", {userId: this.state.userId}, status => {
-            console.log(status);
-        })
-    }
-
-    checkInputs = e => {
-        if (!this.state.message) {
+        handleSend = (e) => {
             e.preventDefault();
-            this.setState({ messageError: true })
-        }
-        let messageError;
-        if (this.state.message.length === 0) {
-            messageError = true;
-            this.setState({ messageError })
-        } else {
-            messageError = false;
-        }
-    }
+            this.checkInputs(e);
+            if (this.state.message.length === 0) {
+                this.setState({ placeholder: "Cannot be blank!" })
+            } else {
+                this.createMessage();
+            };
+        };
 
-    render() {
-        return (
-            <Grid container>
-                <Grid.Row
-                    stretched>
-                    <Grid.Column width={4}>
-                        <ChatSideBar users={this.state.users} />
-                    </Grid.Column>
-                    <Grid.Column width={12}>
-                        <Grid container>
-                            <Grid.Row>
-                                <Grid.Column width={14}>
-                                    <ChatRoomHeader name = {this.state.name} />
-                                </Grid.Column>
-                                <Grid.Column width={1}>
-                                    <LeaveBtn />
-                                </Grid.Column>
-                            </Grid.Row>
-                            <Grid.Row>
-                                <Grid.Column width={16}>
-                                    <MessageContainer
-                                        messages={this.state.messages}
-                                    />
-                                </Grid.Column>
-                            </Grid.Row>
-                            <Grid.Row centered>
-                                <Grid.Column width={16}>
-                                    <MessageInputBar
-                                        getMessage={this.handleMessageChange}
-                                        message={this.state.message}
-                                        error={this.state.messageError}
-                                        placeholder={this.state.placeholder}
-                                        handleSend={this.handleSend}
-                                    />
-                                </Grid.Column>
-                            </Grid.Row>
-                        </Grid>
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
-        )
+
+        handleLeave = () => {
+            this.props.socket.emit("leaveRoom", { userId: this.state.userId }, status => {
+                console.log(status);
+            })
+        }
+
+        checkInputs = e => {
+            if (!this.state.message) {
+                e.preventDefault();
+                this.setState({ messageError: true })
+            }
+            let messageError;
+            if (this.state.message.length === 0) {
+                messageError = true;
+                this.setState({ messageError })
+            } else {
+                messageError = false;
+            }
+        }
+
+        render() {
+            return (
+                <Grid container>
+                    <Grid.Row
+                        stretched>
+                        <Grid.Column width={4}>
+                            <ChatSideBar users={this.state.users} />
+                        </Grid.Column>
+                        <Grid.Column width={12}>
+                            <Grid container>
+                                <Grid.Row>
+                                    <Grid.Column width={14}>
+                                        <ChatRoomHeader name={this.state.name} />
+                                    </Grid.Column>
+                                    <Grid.Column width={1}>
+                                        <LeaveBtn />
+                                    </Grid.Column>
+                                </Grid.Row>
+                                <Grid.Row>
+                                    <Grid.Column width={16}>
+                                        <MessageContainer
+                                            messages={this.state.messages}
+                                        />
+                                    </Grid.Column>
+                                </Grid.Row>
+                                <Grid.Row centered>
+                                    <Grid.Column width={16}>
+                                        <MessageInputBar
+                                            getMessage={this.handleMessageChange}
+                                            message={this.state.message}
+                                            error={this.state.messageError}
+                                            placeholder={this.state.placeholder}
+                                            handleSend={this.handleSend}
+                                        />
+                                    </Grid.Column>
+                                </Grid.Row>
+                            </Grid>
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+            )
+        }
     }
-}
-export default Chat;
+    export default Chat;
