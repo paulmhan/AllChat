@@ -4,7 +4,7 @@ const messageQueries = require('../../models/messages/messageQueries');
 
 module.exports = {
     getMessages: cb => {
-        connection.query(messageQueries.getMessages, (err, text) => {
+        connection.query(messageQueries.getAllMessages, (err, text) => {
             if(err) throw err;
             cb(text);
         });
@@ -16,9 +16,11 @@ module.exports = {
         const {userId } = data;
         connection.query(messageQueries.createMessage, [name, title,timeStamp,userId], (err, result) => {
             if (err) throw err;
-            connection.query(messageQueries.getAllMessages, (err, messages) => {
+            
+            connection.query(messageQueries.getMessageById, result.insertId, (err, newMessage) => {
                 if (err) throw err;
-                cb(messages);
+                
+                cb(newMessage);
             });
         });
     },
