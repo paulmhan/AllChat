@@ -51,14 +51,14 @@ io.on("connection", socket => {
         // socket.broadcast.emit(newMessage);
     })
 
-    socket.on("leaveRoom", (data, cb) => {
-        roomController.deleteUserId(data, status => {
-            if(status.affectedRows !== 0){
-                io.broadcast.emit("userLeft");
-            }
-            cb({status: true});
-        })
-    })
+    // socket.on("leaveRoom", (data, cb) => {
+    //     roomController.deleteUserId(data, status => {
+    //         if(status.affectedRows !== 0){
+    //             io.broadcast.emit("userLeft");
+    //         }
+    //         cb({status: true});
+    //     })
+    // })
     
 
     socket.on("disconnect", () => {
