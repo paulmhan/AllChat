@@ -5,6 +5,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const userController = require("./controllers/userController");
 const messageController = require("./controllers/messageController");
+const roomController = require("./controllers/roomController");
 const botName = 'AllChat Bot';
 
 //for production only
@@ -27,26 +28,19 @@ io.on("connection", socket => {
         })
     })
     // socket.broadcast.emit('user connected');
+
     socket.on("getUsers", (cb) => {
-        userController.getUsers(users => {
+        roomController.getRoomUsers(users => {
             cb(users);
         })
     })
-    // socket.on("getRoom", (cb) => {
-    //     userController.getRoomById(room => {
-    //         cb(room);
-    //     })
-    // })
-    // socket.on("createRoom", (room, cb) => {
-    //     roomController.createRoom(room, newRoom => {
-    //         cb(newRoom);
-    //     })
-    // })
+    
     socket.on("createUser", (user, cb) => {
         userController.createUser(user, newUser => {
             cb(newUser);
         })
     })
+    
     socket.on("createMessage", (message, cb) => {
         messageController.createMessage(message, newMessage => {
             // console.log(newMessage)
@@ -56,6 +50,17 @@ io.on("connection", socket => {
         })
         // socket.broadcast.emit(newMessage);
     })
+
+    // socket.on("leaveRoom", (data, cb) => {
+    //     roomController.deleteUserId(data, status => {
+    //         if(status.affectedRows !== 0){
+    //             io.broadcast.emit("userLeft");
+    //         }
+    //         cb({status: true});
+    //     })
+    // })
+    
+
     socket.on("disconnect", () => {
         console.log("Client disconnected.");
     })

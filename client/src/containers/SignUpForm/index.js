@@ -10,7 +10,9 @@ class SignUpForm extends Component {
     state = {
         open: false,
         name: "",
+        room: "Chat Room",
         userNameError: false
+
     };
 
     handleNameChange = e => {
@@ -32,9 +34,8 @@ class SignUpForm extends Component {
         if (userNameError) {
             this.setState({ userNameError });
         } else {
-            localStorage.setItem("name", this.state.name)
-            let createdUser = this.createUser()
-            // let createdRoom = this.createRoom();
+            localStorage.setItem("name", this.state.name);
+            let createdUser = this.createUser();
             if (createdUser) {
                 this.props.history.push("/chat");
             }
@@ -42,16 +43,17 @@ class SignUpForm extends Component {
     }
     
     createUser = () => {
-        this.props.socket.emit("createUser", { name: this.state.name }, newUser => {
+        this.props.socket.emit("createUser", { name: this.state.name}, newUser => {
+            console.log("signupform",newUser[0].id);
             localStorage.setItem("userId", newUser[0].id);
             localStorage.setItem("name", newUser[0].name);
-            
         })
-        return this.state.name
+        return this.state.name;
     };
 
     open = () => this.setState({ open: true });
     close = () => this.setState({ open: false });
+
     render() {
         const { open } = this.state;
         return (
@@ -75,17 +77,9 @@ class SignUpForm extends Component {
                         name={this.state.name}
                         error={this.state.userNameError}
                     />
-                    <br />
-                    {/* <RoomInput
-                        getRoom={this.handleRoomChange}
-                        name={this.state.room}
-                        error={this.state.roomNameError}
-                    /> */}
                 </Modal.Content>
                 <Modal.Actions>
-                    {/* <Link to={"/chat"}> */}
                     <button onClick={(e) => this.checkInputs(e)} className="button mt-20" type="submit"> Join Chat Room! </button>
-                    {/* </Link> */}
                 </Modal.Actions>
             </Modal>
         )
