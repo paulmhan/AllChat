@@ -13,7 +13,7 @@ import "./style.css";
 class Chat extends Component {
     state = {
         name: "",
-        userId:"",
+        userId:1,
         message: "",
         placeholder: "Send a Message",
         messageError: false,
@@ -23,43 +23,26 @@ class Chat extends Component {
             timeStamp: moment().format('l, h:mm a')
         }],
         users: [],
-       
         messageId: ""
     }
 
 
-
     componentDidMount() {
-        // const userId = localStorage.getItem("userId");
-        // const name = localStorage.getItem("name");
-        
+        this.getCurrentUser();
         this.getUsers();
+        this.receiveMessage();
+        this.userLeft();
         // this.props.socket.on("updatedUsers", users => {
         //     this.setState({ users });
         // })
         
-        // this.props.socket.on("userLeft", () => {
-        //     this.getUsers();
-        // })
-        this.props.socket.on("currentUser", newUser =>{
-            console.log(newUser);
-            console.log(newUser[0].name, newUser[0].id);
-
-            this.setState({name:newUser[0].name, userId:newUser[0].id, users: [...this.state.users, newUser] })
-            this.getUsers()
-        })
-       
-        this.props.socket.on("messageReceive", newMessage => {
-            this.setState({ messages: [...this.state.messages, ...newMessage] });
-        })
-
         
     }
 
 
-    // componentWillUnmount() {
-    //     this.handleLeave();
-    // }
+    componentWillUnmount() {
+        this.handleLeave();
+    }
 
 
     getUsers = () => {
@@ -68,13 +51,34 @@ class Chat extends Component {
         })
     }
 
+    getCurrentUser = () => {
+        this.props.socket.on("currentUser", newUser =>{
+            console.log(newUser);
+            console.log(newUser[0].name, newUser[0].id);
+            this.setState({name:newUser[0].name, userId:newUser[0].id, users: [...this.state.users, newUser] });
+            this.getUsers();
+        })
+    }
+
     createMessage = () => {
-        this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, messages => {
-            this.setState({ messages, message: '' });
+        this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, newMessage => {
+            this.setState({ messages: [...this.state.messages, ...newMessage], message: '' });
             this.scrollToBottom();
         })
-
     };
+
+    receiveMessage = () => {
+        this.props.socket.on("messageReceive", newMessage => {
+            this.setState({ messages: [...this.state.messages, ...newMessage] });
+        })
+    }
+
+    userLeft = () => {
+        this.props.socket.on("userLeft", () => {
+            console.log(this);
+            this.getUsers();
+        })
+    }
 
     handleMessageChange = e => {
         const { value } = e.target;
@@ -99,11 +103,11 @@ class Chat extends Component {
         ReactDOM.findDOMNode(chatTextArea).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
       };
 
-    // handleLeave = () => {
-    //     this.props.socket.emit("leaveRoom", { userId: this.state.userId }, status => {
-    //         console.log(status);
-    //     })
-    // }
+    handleLeave = () => {
+        this.props.socket.emit("leaveRoom", { userId: this.state.userId }, status => {
+            console.log(status);
+        })
+    }
 
     checkInputs = e => {
         if (!this.state.message) {
