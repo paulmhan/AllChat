@@ -12,6 +12,7 @@ import "./style.css";
 class Chat extends Component {
     state = {
         name: "",
+        userId:"",
         message: "",
         placeholder: "Send a Message",
         messageError: false,
@@ -21,24 +22,37 @@ class Chat extends Component {
             timeStamp: moment().format('l, h:mm a')
         }],
         users: [],
-        // userId: localStorage.getItem('userId'),
+       
         messageId: ""
     }
 
 
 
     componentDidMount() {
-        const userId = localStorage.getItem("userId");
-        const name = localStorage.getItem("name");
-        console.log("chat cdm", userId);
+        // const userId = localStorage.getItem("userId");
+        // const name = localStorage.getItem("name");
+        
         this.getUsers();
+        // this.props.socket.on("updatedUsers", users => {
+        //     this.setState({ users });
+        // })
+        
         // this.props.socket.on("userLeft", () => {
         //     this.getUsers();
         // })
+        this.props.socket.on("currentUser", newUser =>{
+            console.log(newUser);
+            console.log(newUser[0].name, newUser[0].id);
+
+            this.setState({name:newUser[0].name, userId:newUser[0].id, users: [...this.state.users, newUser] })
+            this.getUsers()
+        })
+       
         this.props.socket.on("messageReceive", newMessage => {
             this.setState({ messages: [...this.state.messages, ...newMessage] });
         })
-        this.setState({ userId, name });
+
+        
     }
 
 
@@ -48,9 +62,8 @@ class Chat extends Component {
 
 
     getUsers = () => {
-        const name = localStorage.getItem("name");
         this.props.socket.emit("getUsers", users => {
-            this.setState({ users, name });
+            this.setState({ users });
         })
     }
 
