@@ -14,4 +14,8 @@ On leave Button:
  - want to broadcast that the user lefr
 
  want to broadcast when user joins
+
+
+ Add a is typing placeholder
+ 
  
