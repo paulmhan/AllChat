@@ -12,14 +12,13 @@ const botName = 'AllChat Bot';
 if(process.env.NODE_ENV === 'production') {
     app.use(express.static('./client/build'));
 }
+
 //middlewares 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// Prepend / to any route declared inside of routes
-// app.use(routes);
+
 //socket.io
 io.on("connection", socket => {
-
     console.log("New client connected.");
 
     socket.on("getMessage", (cb) => {

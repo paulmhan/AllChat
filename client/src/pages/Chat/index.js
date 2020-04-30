@@ -22,17 +22,16 @@ class Chat extends Component {
             timeStamp: moment().format('l, h:mm a')
         }],
         users: [],
-       
         messageId: ""
     }
 
 
 
     componentDidMount() {
-        // const userId = localStorage.getItem("userId");
-        // const name = localStorage.getItem("name");
-        
         this.getUsers();
+        this.getCurrentUser();
+        this.receiveMessage();
+        
         // this.props.socket.on("updatedUsers", users => {
         //     this.setState({ users });
         // })
@@ -40,17 +39,7 @@ class Chat extends Component {
         // this.props.socket.on("userLeft", () => {
         //     this.getUsers();
         // })
-        this.props.socket.on("currentUser", newUser =>{
-            console.log(newUser);
-            console.log(newUser[0].name, newUser[0].id);
-
-            this.setState({name:newUser[0].name, userId:newUser[0].id, users: [...this.state.users, newUser] })
-            this.getUsers()
-        })
-       
-        this.props.socket.on("messageReceive", newMessage => {
-            this.setState({ messages: [...this.state.messages, ...newMessage] });
-        })
+        
 
         
     }
@@ -67,13 +56,27 @@ class Chat extends Component {
         })
     }
 
+    getCurrentUser = () => {
+        this.props.socket.on("currentUser", newUser =>{
+            console.log(newUser);
+            console.log(newUser[0].name, newUser[0].id);
+
+            this.setState({name:newUser[0].name, userId:newUser[0].id, users: [...this.state.users, newUser] });
+            this.getUsers();
+        })
+    }
+
     createMessage = () => {
         this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, newMessage => {
-
             this.setState({ messages: [...this.state.messages, ...newMessage], message: '' });
         })
-
     };
+
+    receiveMessage = () => {
+        this.props.socket.on("messageReceive", newMessage => {
+            this.setState({ messages: [...this.state.messages, ...newMessage] });
+        })
+    }
 
     handleMessageChange = e => {
         const { value } = e.target;
