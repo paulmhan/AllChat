@@ -1,6 +1,6 @@
 # AllChat Messaging App
 
-Much like other messaging apps, AllChat connects people from all around the world and all walks of life. However, unlike other messenger services, AllChat allows its users to connect and communicate, even if they do not speak the same language.
+Much like other messaging apps, AllChat connects people from all around the world and all walks of life. However, unlike other messenger services, AllChat allows its users to effectively communicate, even if they do not speak the same language.
 
 ## Motivation
 
