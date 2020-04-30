@@ -28,7 +28,6 @@ class Chat extends Component {
 
 
     componentDidMount() {
-       
         this.getUsers();
         this.receiveMessage();
         this.userLeft();
