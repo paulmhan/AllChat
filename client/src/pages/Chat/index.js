@@ -29,34 +29,10 @@ class Chat extends Component {
 
     componentDidMount() {
        
-        
         this.getUsers();
         this.receiveMessage();
         this.userLeft();
-        // this.props.socket.on("updatedUsers", users => {
-        //     this.setState({ users });
-        // })
-        
-        // this.props.socket.on("userLeft", () => {
-        //     this.getUsers();
-        // })
-        // this.props.socket.emit("getCurrentUser", getCurrentUser =>{
-        //     this.setState({name:getCurrentUser[0].name, userId:getCurrentUser[0].id })
-        // })
-
-        this.props.socket.on("currentUser", newUser =>{
-            console.log(newUser);
-            console.log(newUser[0].name, newUser[0].id);
-
-            this.setState({ name:newUser[0].name, userId:newUser[0].id, users: [...this.state.users, newUser] })
-            this.getUsers()
-        })
-       
-        this.props.socket.on("messageReceive", newMessage => {
-            this.setState({ messages: [...this.state.messages, ...newMessage] });
-        })
-
-        
+        this.getCurrentUser();
     }
 
 
@@ -82,7 +58,7 @@ class Chat extends Component {
 
     createMessage = () => {
         this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, newMessage => {
-            this.setState({ messages: [...this.state.messages, ...newMessage], message: '' });
+            this.setState({ messages: [...this.state.messages, ...newMessage], message: '', placeholder:"Send a Message", messageError: false,});
             this.scrollToBottom();
         })
     };
@@ -90,6 +66,7 @@ class Chat extends Component {
     receiveMessage = () => {
         this.props.socket.on("messageReceive", newMessage => {
             this.setState({ messages: [...this.state.messages, ...newMessage] });
+            this.scrollToBottom();
         })
     }
 
@@ -103,7 +80,19 @@ class Chat extends Component {
     handleMessageChange = e => {
         const { value } = e.target;
         this.setState({ message: value });
+        
+        
     };
+
+    handleEnter = e => {
+        console.log(e, "keycode");
+        if (e.keyCode===13){
+            this.handleSend(e);
+
+        } else {
+           return
+        }
+    }
 
     handleSend = (e) => {
         e.preventDefault();
@@ -176,6 +165,7 @@ class Chat extends Component {
                                         error={this.state.messageError}
                                         placeholder={this.state.placeholder}
                                         handleSend={this.handleSend}
+                                        handleEnter = {this.handleEnter}
                                     />
                                 </Grid.Column>
                             </Grid.Row>
