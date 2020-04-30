@@ -33,6 +33,7 @@ io.on("connection", socket => {
         })
     })
     
+    
     socket.on("createUser", (user, cb) => {
         userController.createUser(user, newUser => {
             socket.emit("currentUser", newUser);

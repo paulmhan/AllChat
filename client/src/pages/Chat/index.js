@@ -28,15 +28,11 @@ class Chat extends Component {
 
 
     componentDidMount() {
-        this.getCurrentUser();
+       
         this.getUsers();
         this.receiveMessage();
         this.userLeft();
-        // this.props.socket.on("updatedUsers", users => {
-        //     this.setState({ users });
-        // })
-        
-        
+        this.getCurrentUser();
     }
 
 
@@ -62,7 +58,7 @@ class Chat extends Component {
 
     createMessage = () => {
         this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, newMessage => {
-            this.setState({ messages: [...this.state.messages, ...newMessage], message: '' });
+            this.setState({ messages: [...this.state.messages, ...newMessage], message: '', placeholder:"Send a Message", messageError: false,});
             this.scrollToBottom();
         })
     };
@@ -70,6 +66,7 @@ class Chat extends Component {
     receiveMessage = () => {
         this.props.socket.on("messageReceive", newMessage => {
             this.setState({ messages: [...this.state.messages, ...newMessage] });
+            this.scrollToBottom();
         })
     }
 
@@ -83,7 +80,19 @@ class Chat extends Component {
     handleMessageChange = e => {
         const { value } = e.target;
         this.setState({ message: value });
+        
+        
     };
+
+    handleEnter = e => {
+        console.log(e, "keycode");
+        if (e.keyCode===13){
+            this.handleSend(e);
+
+        } else {
+           return
+        }
+    }
 
     handleSend = (e) => {
         e.preventDefault();
@@ -156,6 +165,7 @@ class Chat extends Component {
                                         error={this.state.messageError}
                                         placeholder={this.state.placeholder}
                                         handleSend={this.handleSend}
+                                        handleEnter = {this.handleEnter}
                                     />
                                 </Grid.Column>
                             </Grid.Row>

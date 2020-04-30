@@ -23,6 +23,7 @@ const MessageInputBar = props => {
                 error={props.error}
                 value={props.message}
                 onChange={props.getMessage}
+                onKeyDown = {props.handleEnter}
                 action={{
                     color: "blue",
                     labelPosition: "right",
