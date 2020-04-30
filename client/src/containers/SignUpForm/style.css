@@ -2,3 +2,22 @@
     background-color: #7d96d8;
     color: white;
 }
+
+#signup-header {
+    background-color: #7d96d8;
+    color: white;
+}
+
+#signup-content {
+    background-color: #294ba6;
+}
+
+#signup-modal {
+    background-image: url(./../../assets/images/metallic-silver-alt.jpg);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#signup-action {
+    background-color: #294ba6;
+}

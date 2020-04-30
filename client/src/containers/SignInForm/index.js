@@ -29,6 +29,7 @@ class SignInForm extends Component {
         const { open } = this.state;
         return (
             <Modal
+                id="signin-modal"
                 open={open}
                 onOpen={this.open}
                 onClose={this.close}
@@ -39,14 +40,15 @@ class SignInForm extends Component {
                     </Button>
                 }
             >
-                <Modal.Header>Sign In</Modal.Header>
-                <Modal.Content>
+                <Modal.Header id="signin-header">Sign In</Modal.Header>
+                <Modal.Content id="signin-content">
                     <NameInput
+                        id="name-input"
                         getName={this.handleNameChange}
                         name={this.state.name}
                     />
                 </Modal.Content>
-                <Modal.Actions>
+                <Modal.Actions id="signin-action">
                     <Button>
                         Sign In
                     </Button>
