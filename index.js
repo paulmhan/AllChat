@@ -6,7 +6,6 @@ const io = require("socket.io")(server);
 const userController = require("./controllers/userController");
 const messageController = require("./controllers/messageController");
 const roomController = require("./controllers/roomController");
-const botName = 'AllChat Bot';
 
 //for production only
 if(process.env.NODE_ENV === 'production') {
@@ -57,14 +56,16 @@ io.on("connection", socket => {
         // socket.broadcast.emit(newMessage);
     })
 
-    // socket.on("leaveRoom", (data, cb) => {
-    //     roomController.deleteUserId(data, status => {
-    //         if(status.affectedRows !== 0){
-    //             io.broadcast.emit("userLeft");
-    //         }
-    //         cb({status: true});
-    //     })
-    // })
+    socket.on("leaveRoom", (data, cb) => {
+        roomController.deleteUserId(data, status => {
+            if(status.affectedRows !== 0){
+                // roomController.getRoomUsers(users => {
+                //     cb(users);
+                socket.broadcast.emit("userLeft");
+            }
+            cb({status: true});
+        })
+    })
     
 
     socket.on("disconnect", () => {

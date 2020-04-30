@@ -12,7 +12,7 @@ import "./style.css";
 class Chat extends Component {
     state = {
         name: "",
-        userId:"",
+        userId:1,
         message: "",
         placeholder: "Send a Message",
         messageError: false,
@@ -26,28 +26,22 @@ class Chat extends Component {
     }
 
 
-
     componentDidMount() {
-        this.getUsers();
         this.getCurrentUser();
+        this.getUsers();
         this.receiveMessage();
-        
+        this.userLeft();
         // this.props.socket.on("updatedUsers", users => {
         //     this.setState({ users });
         // })
         
-        // this.props.socket.on("userLeft", () => {
-        //     this.getUsers();
-        // })
-        
-
         
     }
 
 
-    // componentWillUnmount() {
-    //     this.handleLeave();
-    // }
+    componentWillUnmount() {
+        this.handleLeave();
+    }
 
 
     getUsers = () => {
@@ -60,7 +54,6 @@ class Chat extends Component {
         this.props.socket.on("currentUser", newUser =>{
             console.log(newUser);
             console.log(newUser[0].name, newUser[0].id);
-
             this.setState({name:newUser[0].name, userId:newUser[0].id, users: [...this.state.users, newUser] });
             this.getUsers();
         })
@@ -75,6 +68,13 @@ class Chat extends Component {
     receiveMessage = () => {
         this.props.socket.on("messageReceive", newMessage => {
             this.setState({ messages: [...this.state.messages, ...newMessage] });
+        })
+    }
+
+    userLeft = () => {
+        this.props.socket.on("userLeft", () => {
+            console.log(this);
+            this.getUsers();
         })
     }
 
@@ -94,11 +94,11 @@ class Chat extends Component {
     };
 
 
-    // handleLeave = () => {
-    //     this.props.socket.emit("leaveRoom", { userId: this.state.userId }, status => {
-    //         console.log(status);
-    //     })
-    // }
+    handleLeave = () => {
+        this.props.socket.emit("leaveRoom", { userId: this.state.userId }, status => {
+            console.log(status);
+        })
+    }
 
     checkInputs = e => {
         if (!this.state.message) {
