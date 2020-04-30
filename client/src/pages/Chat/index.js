@@ -70,6 +70,7 @@ class Chat extends Component {
     receiveMessage = () => {
         this.props.socket.on("messageReceive", newMessage => {
             this.setState({ messages: [...this.state.messages, ...newMessage] });
+            this.scrollToBottom();
         })
     }
 

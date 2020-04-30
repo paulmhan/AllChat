@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal } from "semantic-ui-react";
+import { Modal, Button } from "semantic-ui-react";
 
 import SignUpForm from "../SignUpForm";
 import SignInForm from "../SignInForm";
@@ -21,9 +21,9 @@ class LandingPageModal extends Component {
                 onClose={this.close}
                 size="small"
                 trigger={
-                    <button id="GetStartedBtn">
+                    <Button size="massive" id="GetStartedBtn">
                             Get Started
-                    </button>
+                    </Button>
                         
             
                 }
