@@ -33,8 +33,10 @@ class Chat extends Component {
         this.receiveMessage();
         this.userLeft();
         this.getCurrentUser();
+        // this.props.socket.on("updatedUsers", users => {
+        //     this.setState({ users });
+        // })
     }
-
 
     componentWillUnmount() {
         this.handleLeave();
