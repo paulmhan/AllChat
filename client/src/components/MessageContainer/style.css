@@ -1,4 +1,4 @@
-.message {
+#message-container {
     height: 700px;
     max-height: 700px;
     overflow-y: auto;
