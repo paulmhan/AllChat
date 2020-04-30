@@ -32,7 +32,6 @@ class SignUpForm extends Component {
         if (userNameError) {
             this.setState({ userNameError });
         } else {
-            localStorage.setItem("name", this.state.name);
             let createdUser = this.createUser();
             if (createdUser) {
                 this.props.history.push("/chat");
@@ -43,8 +42,6 @@ class SignUpForm extends Component {
     createUser = () => {
         this.props.socket.emit("createUser", { name: this.state.name}, newUser => {
             console.log("signupform",newUser[0].id);
-            // localStorage.setItem("userId", newUser[0].id);
-            // localStorage.setItem("name", newUser[0].name);
         })
         return this.state.name;
     };

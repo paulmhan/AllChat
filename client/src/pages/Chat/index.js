@@ -27,7 +27,8 @@ class Chat extends Component {
 
 
     componentDidMount() {
-        this.getCurrentUser();
+       
+        
         this.getUsers();
         this.receiveMessage();
         this.userLeft();
@@ -35,6 +36,25 @@ class Chat extends Component {
         //     this.setState({ users });
         // })
         
+        // this.props.socket.on("userLeft", () => {
+        //     this.getUsers();
+        // })
+        // this.props.socket.emit("getCurrentUser", getCurrentUser =>{
+        //     this.setState({name:getCurrentUser[0].name, userId:getCurrentUser[0].id })
+        // })
+
+        this.props.socket.on("currentUser", newUser =>{
+            console.log(newUser);
+            console.log(newUser[0].name, newUser[0].id);
+
+            this.setState({ name:newUser[0].name, userId:newUser[0].id, users: [...this.state.users, newUser] })
+            this.getUsers()
+        })
+       
+        this.props.socket.on("messageReceive", newMessage => {
+            this.setState({ messages: [...this.state.messages, ...newMessage] });
+        })
+
         
     }
 
