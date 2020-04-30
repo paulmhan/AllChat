@@ -32,6 +32,9 @@ class Chat extends Component {
         this.receiveMessage();
         this.userLeft();
         this.getCurrentUser();
+        this.props.socket.on("updatedUsers", users => {
+            this.setState({ users });
+        })
     }
 
 
@@ -71,7 +74,6 @@ class Chat extends Component {
 
     userLeft = () => {
         this.props.socket.on("userLeft", () => {
-            console.log(this);
             this.getUsers();
         })
     }
@@ -84,10 +86,8 @@ class Chat extends Component {
     };
 
     handleEnter = e => {
-        console.log(e, "keycode");
         if (e.keyCode===13){
             this.handleSend(e);
-
         } else {
            return
         }

@@ -33,17 +33,16 @@ io.on("connection", socket => {
         })
     })
     
-    
     socket.on("createUser", (user, cb) => {
         userController.createUser(user, newUser => {
             socket.emit("currentUser", newUser);
             cb(newUser);
-            // io.emit("updatedUsers", (cb) =>{
-            //     roomController.getRoomUsers(users=>{
-            //         cb(users)
-            //     })
+            socket.broadcast.emit("updatedUsers", (cb) =>{
+                roomController.getRoomUsers(users=>{
+                    cb(users)
+                })
 
-            // })
+            })
         })
     })
     
