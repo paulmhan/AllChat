@@ -28,18 +28,18 @@ class LandingPageModal extends Component {
             
                 }
             >
-                <Modal.Header>
+                <Modal.Header id="landing-header1">
                     Don't have an account? Sign up and start chatting!
                 </Modal.Header>
-                <Modal.Content>
+                <Modal.Content id="signup-content">
                     <div id="signup-btn">
                         <SignUpForm socket={this.props.socket} />
                     </div>
                 </Modal.Content>
-                <Modal.Header>
+                <Modal.Header id="landing-header2">
                     Already have an account? Enter your name and sign in!
                 </Modal.Header>
-                <Modal.Content>
+                <Modal.Content id="signin-content">
                     <div id="signin-btn">
                         <SignInForm socket={this.props.socket} />
                     </div>

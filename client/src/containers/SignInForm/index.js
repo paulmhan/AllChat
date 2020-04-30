@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
 
 import NameInput from "../../components/NameInput";
+import "./style.css";
 
 class SignInForm extends Component {
     state = {
@@ -33,7 +34,7 @@ class SignInForm extends Component {
                 onClose={this.close}
                 size="small"
                 trigger={
-                    <Button color="red" size="massive">
+                    <Button id="SignInBtn" size="huge">
                         Sign In
                     </Button>
                 }

@@ -60,7 +60,7 @@ class SignUpForm extends Component {
                 onClose={this.close}
                 size="small"
                 trigger={
-                    <Button id="SignUpBtn" color="green" size="massive">
+                    <Button id="SignUpBtn" size="huge">
                         Sign Up
                     </Button>
                 }

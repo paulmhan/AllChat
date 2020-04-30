@@ -12,3 +12,20 @@
     transition: 0.8s;
 }
 
+#landing-header1 {
+    background-color: #7d96d8;
+    color: white;
+}
+
+#landing-header2 {
+    background-color: #7d96d8;
+    color: white;
+}
+
+#signup-content {
+    background-color: #294ba6;
+}
+
+#signin-content {
+    background-color: #294ba6;
+}

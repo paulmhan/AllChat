@@ -1,4 +1,16 @@
 #chatroom-interface {
     height: 100%;
     background-image: url(./../../assets/images/metallic-silver-alt.jpg);
+    max-height: 900px;
+    overflow-y: auto;
+    margin-top: 20px;
 }
+
+/* #user-list {
+    margin-top: 15px;
+    
+}
+
+#user-title {
+    position: fixed;
+} */
