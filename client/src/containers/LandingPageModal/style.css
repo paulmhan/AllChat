@@ -1,3 +1,9 @@
+#landing-modal-container {
+    background-image: url(./../../assets/images/metallic-silver-alt.jpg);
+    padding: 20px;
+    border-radius: 10px;
+}
+
 #GetStartedBtn {
     border: solid white 1px;
     background-color: transparent;
@@ -28,4 +34,12 @@
 
 #signin-content {
     background-color: #294ba6;
+}
+
+#signup-btn {
+    text-align: center;
+}
+
+#signin-btn {
+    text-align: center;
 }

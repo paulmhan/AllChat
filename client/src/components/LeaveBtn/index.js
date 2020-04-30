@@ -7,7 +7,7 @@ const LeaveBtn = props => {
 
     return(
         <div>
-            <Button onClick={() => history.push("/")}>Leave</Button>
+            <Button fluid onClick={() => history.push("/")}>Leave</Button>
 
         </div>
     )

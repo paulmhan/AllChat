@@ -15,36 +15,37 @@ class LandingPageModal extends Component {
         const { open } = this.state;
 
         return (
-            <Modal
-                open={open}
-                onOpen={this.open}
-                onClose={this.close}
-                size="small"
-                trigger={
-                    <Button size="massive" id="GetStartedBtn">
+                <Modal
+                    id="landing-modal-container"
+                    open={open}
+                    onOpen={this.open}
+                    onClose={this.close}
+                    size="small"
+                    trigger={
+                        <Button size="massive" id="GetStartedBtn">
                             Get Started
                     </Button>
-                        
-            
-                }
-            >
-                <Modal.Header id="landing-header1">
-                    Don't have an account? Sign up and start chatting!
+
+
+                    }
+                >
+                    <Modal.Header id="landing-header1">
+                        Don't have an account? Sign up and start chatting!
                 </Modal.Header>
-                <Modal.Content id="signup-content">
-                    <div id="signup-btn">
-                        <SignUpForm socket={this.props.socket} />
-                    </div>
-                </Modal.Content>
-                <Modal.Header id="landing-header2">
-                    Already have an account? Enter your name and sign in!
+                    <Modal.Content id="signup-content">
+                        <div id="signup-btn">
+                            <SignUpForm socket={this.props.socket} />
+                        </div>
+                    </Modal.Content>
+                    <Modal.Header id="landing-header2">
+                        Already have an account? Enter your name and sign in!
                 </Modal.Header>
-                <Modal.Content id="signin-content">
-                    <div id="signin-btn">
-                        <SignInForm socket={this.props.socket} />
-                    </div>
-                </Modal.Content>
-            </Modal>
+                    <Modal.Content id="signin-content">
+                        <div id="signin-btn">
+                            <SignInForm socket={this.props.socket} />
+                        </div>
+                    </Modal.Content>
+                </Modal>
         )
     }
 
