@@ -59,8 +59,6 @@ io.on("connection", socket => {
     socket.on("leaveRoom", (data, cb) => {
         roomController.deleteUserId(data, status => {
             if(status.affectedRows !== 0){
-                // roomController.getRoomUsers(users => {
-                //     cb(users);
                 socket.broadcast.emit("userLeft");
             }
             cb({status: true});
