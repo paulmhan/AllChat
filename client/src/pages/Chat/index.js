@@ -6,6 +6,7 @@ import ChatSideBar from "../../components/ChatSideBar";
 import MessageContainer from "./../../components/MessageContainer";
 import MessageInputBar from "../../components/MessageInputBar";
 import LeaveBtn from "../../components/LeaveBtn";
+import ReactDOM from "react-dom";
 import "./style.css";
 
 
@@ -82,6 +83,7 @@ class Chat extends Component {
     createMessage = () => {
         this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, newMessage => {
             this.setState({ messages: [...this.state.messages, ...newMessage], message: '' });
+            this.scrollToBottom();
         })
     };
 
@@ -113,6 +115,13 @@ class Chat extends Component {
         };
     };
 
+    scrollToBottom = () => {
+        let chatTextArea = document.getElementById("message-container");
+        const scrollHeight = chatTextArea.scrollHeight;
+        const height = chatTextArea.clientHeight;
+        const maxScrollTop = scrollHeight - height;
+        ReactDOM.findDOMNode(chatTextArea).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+      };
 
     handleLeave = () => {
         this.props.socket.emit("leaveRoom", { userId: this.state.userId }, status => {
