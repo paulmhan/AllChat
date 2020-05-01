@@ -27,12 +27,14 @@ io.on("connection", socket => {
     })
     // socket.broadcast.emit('user connected');
 
-    socket.on("getUsers", (newUser, cb) => {
+    socket.on("getUsers", cb => {
         roomController.getRoomUsers(users => {
-            console.log(newUser);
-            socket.broadcast.emit("userJoined", newUser)
             cb(users);
         })
+    })
+
+    socket.on("currentJoin", newUser => {
+        socket.broadcast.emit("userJoined", newUser)
     })
 
     socket.on("createUser", (user, cb) => {

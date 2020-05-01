@@ -50,6 +50,7 @@ class Chat extends Component {
     //         this.setState({ users });
     //     })
     // }
+    
 
     userJoin = () => {
         this.props.socket.on("userJoined", newUser => {
@@ -67,7 +68,9 @@ class Chat extends Component {
 
     getUsers = () => {
         let { newUser } = this.props.history.location.state;
-        this.props.socket.emit("getUsers",{ newUser } ,users => {
+        console.log(this.props.history.location.state);
+        this.props.socket.emit("getUsers", users => {
+            this.props.socket.emit("currentJoin", {newUser})
             this.setState({name:newUser[0].name, userId:newUser[0].id, newUser, users});
         })
     }
@@ -121,8 +124,8 @@ class Chat extends Component {
         ReactDOM.findDOMNode(chatTextArea).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
       };
 
-    handleLeave = () => {
-        this.props.socket.emit("leaveRoom", { userId: this.state.userId }, status => {
+    handleLeave = async () => {
+        await this.props.socket.emit("leaveRoom", { userId: this.state.userId }, status => {
             console.log(status);
         })
     }
