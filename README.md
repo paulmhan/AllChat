@@ -252,6 +252,11 @@ export default withRouter(Chat);
 
 ## Installation
 
+To render Semantic-UI-React framework:
+```
+npm i semantic-ui-react
+```
+
 ## How To Use?
 
 On the landing page, click "Get Started" and enter a username into the modal, then click "Join Chat Room". Once on the chat page, you can message other users who are currently signed in. If you wish to exit the chat, and sign up using a different name, click the "Leave" button in the top-right corner, and repeat the aforementioned steps.
