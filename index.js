@@ -8,7 +8,7 @@ const messageController = require("./controllers/messageController");
 const roomController = require("./controllers/roomController");
 
 //for production only
-if(process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
     app.use(express.static('./client/build'));
 }
 
@@ -20,54 +20,46 @@ app.use(express.urlencoded({ extended: true }));
 io.on("connection", socket => {
     console.log("New client connected.");
 
+    socket.on("createUser", (user, cb) => {
+        userController.createUser(user, newUser => {
+            cb(newUser);
+        })
+    })
+
     socket.on("getMessage", (cb) => {
         messageController.getMessages(messages => {
             cb(messages);
         })
     })
-    // socket.broadcast.emit('user connected');
 
-    socket.on("getUsers", (cb) => {
+    socket.on("getUsers", cb => {
         roomController.getRoomUsers(users => {
             cb(users);
         })
     })
-    
-    
-    socket.on("createUser", (user, cb) => {
-        userController.createUser(user, newUser => {
-            socket.emit("currentUser", newUser);
-            cb(newUser);
-            // io.emit("updatedUsers", (cb) =>{
-            //     roomController.getRoomUsers(users=>{
-            //         cb(users)
-            //     })
 
-            // })
-        })
+    socket.on("currentJoin", newUser => {
+        socket.broadcast.emit("userJoined", newUser)
     })
+
     
+
     socket.on("createMessage", (message, cb) => {
         messageController.createMessage(message, newMessage => {
-            // console.log(newMessage)
             socket.broadcast.emit("messageReceive", newMessage);
-            
             cb(newMessage);
         })
-        // socket.broadcast.emit(newMessage);
     })
 
     socket.on("leaveRoom", (data, cb) => {
         roomController.deleteUserId(data, status => {
-            if(status.affectedRows !== 0){
-                // roomController.getRoomUsers(users => {
-                //     cb(users);
-                socket.broadcast.emit("userLeft");
+            if (status.affectedRows !== 0) {
+                socket.broadcast.emit("userLeft", data);
             }
-            cb({status: true});
+            cb({ status: true });
         })
     })
-    
+
 
     socket.on("disconnect", () => {
         console.log("Client disconnected.");
