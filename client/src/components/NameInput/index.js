@@ -16,6 +16,7 @@ class NameInput extends Component {
           placeholder='Enter your name'
           control='input'
           onChange={this.props.getName}
+          onKeyDown = {this.props.handleEnter}
           />
       </Form>
       )  

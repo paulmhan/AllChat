@@ -22,6 +22,14 @@ class SignUpForm extends Component {
         this.setState({ name: value });
     };
 
+    handleEnter = e => {
+        if (e.keyCode===13){
+            this.checkInputs(e);
+        } else {
+           return
+        }
+    }
+
     checkInputs = async (e) => {
         if (!this.state.name) {
             e.preventDefault();
@@ -76,6 +84,7 @@ class SignUpForm extends Component {
                         getName={this.handleNameChange}
                         name={this.state.name}
                         error={this.state.userNameError}
+                        handleEnter = {this.handleEnter}
                     />
                 </Modal.Content>
                 <Modal.Actions>
