@@ -14,6 +14,8 @@ Currently able to create a user and sustain a single chat room shared by multipl
 
 ## Screenshots
 
+Screen Shot 2020-05-01 at 1.10.38 PM.png
+
 ## Tech/Framework Used
 
 - ReactJS
@@ -39,8 +41,6 @@ AllChat utilizes its built-in API to automatically translate the sender's messag
 ## Code Example
 
 ## Installation
-
-## API Reference
 
 ## Tests
 
