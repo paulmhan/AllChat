@@ -7,6 +7,7 @@ import MessageContainer from "./../../components/MessageContainer";
 import MessageInputBar from "../../components/MessageInputBar";
 import LeaveBtn from "../../components/LeaveBtn";
 import ReactDOM from "react-dom";
+import { withRouter } from "react-router-dom";
 import "./style.css";
 
 
@@ -23,17 +24,16 @@ class Chat extends Component {
             timeStamp: moment().format('l, h:mm a')
         }],
         users: [],
+        newUser:[],
         messageId: ""
     }
 
 
     componentDidMount() {
-       
         this.getUsers();
         this.receiveMessage();
         this.userLeft();
         this.userJoin();
-        // this.getUserById();
     }
 
 
@@ -41,30 +41,55 @@ class Chat extends Component {
         this.handleLeave();
     }
 
-
     getUsers = () => {
+        let { newUser } = this.props.history.location.state;
+        console.log(this.props.history.location.state);
         this.props.socket.emit("getUsers", users => {
-            this.setState({ users });
+            this.props.socket.emit("currentJoin", {newUser})
+            this.setState({
+                name: newUser[0].name,
+                userId: newUser[0].id, 
+                newUser, 
+                users
+            });
         })
     }
+
+    userJoinMessage = newUser => {
+        console.log(newUser);
+        let joinMessage = {name: "AllChat",
+        title: `${newUser.newUser[0].name} has joined the chat!`,timeStamp: moment().format('l, h:mm a')}
+        console.log(joinMessage);
+        this.setState({ messages: [...this.state.messages,joinMessage ] });
+        // this.scrollToBottom();
+    }
+
+    userLeftMessage = data => {
+        console.log(data);
+        let leftMessage = {name: "AllChat",
+        title: `${data.name} has left the chat!`,timeStamp: moment().format('l, h:mm a')}
+        console.log(leftMessage);
+        this.setState({ messages: [...this.state.messages,leftMessage ] });
+        // this.scrollToBottom();
+    }
+
 
     userJoin = () => {
-        this.props.socket.on("userJoin", newUser =>{
+        this.props.socket.on("userJoined", newUser => {
             console.log(newUser);
-            console.log(newUser[0].name, newUser[0].id);
-            this.setState({name:newUser[0].name, userId:newUser[0].id, users: [...this.state.users, newUser] });
-            this.getUsers();
-            this.userJoinMessage(newUser)
+            this.userJoinMessage(newUser);
+            console.log(this.state.users);
+            this.setState({ users:[...this.state.users, ...newUser.newUser] });
         })
     }
 
-    // getUserById = () => {
-    //     this.props.socket.emit("getUserById", this.state.userId, user =>{
-    //         console.log(user);
-    //         console.log(user[0].name, user[0].id);
-    //         this.setState({name:user[0].name, userId:user[0].id });
-    //     })
-    // }
+    userLeft = () => {
+        this.props.socket.on("userLeft", data => {
+            this.getUsers();
+            this.userLeftMessage(data);
+        })
+    }
+
 
     createMessage = () => {
         this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, newMessage => {
@@ -80,42 +105,15 @@ class Chat extends Component {
         })
     }
 
-    userLeftMessage = (data) => {
-            let leftMessage = {name: "AllChat",
-            title: `${data.name} has left the chat!`,timeStamp: moment().format('l, h:mm a')}
-            console.log(leftMessage);
-            this.setState({ messages: [...this.state.messages,leftMessage ] });
-            this.scrollToBottom();
-        }
-
-    userJoinMessage = (newUser) => {
-            let joinMessage = {name: "AllChat",
-            title: `${newUser[0].name} has joined the chat!`,timeStamp: moment().format('l, h:mm a')}
-            console.log(joinMessage);
-            this.setState({ messages: [...this.state.messages,joinMessage ] });
-            this.scrollToBottom();
-        }
     
-
-    userLeft = () => {
-        this.props.socket.on("userLeft", (data) => {
-            console.log(this);
-            this.getUsers();
-            this.userLeftMessage(data)
-        })
-    }
-
     handleMessageChange = e => {
         const { value } = e.target;
         this.setState({ message: value });
-        
-        
     };
 
     handleEnter = e => {
         if (e.keyCode===13){
             this.handleSend(e);
-
         } else {
            return
         }
@@ -139,8 +137,8 @@ class Chat extends Component {
         ReactDOM.findDOMNode(chatTextArea).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
       };
 
-    handleLeave = () => {
-        this.props.socket.emit("leaveRoom", { name:this.state.name, userId: this.state.userId }, status => {
+    handleLeave = async () => {
+        await this.props.socket.emit("leaveRoom", { userId: this.state.userId, name: this.state.name }, status => {
             console.log(status);
         })
     }
@@ -203,4 +201,4 @@ class Chat extends Component {
         )
     }
 }
-export default Chat;
+export default withRouter(Chat);
