@@ -37,7 +37,6 @@ class SignUpForm extends Component {
             this.setState({ userNameError });
         } else {
             this.createUser();
-            
         }
     }
     

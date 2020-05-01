@@ -39,7 +39,6 @@ io.on("connection", socket => {
 
     socket.on("createUser", (user, cb) => {
         userController.createUser(user, newUser => {
-            // socket.emit("currentUser", newUser);
             cb(newUser);
         })
         
@@ -47,18 +46,15 @@ io.on("connection", socket => {
 
     socket.on("createMessage", (message, cb) => {
         messageController.createMessage(message, newMessage => {
-            // console.log(newMessage)
             socket.broadcast.emit("messageReceive", newMessage);
-
             cb(newMessage);
         })
-        // socket.broadcast.emit(newMessage);
     })
 
     socket.on("leaveRoom", (data, cb) => {
         roomController.deleteUserId(data, status => {
             if (status.affectedRows !== 0) {
-                socket.broadcast.emit("userLeft");
+                socket.broadcast.emit("userLeft", data);
             }
             cb({ status: true });
         })

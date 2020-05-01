@@ -25,20 +25,3 @@ class MessageContainer extends Component {
 };
 
 export default MessageContainer;
-
-
-// const MessageContainer = props => {
-//   return (
-//     <div className="message-outline">
-//       <div className="ui message">
-//         {props.messages.map((message, index) =>
-//           <Segment key={index}>
-//             <p>
-//               <span>{message.timeStamp}</span>
-//             </p>
-//             <p>{message.name}: {message.title}</p>
-//           </Segment>)}
-//       </div>
-//     </div>
-//   )
-// }

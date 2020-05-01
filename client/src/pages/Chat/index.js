@@ -41,18 +41,38 @@ class Chat extends Component {
         this.handleLeave();
     }
 
+    userJoinMessage = newUser => {
+        console.log(newUser);
+        let joinMessage = {name: "AllChat",
+        title: `${newUser.newUser[0].name} has joined the chat!`,timeStamp: moment().format('l, h:mm a')}
+        console.log(joinMessage);
+        this.setState({ messages: [...this.state.messages,joinMessage ] });
+        // this.scrollToBottom();
+    }
+
+    userLeftMessage = data => {
+        console.log(data);
+        let leftMessage = {name: "AllChat",
+        title: `${data.name} has left the chat!`,timeStamp: moment().format('l, h:mm a')}
+        console.log(leftMessage);
+        this.setState({ messages: [...this.state.messages,leftMessage ] });
+        // this.scrollToBottom();
+    }
+
 
     userJoin = () => {
         this.props.socket.on("userJoined", newUser => {
             console.log(newUser);
+            this.userJoinMessage(newUser);
             console.log(this.state.users);
             this.setState({ users:[...this.state.users, ...newUser.newUser] });
         })
     }
 
     userLeft = () => {
-        this.props.socket.on("userLeft", () => {
+        this.props.socket.on("userLeft", data => {
             this.getUsers();
+            this.userLeftMessage(data);
         })
     }
 
@@ -117,7 +137,7 @@ class Chat extends Component {
       };
 
     handleLeave = async () => {
-        await this.props.socket.emit("leaveRoom", { userId: this.state.userId }, status => {
+        await this.props.socket.emit("leaveRoom", { userId: this.state.userId, name: this.state.name }, status => {
             console.log(status);
         })
     }
