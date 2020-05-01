@@ -8,7 +8,6 @@ import MessageInputBar from "../../components/MessageInputBar";
 import LeaveBtn from "../../components/LeaveBtn";
 import ReactDOM from "react-dom";
 import { withRouter } from "react-router-dom";
-
 import "./style.css";
 
 
@@ -31,7 +30,6 @@ class Chat extends Component {
 
 
     componentDidMount() {
-        // this.getCurrentUser();
         this.receiveMessage();
         this.userLeft();
         this.getUsers();
@@ -43,14 +41,6 @@ class Chat extends Component {
         this.handleLeave();
     }
 
-
-    // getUsers = () => {
-    //     console.log(this.state.newUser);
-    //     this.props.socket.emit("getUsers",{ newUser: this.state.newUser } ,users => {
-    //         this.setState({ users });
-    //     })
-    // }
-    
 
     userJoin = () => {
         this.props.socket.on("userJoined", newUser => {
@@ -71,7 +61,12 @@ class Chat extends Component {
         console.log(this.props.history.location.state);
         this.props.socket.emit("getUsers", users => {
             this.props.socket.emit("currentJoin", {newUser})
-            this.setState({name:newUser[0].name, userId:newUser[0].id, newUser, users});
+            this.setState({
+                name: newUser[0].name,
+                userId: newUser[0].id, 
+                newUser, 
+                users
+            });
         })
     }
 
@@ -90,12 +85,9 @@ class Chat extends Component {
     }
 
     
-
     handleMessageChange = e => {
         const { value } = e.target;
         this.setState({ message: value });
-        
-        
     };
 
     handleEnter = e => {

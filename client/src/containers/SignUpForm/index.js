@@ -36,32 +36,20 @@ class SignUpForm extends Component {
         if (userNameError) {
             this.setState({ userNameError });
         } else {
-            // let createdUser = this.createUser();
-            // // console.log(parseInt(localStorage.getItem("ACUserId")));
-            // if (createdUser) {
-                // this.props.history.push("/chat");
-                // this.props.history.push({
-                //     pathname: '/chat',
-                    
-                //     state: { newUser: this.state.newUser }
-                //   })
-                this.createUser();
-            // }
+            this.createUser();
+            
         }
     }
     
     createUser = () => {
         this.props.socket.emit("createUser", { name: this.state.name}, newUser => {
             console.log(newUser);
-            // console.log("signupform",newUser[0].id);
-            // localStorage.setItem("ACUserId", newUser[0].id);
-            // this.setState({ newUser })
             this.props.history.push({
                 pathname: '/chat',
                 state: { newUser: newUser }
               })
         })
-        // return this.state.name;
+        
     };
 
     open = () => this.setState({ open: true });
