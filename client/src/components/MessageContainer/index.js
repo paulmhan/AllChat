@@ -13,10 +13,10 @@ class MessageContainer extends Component {
         <div className="ui message" id="message-container">
           {this.props.messages.map((message, index) =>
             <Segment key={index}>
-              <p>
+              <p id="timeStamp">
                 <span>{message.timeStamp}</span>
               </p>
-              <p>{message.name}: {message.title}</p>
+              <p id ="userName"> <strong>{message.name}:</strong> {message.title}</p>
             </Segment>)}
         </div>
       </div>
