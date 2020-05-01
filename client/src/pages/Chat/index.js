@@ -30,15 +30,29 @@ class Chat extends Component {
 
 
     componentDidMount() {
+        this.getUsers();
         this.receiveMessage();
         this.userLeft();
-        this.getUsers();
         this.userJoin();
     }
 
 
     componentWillUnmount() {
         this.handleLeave();
+    }
+
+    getUsers = () => {
+        let { newUser } = this.props.history.location.state;
+        console.log(this.props.history.location.state);
+        this.props.socket.emit("getUsers", users => {
+            this.props.socket.emit("currentJoin", {newUser})
+            this.setState({
+                name: newUser[0].name,
+                userId: newUser[0].id, 
+                newUser, 
+                users
+            });
+        })
     }
 
     userJoinMessage = newUser => {
@@ -76,19 +90,6 @@ class Chat extends Component {
         })
     }
 
-    getUsers = () => {
-        let { newUser } = this.props.history.location.state;
-        console.log(this.props.history.location.state);
-        this.props.socket.emit("getUsers", users => {
-            this.props.socket.emit("currentJoin", {newUser})
-            this.setState({
-                name: newUser[0].name,
-                userId: newUser[0].id, 
-                newUser, 
-                users
-            });
-        })
-    }
 
     createMessage = () => {
         this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, newMessage => {

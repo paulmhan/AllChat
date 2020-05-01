@@ -20,12 +20,17 @@ app.use(express.urlencoded({ extended: true }));
 io.on("connection", socket => {
     console.log("New client connected.");
 
+    socket.on("createUser", (user, cb) => {
+        userController.createUser(user, newUser => {
+            cb(newUser);
+        })
+    })
+
     socket.on("getMessage", (cb) => {
         messageController.getMessages(messages => {
             cb(messages);
         })
     })
-    // socket.broadcast.emit('user connected');
 
     socket.on("getUsers", cb => {
         roomController.getRoomUsers(users => {
@@ -37,12 +42,7 @@ io.on("connection", socket => {
         socket.broadcast.emit("userJoined", newUser)
     })
 
-    socket.on("createUser", (user, cb) => {
-        userController.createUser(user, newUser => {
-            cb(newUser);
-        })
-        
-    })
+    
 
     socket.on("createMessage", (message, cb) => {
         messageController.createMessage(message, newMessage => {
