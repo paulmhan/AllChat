@@ -43,6 +43,7 @@ class Chat extends Component {
 
     getUsers = () => {
         let { newUser } = this.props.history.location.state;
+        console.log(this.props.history);
         console.log(this.props.history.location.state);
         this.props.socket.emit("getUsers", users => {
             this.props.socket.emit("currentJoin", {newUser})
