@@ -4,6 +4,9 @@
 
 #text1 {
     text-align: center;
+    font-family: 'Rubik', sans-serif;
+    color: white;
+    font-size: 24px;
 }
 
 #text2 {
@@ -19,8 +22,11 @@ h1 {
     font-size: 36px;
 }
 
-h3 {
-    font-family: 'Rubik', sans-serif;
+#together {
     color: white;
+}
+
+#paragraph {
     font-size: 24px;
 }
+

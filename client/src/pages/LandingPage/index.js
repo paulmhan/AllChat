@@ -13,7 +13,7 @@ class LandingPage extends Component {
                 <Grid.Row
                     centered
                     columns={1}>
-                    <h1>Welcome to AllChat!</h1>
+                    <h1 id="welcome">Welcome to AllChat!</h1>
                 </Grid.Row>
                 <Grid.Row
                     centered
