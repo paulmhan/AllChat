@@ -8,7 +8,7 @@ const messageController = require("./controllers/messageController");
 const roomController = require("./controllers/roomController");
 
 //for production only
-if(process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
     app.use(express.static('./client/build'));
 }
 
@@ -27,30 +27,27 @@ io.on("connection", socket => {
     })
     // socket.broadcast.emit('user connected');
 
-    socket.on("getUsers", (cb) => {
+    socket.on("getUsers", (newUser, cb) => {
         roomController.getRoomUsers(users => {
+            console.log(newUser);
+            socket.broadcast.emit("userJoined", newUser)
             cb(users);
         })
     })
-    
+
     socket.on("createUser", (user, cb) => {
         userController.createUser(user, newUser => {
-            socket.emit("currentUser", newUser);
+            // socket.emit("currentUser", newUser);
             cb(newUser);
-            socket.broadcast.emit("updatedUsers", (cb) =>{
-                roomController.getRoomUsers(users=>{
-                    cb(users)
-                })
-
-            })
         })
+        
     })
-    
+
     socket.on("createMessage", (message, cb) => {
         messageController.createMessage(message, newMessage => {
             // console.log(newMessage)
             socket.broadcast.emit("messageReceive", newMessage);
-            
+
             cb(newMessage);
         })
         // socket.broadcast.emit(newMessage);
@@ -58,13 +55,13 @@ io.on("connection", socket => {
 
     socket.on("leaveRoom", (data, cb) => {
         roomController.deleteUserId(data, status => {
-            if(status.affectedRows !== 0){
+            if (status.affectedRows !== 0) {
                 socket.broadcast.emit("userLeft");
             }
-            cb({status: true});
+            cb({ status: true });
         })
     })
-    
+
 
     socket.on("disconnect", () => {
         console.log("Client disconnected.");

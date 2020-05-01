@@ -7,6 +7,8 @@ import MessageContainer from "./../../components/MessageContainer";
 import MessageInputBar from "../../components/MessageInputBar";
 import LeaveBtn from "../../components/LeaveBtn";
 import ReactDOM from "react-dom";
+import { withRouter } from "react-router-dom";
+
 import "./style.css";
 
 
@@ -23,18 +25,17 @@ class Chat extends Component {
             timeStamp: moment().format('l, h:mm a')
         }],
         users: [],
+        newUser:[],
         messageId: ""
     }
 
 
     componentDidMount() {
-        this.getUsers();
+        // this.getCurrentUser();
         this.receiveMessage();
         this.userLeft();
-        this.getCurrentUser();
-        this.props.socket.on("updatedUsers", users => {
-            this.setState({ users });
-        })
+        this.getUsers();
+        this.userJoin();
     }
 
 
@@ -43,18 +44,31 @@ class Chat extends Component {
     }
 
 
-    getUsers = () => {
-        this.props.socket.emit("getUsers", users => {
-            this.setState({ users });
+    // getUsers = () => {
+    //     console.log(this.state.newUser);
+    //     this.props.socket.emit("getUsers",{ newUser: this.state.newUser } ,users => {
+    //         this.setState({ users });
+    //     })
+    // }
+
+    userJoin = () => {
+        this.props.socket.on("userJoined", newUser => {
+            console.log(newUser);
+            console.log(this.state.users);
+            this.setState({ users:[...this.state.users, ...newUser.newUser] });
         })
     }
 
-    getCurrentUser = () => {
-        this.props.socket.on("currentUser", newUser =>{
-            console.log(newUser);
-            console.log(newUser[0].name, newUser[0].id);
-            this.setState({name:newUser[0].name, userId:newUser[0].id, users: [...this.state.users, newUser] });
+    userLeft = () => {
+        this.props.socket.on("userLeft", () => {
             this.getUsers();
+        })
+    }
+
+    getUsers = () => {
+        let { newUser } = this.props.history.location.state;
+        this.props.socket.emit("getUsers",{ newUser } ,users => {
+            this.setState({name:newUser[0].name, userId:newUser[0].id, newUser, users});
         })
     }
 
@@ -72,11 +86,7 @@ class Chat extends Component {
         })
     }
 
-    userLeft = () => {
-        this.props.socket.on("userLeft", () => {
-            this.getUsers();
-        })
-    }
+    
 
     handleMessageChange = e => {
         const { value } = e.target;
@@ -175,4 +185,4 @@ class Chat extends Component {
         )
     }
 }
-export default Chat;
+export default withRouter(Chat);
