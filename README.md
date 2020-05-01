@@ -13,6 +13,10 @@ Currently able to create a user and sustain a single chat room shared by multipl
 ## Code Style
 
 ## Screenshots
+![](client/src/assets/images/LandingPage.png)
+![](client/src/assets/images/FirstModal.png)
+![](client/src/assets/images/SignUpModal.png)
+![](client/src/assets/images/Chat.png)
 
 ## Tech/Framework Used
 
