@@ -6,8 +6,11 @@ const roomQueries = require('../../models/rooms/roomQueries');
 
 module.exports = {
     getUserById: (req, res) => {
+        
         const { userId } = req.params;
-        connection.query(userQueries.getUserById, parseInt(userId), (err, users) => {
+       
+        connection.query(userQueries.getUserById, parseint(userId), (err, user) => {
+            if (err) throw err;
             if(err) {
                 return res.json(err);
             }

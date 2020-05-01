@@ -32,7 +32,8 @@ class Chat extends Component {
         this.getUsers();
         this.receiveMessage();
         this.userLeft();
-        this.getCurrentUser();
+        this.userJoin();
+        // this.getUserById();
     }
 
 
@@ -47,14 +48,23 @@ class Chat extends Component {
         })
     }
 
-    getCurrentUser = () => {
-        this.props.socket.on("currentUser", newUser =>{
+    userJoin = () => {
+        this.props.socket.on("userJoin", newUser =>{
             console.log(newUser);
             console.log(newUser[0].name, newUser[0].id);
             this.setState({name:newUser[0].name, userId:newUser[0].id, users: [...this.state.users, newUser] });
             this.getUsers();
+            this.userJoinMessage(newUser)
         })
     }
+
+    // getUserById = () => {
+    //     this.props.socket.emit("getUserById", this.state.userId, user =>{
+    //         console.log(user);
+    //         console.log(user[0].name, user[0].id);
+    //         this.setState({name:user[0].name, userId:user[0].id });
+    //     })
+    // }
 
     createMessage = () => {
         this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, newMessage => {
@@ -70,10 +80,28 @@ class Chat extends Component {
         })
     }
 
+    userLeftMessage = (data) => {
+            let leftMessage = {name: "AllChat",
+            title: `${data.name} has left the chat!`,timeStamp: moment().format('l, h:mm a')}
+            console.log(leftMessage);
+            this.setState({ messages: [...this.state.messages,leftMessage ] });
+            this.scrollToBottom();
+        }
+
+    userJoinMessage = (newUser) => {
+            let joinMessage = {name: "AllChat",
+            title: `${newUser[0].name} has joined the chat!`,timeStamp: moment().format('l, h:mm a')}
+            console.log(joinMessage);
+            this.setState({ messages: [...this.state.messages,joinMessage ] });
+            this.scrollToBottom();
+        }
+    
+
     userLeft = () => {
-        this.props.socket.on("userLeft", () => {
+        this.props.socket.on("userLeft", (data) => {
             console.log(this);
             this.getUsers();
+            this.userLeftMessage(data)
         })
     }
 
@@ -85,7 +113,6 @@ class Chat extends Component {
     };
 
     handleEnter = e => {
-        console.log(e, "keycode");
         if (e.keyCode===13){
             this.handleSend(e);
 
@@ -113,7 +140,7 @@ class Chat extends Component {
       };
 
     handleLeave = () => {
-        this.props.socket.emit("leaveRoom", { userId: this.state.userId }, status => {
+        this.props.socket.emit("leaveRoom", { name:this.state.name, userId: this.state.userId }, status => {
             console.log(status);
         })
     }

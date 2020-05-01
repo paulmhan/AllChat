@@ -36,7 +36,7 @@ io.on("connection", socket => {
     
     socket.on("createUser", (user, cb) => {
         userController.createUser(user, newUser => {
-            socket.emit("currentUser", newUser);
+            socket.broadcast.emit("userJoin", newUser);
             cb(newUser);
             // io.emit("updatedUsers", (cb) =>{
             //     roomController.getRoomUsers(users=>{
@@ -47,22 +47,30 @@ io.on("connection", socket => {
         })
     })
     
+    socket.on("getUserById", (userId, cb) => {
+        roomController.getUserById(userId, user => {
+            cb(user);
+        })
+    })
+
     socket.on("createMessage", (message, cb) => {
         messageController.createMessage(message, newMessage => {
-            // console.log(newMessage)
+           
             socket.broadcast.emit("messageReceive", newMessage);
             
             cb(newMessage);
         })
-        // socket.broadcast.emit(newMessage);
+        
     })
 
     socket.on("leaveRoom", (data, cb) => {
         roomController.deleteUserId(data, status => {
+            console.log(data, status, "Leaveroom backend")
             if(status.affectedRows !== 0){
                 // roomController.getRoomUsers(users => {
                 //     cb(users);
-                socket.broadcast.emit("userLeft");
+                socket.broadcast.emit("userLeft", data);
+                
             }
             cb({status: true});
         })
