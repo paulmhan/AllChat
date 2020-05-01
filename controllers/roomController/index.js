@@ -9,6 +9,13 @@ module.exports = {
             cb(users);
         });
     },
+    getUserById: (data, cb) => {
+        connection.query(roomQueries.getUserById, data, (err, user) => {
+            if(err) throw err;
+            cb(user);
+            console.log(user);
+        });
+    },
     deleteUserId: (data, cb) => {
         const { userId } = data;
         console.log(userId);

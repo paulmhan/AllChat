@@ -9,3 +9,8 @@
     background-image: url(./../../assets/images/metallic-silver-alt.jpg);
     border-radius: 25px;
 }
+
+#timeStamp {
+    font-size: 10px;
+}
+
