@@ -11,6 +11,8 @@ class SignUpForm extends Component {
         open: false,
         name: "",
         room: "Chat Room",
+        userId:"",
+        newUser:[],
         userNameError: false
 
     };
@@ -34,18 +36,19 @@ class SignUpForm extends Component {
         if (userNameError) {
             this.setState({ userNameError });
         } else {
-            let createdUser = this.createUser();
-            if (createdUser) {
-                this.props.history.push("/chat");
-            }
+            this.createUser();
         }
     }
     
     createUser = () => {
         this.props.socket.emit("createUser", { name: this.state.name}, newUser => {
-            console.log("signupform",newUser[0].id);
+            console.log(newUser);
+            this.props.history.push({
+                pathname: '/chat',
+                state: { newUser: newUser }
+              })
         })
-        return this.state.name;
+        
     };
 
     open = () => this.setState({ open: true });

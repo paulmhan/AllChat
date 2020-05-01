@@ -19,3 +19,11 @@ On leave Button:
  Add a is typing placeholder
  
  
+ When Chatroom loads:
+ 1) get all users on load, once
+ 2) get current user on load
+
+ Listeners
+ 1) userJoined - get newUser, add to users array
+ 2) userLeft - call getUsers
+ 3) messageReceive
