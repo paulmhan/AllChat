@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
 
-import NameInput from "../../components/NameInput";
+// import NameInput from "../../components/NameInput";
+import UnderConstruction from "./../../assets/images"
 import "./style.css";
 
 class SignInForm extends Component {
@@ -42,11 +43,7 @@ class SignInForm extends Component {
             >
                 <Modal.Header id="signin-header">Sign In</Modal.Header>
                 <Modal.Content id="signin-content">
-                    <NameInput
-                        id="name-input"
-                        getName={this.handleNameChange}
-                        name={this.state.name}
-                    />
+                    <img src={require("../../assets/images/under-construction-pikachu.gif")} alt="under-construction-pikachu"/>
                 </Modal.Content>
                 <Modal.Actions id="signin-action">
                     <Button>
@@ -55,7 +52,6 @@ class SignInForm extends Component {
                 </Modal.Actions>
             </Modal>
         );
-
     }
 };
 

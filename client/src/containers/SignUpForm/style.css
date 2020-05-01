@@ -21,3 +21,17 @@
 #signup-action {
     background-color: #294ba6;
 }
+
+#JoinChatBtn {
+    border: solid white 1px;
+    background-color: transparent;
+    color: white;
+    transition: 0.5s;
+    border-radius: 10px;
+}
+
+#JoinChatBtn:hover {
+    color: black;
+    background-color: white;
+    transition: 0.8s;
+}

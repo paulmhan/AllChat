@@ -80,7 +80,7 @@ class SignUpForm extends Component {
                     />
                 </Modal.Content>
                 <Modal.Actions id="signup-action">
-                    <Button onClick={(e) => this.checkInputs(e)} className="button mt-20" type="submit"> Join Chat Room! </Button>
+                    <Button id="JoinChatBtn" onClick={(e) => this.checkInputs(e)} className="button mt-20" type="submit"> Join Chat Room! </Button>
                 </Modal.Actions>
             </Modal>
         )

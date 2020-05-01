@@ -8,6 +8,8 @@ As communication continues to increase on a global scale, so too does the demand
 
 ## Build Status
 
+Currently able to create a user and sustain a single chat room shared by multiple users. Sign-in authentication, multiple chat rooms, and dynamic translation of messages are still in progress. 
+
 ## Code Style
 
 ## Screenshots
@@ -43,6 +45,8 @@ AllChat utilizes its built-in API to automatically translate the sender's messag
 ## Tests
 
 ## How To Use?
+
+On the landing page, click "Get Started" and enter a username into the modal, then click "Join Chat Room". Once on the chat page, you can message other users who are currently signed in. If you wish to exit the chat, and sign up using a different name, click the "Leave" button in the top-right corner, and repeat the aforementioned steps.
 
 ## Contribute
 

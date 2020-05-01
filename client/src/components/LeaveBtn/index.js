@@ -2,11 +2,13 @@ import React from "react";
 import { Button } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 
+import "./style.css";
+
 const LeaveBtn = props => {
 
     return(
         <div>
-            <Button fluid onClick={() => history.push("/")}>Leave</Button>
+            <Button id="LeaveBtn" onClick={() => props.history.push("/")}>Leave</Button>
         </div>
     )
 }
