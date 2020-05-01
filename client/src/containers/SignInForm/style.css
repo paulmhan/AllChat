@@ -21,3 +21,17 @@
 #signin-action {
     background-color: #294ba6;
 }
+
+#SignInBtn2 {
+    border: solid white 1px;
+    background-color: transparent;
+    color: white;
+    transition: 0.5s;
+    border-radius: 10px;
+}
+
+#SignInBtn2:hover {
+    color: black;
+    background-color: white;
+    transition: 0.8s;
+}

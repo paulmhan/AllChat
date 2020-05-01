@@ -9,7 +9,7 @@ class LandingPage extends Component {
 
     render() {
         return (
-            <Grid container >
+            <Grid container id="landing-container">
                 <Grid.Row
                     centered
                     columns={1}>

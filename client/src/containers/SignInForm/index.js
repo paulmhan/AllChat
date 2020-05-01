@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Button, Modal } from "semantic-ui-react";
+import { Button, Modal, Grid } from "semantic-ui-react";
 
 // import NameInput from "../../components/NameInput";
-import UnderConstruction from "./../../assets/images"
 import "./style.css";
 
 class SignInForm extends Component {
@@ -43,10 +42,14 @@ class SignInForm extends Component {
             >
                 <Modal.Header id="signin-header">Sign In</Modal.Header>
                 <Modal.Content id="signin-content">
-                    <img src={require("../../assets/images/under-construction-pikachu.gif")} alt="under-construction-pikachu"/>
+                    <Grid>
+                        <Grid.Row centered columns={1}>
+                            <img id="gif" src={require("../../assets/images/under-construction-pikachu.gif")} alt="under-construction-pikachu"/>
+                        </Grid.Row>
+                    </Grid>
                 </Modal.Content>
                 <Modal.Actions id="signin-action">
-                    <Button>
+                    <Button id="SignInBtn2">
                         Sign In
                     </Button>
                 </Modal.Actions>
