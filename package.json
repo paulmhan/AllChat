@@ -1,7 +1,7 @@
 {
   "name": "blogster",
   "version": "1.0.0",
-  "description": "",
+  "description": "This repo serves as the foundation for an even greater messenger app in the foreseeable future.",
   "main": "index.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -29,10 +29,16 @@
     "express": "^4.17.1",
     "http": "0.0.1-security",
     "if-env": "^1.0.4",
-    "moment-timezone": "^0.5.28",
     "mysql": "^2.17.1",
-    "react-moment": "^0.9.7",
     "semantic-ui-react": "^0.88.2",
     "socket.io": "^2.3.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulmhan/AllChat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/paulmhan/AllChat/issues"
+  },
+  "homepage": "https://github.com/paulmhan/AllChat#readme"
 }
