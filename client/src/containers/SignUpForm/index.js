@@ -66,20 +66,21 @@ class SignUpForm extends Component {
         const { open } = this.state;
         return (
             <Modal
+                id="signup-modal"
                 open={open}
                 onOpen={this.open}
                 onClose={this.close}
                 size="small"
                 trigger={
-                    <Button id="SignUpBtn" color="green" size="massive">
+                    <Button id="SignUpBtn" size="huge">
                         Sign Up
                     </Button>
                 }
             >
-                <Modal.Header>
+                <Modal.Header id="signup-header">
                     Sign Up
                 </Modal.Header>
-                <Modal.Content>
+                <Modal.Content id="signup-content">
                     <NameInput
                         getName={this.handleNameChange}
                         name={this.state.name}
@@ -87,8 +88,8 @@ class SignUpForm extends Component {
                         handleEnter = {this.handleEnter}
                     />
                 </Modal.Content>
-                <Modal.Actions>
-                    <button onClick={(e) => this.checkInputs(e)} className="button mt-20" type="submit"> Join Chat Room! </button>
+                <Modal.Actions id="signup-action">
+                    <Button id="JoinChatBtn" onClick={(e) => this.checkInputs(e)} className="button mt-20" type="submit"> Join Chat Room! </Button>
                 </Modal.Actions>
             </Modal>
         )

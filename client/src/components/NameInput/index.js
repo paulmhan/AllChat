@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Form } from "semantic-ui-react";
 
+import "./style.css";
+
 class NameInput extends Component {
   
   componentDidUpdate(prevProps) {
@@ -8,8 +10,9 @@ class NameInput extends Component {
   }
     render(){
         return (
-        <Form >
-        <Form.Field 
+        <Form id="form-container">
+        <Form.Field
+          id="name-input"
           error={ this.props.error } 
           required
           label='Name'

@@ -1,9 +1,13 @@
+#landing-modal-container {
+    background-image: url(./../../assets/images/metallic-silver-alt.jpg);
+    padding: 20px;
+    border-radius: 10px;
+}
+
 #GetStartedBtn {
     border: solid white 1px;
     background-color: transparent;
     color: white;
-    width: 200px;
-    height: 70px;
     transition: 0.5s;
     border-radius: 10px;
 }
@@ -14,3 +18,28 @@
     transition: 0.8s;
 }
 
+#landing-header1 {
+    background-color: #7d96d8;
+    color: white;
+}
+
+#landing-header2 {
+    background-color: #7d96d8;
+    color: white;
+}
+
+#signup-content {
+    background-color: #294ba6;
+}
+
+#signin-content {
+    background-color: #294ba6;
+}
+
+#signup-btn {
+    text-align: center;
+}
+
+#signin-btn {
+    text-align: center;
+}

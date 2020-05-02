@@ -1,0 +1,37 @@
+#SignInBtn {
+    background-color: #7d96d8;
+    color: white;
+}
+
+#signin-header {
+    background-color: #7d96d8;
+    color: white;
+}
+
+#signin-content {
+    background-color: #294ba6;
+}
+
+#signin-modal {
+    background-image: url(./../../assets/images/metallic-silver-alt.jpg);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#signin-action {
+    background-color: #294ba6;
+}
+
+#SignInBtn2 {
+    border: solid white 1px;
+    background-color: transparent;
+    color: white;
+    transition: 0.5s;
+    border-radius: 10px;
+}
+
+#SignInBtn2:hover {
+    color: black;
+    background-color: white;
+    transition: 0.8s;
+}

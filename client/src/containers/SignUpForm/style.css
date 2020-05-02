@@ -1,3 +1,37 @@
 #SignUpBtn {
-    background-color: blue;
+    background-color: #7d96d8;
+    color: white;
+}
+
+#signup-header {
+    background-color: #7d96d8;
+    color: white;
+}
+
+#signup-content {
+    background-color: #294ba6;
+}
+
+#signup-modal {
+    background-image: url(./../../assets/images/metallic-silver-alt.jpg);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#signup-action {
+    background-color: #294ba6;
+}
+
+#JoinChatBtn {
+    border: solid white 1px;
+    background-color: transparent;
+    color: white;
+    transition: 0.5s;
+    border-radius: 10px;
+}
+
+#JoinChatBtn:hover {
+    color: black;
+    background-color: white;
+    transition: 0.8s;
 }

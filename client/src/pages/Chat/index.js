@@ -169,10 +169,10 @@ class Chat extends Component {
                     <Grid.Column width={12}>
                         <Grid container>
                             <Grid.Row>
-                                <Grid.Column width={14}>
+                                <Grid.Column width={13}>
                                     <ChatRoomHeader name={this.state.name} />
                                 </Grid.Column>
-                                <Grid.Column width={1}>
+                                <Grid.Column width={3}>
                                     <LeaveBtn />
                                 </Grid.Column>
                             </Grid.Row>

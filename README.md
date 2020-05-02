@@ -8,9 +8,17 @@ As communication continues to increase on a global scale, so too does the demand
 
 ## Build Status
 
+Currently able to create a user and sustain a single chat room shared by multiple users. Sign-in authentication, multiple chat rooms, and dynamic translation of messages are still in progress. 
+
 ## Code Style
 
+Standard
+
 ## Screenshots
+![](client/src/assets/images/LandingPage.png)
+![](client/src/assets/images/FirstModal.png)
+![](client/src/assets/images/SignUpModal.png)
+![](client/src/assets/images/Chat.png)
 
 ## Tech/Framework Used
 
@@ -34,22 +42,28 @@ That's where AllChat comes in.
 
 AllChat utilizes its built-in API to automatically translate the sender's message into the recipient's native language, allowing for more intuitive international communication. Whether its for sealing that important business deal, or discovering that special someone from across the globe, AllChat brings us all closer together.
 
-## Code Example
-
 ## Installation
 
-## API Reference
-
-## Tests
+To render Semantic-UI-React framework:
+```
+npm i semantic-ui-react
+```
 
 ## How To Use?
 
+On the landing page, click "Get Started" and enter a username into the modal, then click "Join Chat Room". Once on the chat page, you can message other users who are currently signed in. If you wish to exit the chat, and sign up using a different name, click the "Leave" button in the top-right corner, and repeat the aforementioned steps.
+
 ## Contribute
+
+If you wish to contribute, send a code snippet of a component, style, or anything else that can improve our app to one of our e-mail addresses:
+
+- paul.myung.han@gmail.com
+- suneetha@gmail.com
+- jpgeib2@gmail.com
 
 ## Credits
 
-- Paul Han, 
-- Suneetha Burla, 
-- James Geib, Front-end styling,
+- Paul Han, Front-end Building, Back-end Server, SQL Database/Queries, Socket.IO, GitHub: https://github.com/paulmhan
+- Suneetha Burla, Front-end Building, SQL Database/Queries, Socket.IO, GitHub: https://github.com/suneethaburla
+- James Geib, Front-end Building, Front-end styling/formatting, GitHub: https://github.com/jpgeib
 
-## License
