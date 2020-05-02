@@ -2,9 +2,11 @@
 
 This repo serves as the foundation for an even greater messenger app in the foreseeable future.
 
+Current Version: AllChat V1
+
 ## Motivation
 
-We want to build a chatroom app that is able to automatically translate messages into different languages upon sending. As of now we are just creating a functioning chatroom.
+We intend to build a chatroom app that is able to automatically translate messages into different languages upon sending. AllChat V1 currently supports a basic chatroom with multiple users in English.
 
 ## Build Status
 
@@ -22,6 +24,8 @@ Currently able to create a user and sustain a single chat room shared by multipl
 
 ## Tech/Framework Used
 
+- HTML
+- JSX
 - ReactJS
 - ReactDOM
 - ReactRouterDOM
@@ -30,20 +34,13 @@ Currently able to create a user and sustain a single chat room shared by multipl
 - Socket.IO
 - MySQL
 - Express
+- Moment
 - React-Moment
 - Moment-Timezone
-
 
 ## Features
 
 Currently, nothing sets this app apart from other messenger services. It is merely serving as a step/groundwork for what it will become in our next project.
-
-## Installation
-
-To render Semantic-UI-React framework:
-```
-npm i semantic-ui-react
-```
 
 ## How To Use?
 
@@ -75,4 +72,7 @@ If you wish to contribute, send a code snippet of a component, style, or anythin
     - Front-end Building
     - Front-end styling/formatting 
     - GitHub: https://github.com/jpgeib
+- Manny Jucaban, Musa Akbari, Ryan Gendel & Namita Shenai:
+    - Technical support/guidance
+
 
