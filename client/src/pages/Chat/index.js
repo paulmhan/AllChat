@@ -27,25 +27,31 @@ class Chat extends Component {
         newUser:[],
         messageId: ""
     }
-
+    //flag to know if component mounted
+    isLive = false;
 
     componentDidMount() {
+        this.isLive = true;
         this.getUsers();
         this.receiveMessage();
         this.userLeft();
         this.userJoin();
+        
     }
 
 
     componentWillUnmount() {
         this.handleLeave();
+        this.isLive= false;
     }
 
     getUsers = () => {
-        let { newUser } = this.props.history.location.state;
-        console.log(this.props.history);
-        console.log(this.props.history.location.state);
-        this.props.socket.emit("getUsers", users => {
+        let newUser = this.props.history.location.state && this.props.history.location.state.newUser 
+                        ? this.props.history.location.state.newUser
+                        : [{name:"name", id:0}];
+        // console.log(this.props.history);
+        // console.log(this.props.history.location.state);
+        this.isLive && this.props.socket.emit("getUsers", users => {
             this.props.socket.emit("currentJoin", {newUser})
             this.setState({
                 name: newUser[0].name,
@@ -89,6 +95,7 @@ class Chat extends Component {
             this.getUsers();
             this.userLeftMessage(data);
         })
+
     }
 
 
