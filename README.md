@@ -1,10 +1,10 @@
 # AllChat Messaging App
 
-Much like other messaging apps, AllChat connects people from all around the world and all walks of life. However, unlike other messenger services, AllChat allows its users to effectively communicate, even if they do not speak the same language.
+This repo serves as the foundation for an even greater messenger app in the foreseeable future.
 
 ## Motivation
 
-As communication continues to increase on a global scale, so too does the demand for quick, reliable translation.
+We want to build a chatroom app that is able to automatically translate messages into different languages upon sending. As of now we are just creating a functioning chatroom.
 
 ## Build Status
 
@@ -12,7 +12,7 @@ Currently able to create a user and sustain a single chat room shared by multipl
 
 ## Code Style
 
-Standard
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
 ## Screenshots
 ![](client/src/assets/images/LandingPage.png)
@@ -36,11 +36,7 @@ Standard
 
 ## Features
 
-There are many different messaging apps out there. You got the default messenger on your typical smartphone; that will let you communicate across the country. Facebook Messenger and WhatsApp allow you to connect with people outside your country, but what if you wanted to talk to someone in France, but couldn't speak a lick of French? 
-
-That's where AllChat comes in. 
-
-AllChat utilizes its built-in API to automatically translate the sender's message into the recipient's native language, allowing for more intuitive international communication. Whether its for sealing that important business deal, or discovering that special someone from across the globe, AllChat brings us all closer together.
+Currently, nothing sets this app apart from other messenger services. It is merely serving as a step/groundwork for what it will become in our next project.
 
 ## Installation
 
@@ -63,7 +59,20 @@ If you wish to contribute, send a code snippet of a component, style, or anythin
 
 ## Credits
 
-- Paul Han, Front-end Building, Back-end Server, SQL Database/Queries, Socket.IO, GitHub: https://github.com/paulmhan
-- Suneetha Burla, Front-end Building, SQL Database/Queries, Socket.IO, GitHub: https://github.com/suneethaburla
-- James Geib, Front-end Building, Front-end styling/formatting, GitHub: https://github.com/jpgeib
+- Paul Han: 
+    - Front-end Building
+    - Back-end Server 
+    - SQL Database/Queries 
+    - Socket.IO
+    - GitHub: https://github.com/paulmhan
+- Suneetha Burla: 
+    - Front-end Building 
+    - Back-end Server
+    - SQL Database/Queries
+    - Socket.IO 
+    - GitHub: https://github.com/suneethaburla
+- James Geib: 
+    - Front-end Building
+    - Front-end styling/formatting 
+    - GitHub: https://github.com/jpgeib
 
