@@ -1,14 +1,24 @@
 import React from "react";
+import { Grid } from "semantic-ui-react";
 
+import "./style.css";
 
 const LandingBodyText = props => {
     return(
-        <div>
-            <h1>Bring People Together</h1>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-        </div>
+        <Grid id="body-text-grid">
+            <Grid.Row centered>
+                <Grid.Column id="header" width={6}>
+                    <h1 id="together">Bring People Together</h1>
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row centered>
+                 <Grid.Column id="text1" width={8}>
+                    <h3 id="paragraph">As communication continues to increase on a global scale, so too does the demand for quick, reliable translation. 
+                    With AllChat, you can talk to anyone across the world, even if you don't speak their language!
+                    </h3>
+                </Grid.Column>
+            </Grid.Row>
+        </Grid>
     )
 }
 

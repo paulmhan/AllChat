@@ -7,7 +7,7 @@ const AllChatTitle = props => {
     return (
         <div id="allchat-icon">
             <Link to="/" name="home">
-                <h1>AllChat</h1>
+                <h1 id="main-header">AllChat</h1>
             </Link>
         </div>
 
