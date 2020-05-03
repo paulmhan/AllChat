@@ -15,7 +15,7 @@ import "./style.css";
 class Chat extends Component {
     state = {
         name: "",
-        userId:1,
+        userId: 1,
         message: "",
         placeholder: "Send a Message",
         messageError: false,
@@ -25,8 +25,8 @@ class Chat extends Component {
             timeStamp: moment().format('l, h:mm a')
         }],
         users: [],
-        typingUser:"",
-        newUser:[],
+        typingUser: "",
+        newUser: [],
         messageId: ""
     }
     //flag to know if component mounted
@@ -46,51 +46,51 @@ class Chat extends Component {
 
     componentWillUnmount() {
         this.handleLeave();
-        this.isLive= false;
+        this.isLive = false;
     }
 
     getUsers = () => {
-        let newUser = this.props.history.location.state && this.props.history.location.state.newUser 
-                        ? this.props.history.location.state.newUser
-                        : [{name:"name", id:0}];
+        let newUser = this.props.history.location.state && this.props.history.location.state.newUser
+            ? this.props.history.location.state.newUser
+            : [{ name: "name", id: 0 }];
         // console.log(this.props.history);
         // console.log(this.props.history.location.state);
         this.isLive && this.props.socket.emit("getUsers", users => {
-            this.props.socket.emit("currentJoin", {newUser})
+            this.props.socket.emit("currentJoin", { newUser })
             this.setState({
                 name: newUser[0].name,
-                userId: newUser[0].id, 
-                newUser, 
+                userId: newUser[0].id,
+                newUser,
                 users
             });
         })
     }
 
     userJoinMessage = newUser => {
-        console.log(newUser);
-        let joinMessage = {name: "AllChat",
-        title: `${newUser.newUser[0].name} has joined the chat!`,timeStamp: moment().format('l, h:mm a')}
-        console.log(joinMessage);
-        this.setState({ messages: [...this.state.messages,joinMessage ] });
+        let joinMessage = {
+            name: "AllChat",
+            title: `${newUser.newUser[0].name} has joined the chat!`, 
+            timeStamp: moment().format('l, h:mm a')
+        }
+        this.setState({ messages: [...this.state.messages, joinMessage] });
         // this.scrollToBottom();
     }
 
     userLeftMessage = (data) => {
-        console.log(data);
-        let leftMessage = {name: "AllChat",
-        title: `${data.name} has left the chat!`,timeStamp: moment().format('l, h:mm a')}
-        console.log(leftMessage);
-        this.setState({ messages: [...this.state.messages,leftMessage ] });
+        let leftMessage = {
+            name: "AllChat",
+            title: `${data.name} has left the chat!`, 
+            timeStamp: moment().format('l, h:mm a')
+        }
+        this.setState({ messages: [...this.state.messages, leftMessage] });
         // this.scrollToBottom();
     }
 
 
     userJoin = () => {
         this.props.socket.on("userJoined", newUser => {
-            console.log(newUser);
             this.userJoinMessage(newUser);
-            console.log(this.state.users);
-            this.setState({ users:[...this.state.users, ...newUser.newUser] });
+            this.setState({ users: [...this.state.users, ...newUser.newUser] });
         })
     }
 
@@ -103,17 +103,27 @@ class Chat extends Component {
     }
 
     userCloseTab = () => {
-        this.props.socket.on("userCloseTab", data =>{
-            console.log(data);
-            this.userLeftMessage(data);
-         })
+        this.props.socket.on("userCloseTab", data => {
+            this.userLeftMessage(data[0]);
+            
+        })
 
     }
 
+    // userCloseTab = () => {
+    //     this.props.socket.on("userCloseTab", data => {
+    //         this.userLeftMessage(data[0]);
+    //         console.log(data[0].id, data[0].name);
+    //          this.props.socket.emit("leaveRoom", { userId: parseInt(data[0].id), name: data[0].name }, status => {
+    //             console.log(status);
+    //         })
+    //     })
+
+    // }
 
     createMessage = () => {
         this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, newMessage => {
-            this.setState({ messages: [...this.state.messages, ...newMessage], message: '', placeholder:"Send a Message", messageError: false,});
+            this.setState({ messages: [...this.state.messages, ...newMessage], message: '', placeholder: "Send a Message", messageError: false, });
             this.scrollToBottom();
         })
     };
@@ -127,7 +137,7 @@ class Chat extends Component {
 
 
     handleEnter = e => {
-        if (e.keyCode===13){
+        if (e.keyCode === 13) {
             this.handleSend(e);
         } else {
             this.props.socket.emit("onKeyUp", this.state.name, user => {
@@ -138,7 +148,7 @@ class Chat extends Component {
 
     handleSend = (e) => {
         e.preventDefault();
-        
+
         this.checkInputs(e);
         if (this.state.message.length === 0) {
             this.setState({ placeholder: "Cannot be blank!" })
@@ -166,11 +176,9 @@ class Chat extends Component {
 
     userTypingMessage = () => {
         this.props.socket.on("userTypingMessage", name => {
-            console.log(name);
-            this.setState({typingUser:`${name} is typing...`})
-        } )
+            this.setState({ typingUser: `${name} is typing...` })
+        })
     }
-
 
     scrollToBottom = () => {
         let chatTextArea = document.getElementById("message-container");
@@ -178,7 +186,7 @@ class Chat extends Component {
         const height = chatTextArea.clientHeight;
         const maxScrollTop = scrollHeight - height;
         ReactDOM.findDOMNode(chatTextArea).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
-      };
+    };
 
     handleLeave = async () => {
         await this.props.socket.emit("leaveRoom", { userId: this.state.userId, name: this.state.name }, status => {
@@ -198,13 +206,6 @@ class Chat extends Component {
         } else {
             messageError = false;
         }
-
-
-
-
-
-
-
 
     }
 
@@ -236,7 +237,7 @@ class Chat extends Component {
                             <Grid.Row>
                                 <Grid.Column width={16}>
                                     <UserTyping
-                                    name={this.state.typingUser}
+                                        name={this.state.typingUser}
                                     />
                                 </Grid.Column>
                             </Grid.Row>
@@ -248,8 +249,8 @@ class Chat extends Component {
                                         error={this.state.messageError}
                                         placeholder={this.state.placeholder}
                                         handleSend={this.handleSend}
-                                        handleEnter = {this.handleEnter}
-                                        handleOnKeyUp = {this.handleOnKeyUp}
+                                        handleEnter={this.handleEnter}
+                                        handleOnKeyUp={this.handleOnKeyUp}
                                     />
                                 </Grid.Column>
                             </Grid.Row>

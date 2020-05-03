@@ -21,10 +21,10 @@ io.on("connection", socket => {
     console.log("New client connected.");
 
     socket.on("createUser", (user, cb) => {
-        socket.user=user;
-        console.log(socket.user.name)
+        
         userController.createUser(user, newUser => {
             cb(newUser);
+            socket.user=newUser;
         })
     })
 
@@ -57,9 +57,11 @@ io.on("connection", socket => {
     })
 
     socket.on("leaveRoom", (data, cb) => {
+        
         roomController.deleteUserId(data, status => {
             if (status.affectedRows !== 0) {
                 socket.broadcast.emit("userLeft", data);
+               console.log(data, "I am in LeaveRoom");
             }
             cb({ status: true });
         })
@@ -67,9 +69,9 @@ io.on("connection", socket => {
 
 
     socket.on("disconnect", () => {
-        console.log(socket.user);
         console.log("Client disconnected.");
         socket.broadcast.emit("userCloseTab", socket.user)
+        console.log(socket.user, "I am in userCloseTab");
     })
 })
 const PORT = process.env.PORT || 3001;
