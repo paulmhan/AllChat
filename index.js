@@ -21,6 +21,8 @@ io.on("connection", socket => {
     console.log("New client connected.");
 
     socket.on("createUser", (user, cb) => {
+        socket.user=user;
+        console.log(socket.user.name)
         userController.createUser(user, newUser => {
             cb(newUser);
         })
@@ -43,12 +45,15 @@ io.on("connection", socket => {
     })
 
     
-
     socket.on("createMessage", (message, cb) => {
         messageController.createMessage(message, newMessage => {
             socket.broadcast.emit("messageReceive", newMessage);
             cb(newMessage);
         })
+    })
+    socket.on("onKeyUp", (name, cb)=>{
+        socket.broadcast.emit("userTypingMessage", name);
+        cb(name);
     })
 
     socket.on("leaveRoom", (data, cb) => {
@@ -62,7 +67,9 @@ io.on("connection", socket => {
 
 
     socket.on("disconnect", () => {
+        console.log(socket.user);
         console.log("Client disconnected.");
+        socket.broadcast.emit("userCloseTab", socket.user)
     })
 })
 const PORT = process.env.PORT || 3001;

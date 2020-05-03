@@ -6,6 +6,7 @@ import ChatSideBar from "../../components/ChatSideBar";
 import MessageContainer from "./../../components/MessageContainer";
 import MessageInputBar from "../../components/MessageInputBar";
 import LeaveBtn from "../../components/LeaveBtn";
+import UserTyping from "../../components/UserTyping";
 import ReactDOM from "react-dom";
 import { withRouter } from "react-router-dom";
 import "./style.css";
@@ -24,6 +25,7 @@ class Chat extends Component {
             timeStamp: moment().format('l, h:mm a')
         }],
         users: [],
+        typingUser:"",
         newUser:[],
         messageId: ""
     }
@@ -36,6 +38,8 @@ class Chat extends Component {
         this.receiveMessage();
         this.userLeft();
         this.userJoin();
+        this.userTypingMessage();
+        this.userCloseTab();
         
     }
 
@@ -71,7 +75,7 @@ class Chat extends Component {
         // this.scrollToBottom();
     }
 
-    userLeftMessage = data => {
+    userLeftMessage = (data) => {
         console.log(data);
         let leftMessage = {name: "AllChat",
         title: `${data.name} has left the chat!`,timeStamp: moment().format('l, h:mm a')}
@@ -98,6 +102,14 @@ class Chat extends Component {
 
     }
 
+    userCloseTab = () => {
+        this.props.socket.on("userCloseTab", data =>{
+            console.log(data);
+            this.userLeftMessage(data);
+         })
+
+    }
+
 
     createMessage = () => {
         this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, newMessage => {
@@ -113,22 +125,20 @@ class Chat extends Component {
         })
     }
 
-    
-    handleMessageChange = e => {
-        const { value } = e.target;
-        this.setState({ message: value });
-    };
 
     handleEnter = e => {
         if (e.keyCode===13){
             this.handleSend(e);
         } else {
-           return
+            this.props.socket.emit("onKeyUp", this.state.name, user => {
+                console.log(user)
+            })
         }
     }
 
     handleSend = (e) => {
         e.preventDefault();
+        
         this.checkInputs(e);
         if (this.state.message.length === 0) {
             this.setState({ placeholder: "Cannot be blank!" })
@@ -136,6 +146,31 @@ class Chat extends Component {
             this.createMessage();
         };
     };
+
+    handleMessageChange = e => {
+        console.log(e.keyCode);
+        const { value } = e.target;
+        this.setState({ message: value });
+        // this.props.socket.emit("onKeyUp", this.state.name, user => {
+        //     console.log(user)
+        // })
+    };
+
+    handleOnKeyUp = (event) => {
+        console.log("hello");
+        console.log(event.keyCode)
+        // this.props.socket.emit("onKeyUp", { name: this.state.name }, user => {
+        //     console.log(user)
+        // })
+    }
+
+    userTypingMessage = () => {
+        this.props.socket.on("userTypingMessage", name => {
+            console.log(name);
+            this.setState({typingUser:`${name} is typing...`})
+        } )
+    }
+
 
     scrollToBottom = () => {
         let chatTextArea = document.getElementById("message-container");
@@ -163,6 +198,14 @@ class Chat extends Component {
         } else {
             messageError = false;
         }
+
+
+
+
+
+
+
+
     }
 
     render() {
@@ -190,6 +233,13 @@ class Chat extends Component {
                                     />
                                 </Grid.Column>
                             </Grid.Row>
+                            <Grid.Row>
+                                <Grid.Column width={16}>
+                                    <UserTyping
+                                    name={this.state.typingUser}
+                                    />
+                                </Grid.Column>
+                            </Grid.Row>
                             <Grid.Row centered>
                                 <Grid.Column width={16}>
                                     <MessageInputBar
@@ -199,6 +249,7 @@ class Chat extends Component {
                                         placeholder={this.state.placeholder}
                                         handleSend={this.handleSend}
                                         handleEnter = {this.handleEnter}
+                                        handleOnKeyUp = {this.handleOnKeyUp}
                                     />
                                 </Grid.Column>
                             </Grid.Row>
