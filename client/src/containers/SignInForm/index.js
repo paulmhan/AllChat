@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Button, Modal, Grid } from "semantic-ui-react";
 
-// import NameInput from "../../components/NameInput";
 import "./style.css";
 
 class SignInForm extends Component {

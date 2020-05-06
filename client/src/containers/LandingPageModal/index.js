@@ -24,11 +24,8 @@ class LandingPageModal extends Component {
                     trigger={
                         <Button size="massive" id="GetStartedBtn">
                             Get Started
-                    </Button>
-
-
-                    }
-                >
+                        </Button>
+                    }>
                     <Modal.Header id="landing-header1">
                         Don't have an account? Sign up and start chatting!
                 </Modal.Header>
