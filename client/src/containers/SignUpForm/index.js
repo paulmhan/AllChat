@@ -50,7 +50,6 @@ class SignUpForm extends Component {
     
     createUser = () => {
         this.props.socket.emit("createUser", { name: this.state.name }, newUser => {
-            console.log(newUser);
             this.props.history.push({
                 pathname: '/chat',
                 state: { newUser: newUser }

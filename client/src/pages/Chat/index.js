@@ -53,28 +53,26 @@ class Chat extends Component {
     }
 
     userJoinMessage = newUser => {
-        console.log(newUser);
-        let joinMessage = {name: "AllChat",
-        title: `${newUser.newUser[0].name} has joined the chat!`,timeStamp: moment().format('l, h:mm a')}
-        console.log(joinMessage);
+        let joinMessage = {
+            name: "AllChat",
+            title: `${newUser.newUser[0].name} has joined the chat!`,
+            timeStamp: moment().format('l, h:mm a')
+        };
         this.setState({ messages: [...this.state.messages,joinMessage ] });
-        // this.scrollToBottom();
     }
 
     userLeftMessage = data => {
-        console.log(data);
-        let leftMessage = {name: "AllChat",
-        title: `${data.name} has left the chat!`,timeStamp: moment().format('l, h:mm a')}
-        console.log(leftMessage);
+        let leftMessage = {
+            name: "AllChat",
+            title: `${data.name} has left the chat!`,
+            timeStamp: moment().format('l, h:mm a')
+        };
         this.setState({ messages: [...this.state.messages,leftMessage ] });
-        // this.scrollToBottom();
     }
 
     userJoin = () => {
         this.props.socket.on("userJoined", newUser => {
-            console.log(newUser);
             this.userJoinMessage(newUser);
-            console.log(this.state.users);
             this.setState({ users:[...this.state.users, ...newUser.newUser] });
         })
     }
@@ -87,8 +85,19 @@ class Chat extends Component {
     }
 
     createMessage = () => {
-        this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, newMessage => {
-            this.setState({ messages: [...this.state.messages, ...newMessage], message: '', placeholder:"Send a Message", messageError: false,});
+        const messageObject = { 
+            name: this.state.name, 
+            title: this.state.message, 
+            timeStamp: moment().format('l, h:mm a'), 
+            userId: this.state.userId 
+        }
+        this.props.socket.emit("createMessage", messageObject, newMessage => {
+            this.setState({ 
+                messages: [...this.state.messages, ...newMessage], 
+                message: '', 
+                placeholder:"Send a Message", 
+                messageError: false,
+            });
             this.scrollToBottom();
         })
     };
@@ -117,7 +126,7 @@ class Chat extends Component {
         e.preventDefault();
         this.checkInputs(e);
         if (this.state.message.length === 0) {
-            this.setState({ placeholder: "Cannot be blank!" })
+            this.setState({ placeholder: "Cannot be blank!" });
         } else {
             this.createMessage();
         };
@@ -138,12 +147,12 @@ class Chat extends Component {
     checkInputs = e => {
         if (!this.state.message) {
             e.preventDefault();
-            this.setState({ messageError: true })
+            this.setState({ messageError: true });
         }
         let messageError;
         if (this.state.message.length === 0) {
             messageError = true;
-            this.setState({ messageError })
+            this.setState({ messageError });
         } else {
             messageError = false;
         }
@@ -169,9 +178,7 @@ class Chat extends Component {
                             </Grid.Row>
                             <Grid.Row>
                                 <Grid.Column width={16}>
-                                    <MessageContainer
-                                        messages={this.state.messages}
-                                    />
+                                    <MessageContainer messages={this.state.messages} />
                                 </Grid.Column>
                             </Grid.Row>
                             <Grid.Row centered>
@@ -193,4 +200,5 @@ class Chat extends Component {
         )
     }
 }
+
 export default withRouter(Chat);
