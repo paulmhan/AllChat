@@ -17,7 +17,7 @@ module.exports = {
             return res.json(users[0]);
         });
     },
-    createUser: (data, cb) => {
+    createUser: (data, callback) => {
         const { name } = data;
         connection.query(userQueries.createUser, name, err => {
             if (err) throw err;
@@ -26,7 +26,7 @@ module.exports = {
                 //create insert userid into room table
                 connection.query(roomQueries.insertIdtoRoom, newUser[0].id, err => {
                     if (err) throw err;
-                    cb(newUser);
+                    callback(newUser);
                 })
             });
         });
