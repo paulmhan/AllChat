@@ -39,7 +39,7 @@ io.on("connection", socket => {
     })
 
     socket.on("currentJoin", newUser => {
-        socket.broadcast.emit("userJoined", newUser)
+        socket.broadcast.emit("userJoined", newUser);
     })
 
     
@@ -51,12 +51,12 @@ io.on("connection", socket => {
         })
     })
 
-    socket.on("leaveRoom", (data, cb) => {
+    socket.on("leaveRoom", (data) => {
         roomController.deleteUserId(data, status => {
             if (status.affectedRows !== 0) {
                 socket.broadcast.emit("userLeft", data);
             }
-            cb({ status: true });
+            // cb({ status: true });
         })
     })
 
