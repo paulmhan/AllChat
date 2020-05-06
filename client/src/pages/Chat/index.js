@@ -28,7 +28,6 @@ class Chat extends Component {
         messageId: ""
     }
 
-
     componentDidMount() {
         this.getUsers();
         this.receiveMessage();
@@ -36,15 +35,12 @@ class Chat extends Component {
         this.userJoin();
     }
 
-
     componentWillUnmount() {
         this.handleLeave();
     }
 
     getUsers = () => {
         let { newUser } = this.props.history.location.state;
-        console.log(this.props.history);
-        console.log(this.props.history.location.state);
         this.props.socket.emit("getUsers", users => {
             this.props.socket.emit("currentJoin", {newUser})
             this.setState({
@@ -74,7 +70,6 @@ class Chat extends Component {
         // this.scrollToBottom();
     }
 
-
     userJoin = () => {
         this.props.socket.on("userJoined", newUser => {
             console.log(newUser);
@@ -91,7 +86,6 @@ class Chat extends Component {
         })
     }
 
-
     createMessage = () => {
         this.props.socket.emit("createMessage", { name: this.state.name, title: this.state.message, timeStamp: moment().format('l, h:mm a'), userId: this.state.userId }, newMessage => {
             this.setState({ messages: [...this.state.messages, ...newMessage], message: '', placeholder:"Send a Message", messageError: false,});
@@ -106,7 +100,6 @@ class Chat extends Component {
         })
     }
 
-    
     handleMessageChange = e => {
         const { value } = e.target;
         this.setState({ message: value });
@@ -139,9 +132,7 @@ class Chat extends Component {
       };
 
     handleLeave = async () => {
-        await this.props.socket.emit("leaveRoom", { userId: this.state.userId, name: this.state.name }, status => {
-            console.log(status);
-        })
+        await this.props.socket.emit("leaveRoom", { userId: this.state.userId, name: this.state.name });
     }
 
     checkInputs = e => {
